@@ -1,0 +1,433 @@
+@charset "utf-8";
+body {
+  width: 100%;
+  height: auto;
+}
+
+body::-webkit-scrollbar{
+  width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: rgb(91, 170, 84); /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: rgba(91, 170, 84, 0.3);  /*스크롤바 뒷 배경 색상*/
+}
+
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 55%;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #5baa54;
+}
+h2 {
+  position: absolute;
+  top: 8%;
+  font-size: 1.6vw;
+  margin-left: 53%;
+}
+
+/* left_Area================================================================= */
+
+#left_Area {
+  position: relative;
+  top: 200px;
+  width: 14%;
+  height: 700px;
+  margin: 0 8% 0 8%;
+  box-sizing: border-box;
+  padding: 1% 0;
+  /* background-color: red; */
+}
+
+.profileBox {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.proimgBox {
+  position: relative;
+  width: 41%;
+  height: 50%;
+
+  margin: 0 auto;
+  border-radius: 100%;
+}
+
+.proImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.speech_bubble {
+  position: relative;
+  width: 95%;
+  height: 30%;
+  margin: 0 auto;
+}
+
+.bubbleImg {
+  width: 100%;
+}
+
+.speech_bubble p {
+  position: absolute;
+    top: 40%;
+    margin-left: 20%;
+}
+.firstMenu {
+  position: relative;
+  margin-bottom: 10%;
+  font-size: 1vw;
+}
+.secondMenu {
+  position: relative;
+  margin-bottom: 3%;
+  font-size: 0.8vw;
+}
+.secondMenu > a:hover {
+  color: #5baa54;
+}
+.firstMenu .secondMenu:first-child {
+  margin-top: 5px;
+}
+
+.userID {
+  color: #5baa54;
+}
+
+
+/* <!-- ============================구분선  */
+
+#verticalLine {
+  position: absolute;
+  height: 700px;
+  top: 200px;
+  left: 24.5%;
+  width: 1px;
+  background-color: #ebe8e8;
+  z-index: 999;
+}
+/* tab_Area================================================================= */
+
+#tab_Area {
+  position: absolute;
+  top: 200px;
+  width: 60%;
+  margin-right: 13%;
+  height: 700px;
+  right: 0;
+  box-sizing: border-box;
+  border: 5px solid #5baa54;
+  font-size: 1vw;
+}
+
+.tab_nav {
+  position: absolute;
+  right: -5.3%;
+  width: 5%;
+  height: 100%;
+  top: -0.7%;
+  /* 나중에 높이값 auto */
+  display: block;
+}
+
+.tab_Btns {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+.tBtn {
+  position: relative;
+  margin-bottom: 3%;
+  font-size: 0.9vw;
+}
+.tBtn1 {
+  width: 100%;
+  height: 15%;
+}
+
+.tBtn2 {
+  width: 100%;
+  height: 15%;
+}
+.notChoice {
+  background-color: #5baa54;
+}
+
+.choiceTabNav {
+  position: relative;
+  width: 105%;
+  left: -5%;
+  border: 5px solid #5baa54;
+  box-sizing: border-box;
+  background-color: #ffff;
+  border-left: 0;
+
+  z-index: 999;
+}
+
+.tBtn a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 20% 0;
+}
+
+.tBtn span {
+  display: block;
+  width: 14px;
+  margin: 0 auto;
+}
+
+.pointT {
+  color: #fff;
+}
+.word{
+  position: relative;
+  display: inline;
+  left: 13%;
+  float: left;
+  padding: 5% 6%;
+  top: 10%;
+  
+}
+
+.choiceTabNav .pointT {
+  color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tabcontents {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 3%;
+}
+
+#tabBox {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.reservationInfoArea {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  margin-bottom: 3%;
+  
+}
+
+
+
+.boxTitles {
+  position: relative;
+  font-size: 1.5em;
+  margin-bottom: 1%;
+}
+
+.rInfoBox {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  background-color: #f4f4f4;
+  padding: 2%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+
+.rInfoBox::-webkit-scrollbar {
+  width: 5px;
+}
+
+.rInfoBox::-webkit-scrollbar-thumb {
+  background-color: #5baa54;
+  height: 10%;
+}
+.rInfoBox::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+
+
+.rInfoBox img{
+
+  display: block;
+  width: 50%;
+  height: 200px;
+}
+.myReservaiton {
+  position: relative;
+  float: left;
+}
+
+.myReservaitonA {
+  position: relative;
+  display: block;
+  width: 35%;
+  height: 100%;
+
+  margin-right: 3%;
+}
+
+.myReservaiton > img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.infoText {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+
+.btns {
+  position: relative;
+  top: -10%;
+  width: 8%;
+  height: 10%;
+  background-color: #5baa54;
+  color: #ffff;
+}
+.modifyBtn {
+  position: relative;
+  margin-left: 62%;
+  margin-right: 1%;
+}
+
+.historyArea {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.historyBoard {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  padding: 2% 0;
+  background-color: #f4f4f4;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.historyBoard::-webkit-scrollbar {
+  width: 5px;
+}
+
+.historyBoard::-webkit-scrollbar-thumb {
+  background-color: #5baa54;
+  height: 10%;
+}
+.historyBoard::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+
+
+.reservBox{
+  margin-bottom: 5%;
+}
+
+
+.r_smallBox{
+  width: 40%;
+  margin-left: 5%;
+
+}
+.r_infotit{
+  color: #5baa54;
+  margin-right: 5%;
+}
+
+.r_info_text{
+
+  position: relative;
+  width: 100%;
+  margin-bottom: 5%;
+  right: 0;
+}
+
+
+/* ==================================== */
+
+.historyLink{
+
+  position: relative;
+  height: 10%;
+
+
+}
+.historyLink:hover{
+  background-color: #5baa54;
+}
+
+th{
+  padding: 1%;
+  border-bottom: 2px dashed #5baa54;
+  color: #5baa54;
+}
+
+
+td{
+  text-align: center; 
+  padding: 1%;
+
+}
+
+
+
+/* ===========================================footer */
+
+footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 20%;
+  background-color: #7db778;
+}

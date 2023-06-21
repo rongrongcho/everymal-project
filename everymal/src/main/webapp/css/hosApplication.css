@@ -1,0 +1,464 @@
+@charset "utf-8";
+
+body {
+  width: 100%;
+  height: auto;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #91d3f9;
+  height: 10%;
+}
+body::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  font-size: 1.6vw;
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 50%;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #91d3f9;
+}
+
+/* left_Area================================================================= */
+.grey_line {
+  position: absolute;
+  bottom: 34%;
+  left: 24%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px solid #ebe8e8;
+}
+#left_Area {
+  position: relative;
+  top: 200px;
+  width: 14%;
+  height: 700px;
+  margin: 0 8% 0 8%;
+  /*background-color: red;*/
+}
+
+.profileBox {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.proimgBox {
+  position: relative;
+  width: 41%;
+  height: 50%;
+  margin: 0 auto;
+  border-radius: 100%;
+}
+
+.proImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.speech_bubble {
+  position: relative;
+  width: 95%;
+  height: 30%;
+  margin: 0 auto;
+}
+.speech_bubble p {
+    position: absolute;
+    top: 42%;
+    margin-left: 20%;
+    font-size: 0.9vw;
+}
+
+.leftCategory {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  padding: 10%;
+}
+
+.bubbleImg {
+  width: 100%;
+}
+.firstMenu {
+  position: relative;
+  margin-bottom: 10%;
+  font-size: 1vw;
+}
+.secondMenu {
+  position: relative;
+  margin-bottom: 3%;
+  font-size: 0.8vw;
+}
+.secondMenu > a:hover {
+  color: #91d3f9;
+}
+.firstMenu .secondMenu:first-child {
+  margin-top: 5px;
+}
+.userID {
+  color: #91d3f9;
+}
+/* tab_Area================================================================= */
+
+#tab_Area {
+  position: absolute;
+  top: 200px;
+  width: 60%;
+  margin-right: 13%;
+  height: 51%;
+  right: 0;
+  border: 5px solid #91d3f9;
+  border-radius: 10px 0 10px 10px;
+}
+
+.tab_nav {
+  position: absolute;
+  right: -5.3%;
+  width: 5%;
+  height: 100%;
+  /* 나중에 높이값 auto */
+  display: block;
+  top: -0.7%;
+
+  /*background-color: palegreen;*/
+}
+
+.tab_Btns {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.tBtn {
+  position: relative;
+  margin-bottom: 3%;
+  font-size: 0.9vw;
+}
+
+.tBtn1 {
+  /*border: 5px solid #91D3F9;*/
+  width: 100%;
+  height: 15%;
+  /*background-color: #fff;*/
+}
+
+.tBtn2 {
+  width: 100%;
+  height: 15%;
+}
+.tBtn3 {
+  width: 100%;
+  height: 15%;
+}
+
+.tBtn4 {
+  width: 100%;
+  height: 15%;
+}
+.notChoice {
+  background-color: #91d3f9;
+}
+
+.choiceTabNav {
+  position: relative;
+  width: 105%;
+  left: -5%;
+  border: 5px solid #91d3f9;
+  box-sizing: border-box;
+  background-color: #ffff;
+  border-left: 0;
+  z-index: 999;
+}
+
+.tBtn a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 20% 0;
+}
+
+.tBtn span {
+  display: block;
+  width: 14px;
+  margin: 0 auto;
+}
+
+.span3 {
+  position: relative;
+  display: inline;
+  left: 13%;
+  float: left;
+  padding: 5% 6%;
+  top: 10%;
+}
+.span4 {
+  position: relative;
+  top: 7%;
+}
+
+.pointT {
+  color: #fff;
+}
+
+.choiceTabNav .pointT {
+  color: #91d3f9;
+}
+
+.tabcontents {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3%;
+}
+
+/*=========================================tabBox*/
+.inputbox {
+  position: absolute;
+  width: 70%;
+  height: 60%;
+  background-color: #efefef;
+  left: 20%;
+  top: 4%;
+}
+#imgForm {
+  position: relative;
+  /*border: 1px solid red;*/
+  top: 4vh;
+  font-size: 1vw;
+}
+#tabBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.formbox {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  width: 90%;
+  padding: 2% 5%;
+}
+
+.formbox input {
+  position: absolute;
+  width: 18%;
+  left: 25%;
+  border-radius: 10px;
+  height: 45%;
+  border: none;
+  text-indent: 4px;
+}
+#preview{
+	position: relative;
+    left: 11%;
+    border-radius: 5px;
+}
+.file {
+  display: none;
+}	
+.infoTitle{
+	position:relative;
+}
+.agreeform{
+	position:relative;
+	top:-225px;
+}
+.noticebox{
+    position: relative;
+    width: 55%;
+    /* left: 25%; */
+    right: -20%;
+    top: -200px;
+    height: auto;
+}
+.file-label {
+	margin-left: 22.2%;
+    background-color: #91d3f9;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    /* width: 65%; */
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    top: -13px; 
+}
+.upload-box {
+  width: calc(50% - 15px);
+  box-sizing: border-box;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.upload-box .drag-file {
+width: 350px;
+    position: relative;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px dashed #dbdbdb;
+    background-color: rgba(255,255,255,0.5);
+    left: 40%;
+    top: -30px;
+}
+.upload-box .drag-file.highlight {
+  border: 1.5px dashed #91d3f9;
+}
+.upload-box .drag-file .image {
+  width: 40px;
+}
+.upload-box .drag-file .message {
+  margin-bottom: 0;
+}
+.btns {
+  position: absolute;
+  margin-top: -22.5%;
+  right: 11%;
+  background-color: #91d3f9;
+  text-align: center;
+  padding: 7px;
+  border-radius: 5px;
+  /*border: none;*/
+  color: #fff;
+}
+/*.agree input{
+  position: relative;
+  width: 200%;
+  height: 200%;
+  
+}*/
+.files {
+width: calc(50% - 15px);
+    box-sizing: border-box;
+    overflow: auto;
+    height: 200px;
+    position: relative;
+    top: -250px;
+    left: 67%;
+}
+.files .file {
+  width:270px;
+  display: flex;
+  padding: 5px 5px;
+  border-bottom: 1px solid #dbdbdb;
+}
+.files .file:last-child {
+  margin-bottom: 0px;
+  border-bottom: none;
+}
+.files .file .thumbnail {
+  display: flex;
+  flex: none;
+  width: 20px;
+  margin-right: 15px;
+  align-items: center;
+}
+.files .file .thumbnail .image {
+  width: 100%;
+}
+.files .file .details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.files .file .details .header {
+  display: flex;
+  font-size: 0.7em;
+}
+.files .file .details .header .name {
+  width: 100px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.files .file .details .header .size {
+  margin-left: auto;
+}
+.files .file .progress {
+  position: relative;
+  height: 3px;
+  background-color: #dbdbdb;
+  overflow: hidden;
+  margin-top: 4px;
+  border-radius: 10px;
+}
+.files .file .progress .bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #91d3f9;
+}
+.files .file .status {
+display: flex;
+    width: 100%;
+    font-size: 0.7em;
+    margin-top: 4px;
+}
+.files .file .status .speed {
+  margin-left: auto;
+}
+input[type="button"] {
+  cursor: pointer;
+}
+.message{
+	margin-top:10px;
+}
+.message strong{
+	color:#91d3f9;
+}
+
+.tab_Btns a {
+  z-index: 10000;
+}
+/*==============================================footer*/
+
+footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 20%;
+  background-color: #c5e8fd;
+}
+
+fieldset {
+  width: 25%;
+  border: 1px solid red;
+  float: left;
+}
+
+form::after {
+  display: block;
+  content: "";
+  clear: both;
+}

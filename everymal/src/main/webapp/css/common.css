@@ -1,0 +1,102 @@
+@charset "utf-8";
+* {
+  font: bold 40px "IBMPlexSansR";
+  font-size: 15px;
+  color: #282727;
+}
+button {
+  cursor: pointer;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+#skip,
+.skip,
+legend {
+  display: none;
+}
+@font-face {
+  font-family: "IBMPlexSansR";
+  src: url("../font/SCoreDream_OTF/SCDream5.otf") format("opentype");
+}
+body {
+  width: 100%;
+  height: auto;
+}
+ul.topNav {
+  position: absolute;
+  right: -5%;
+  width: 100%;
+  font: 0.6vw normal;
+  margin-right: 5%;
+  display: flex;
+  justify-content: right;
+  z-index: 999;
+}
+.topNav li {
+  position: relative;
+  margin: 1% 3% 0 1%;
+}
+footer {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+  margin-top: auto;
+  background-color: #fba16e;
+  font-size: 0.65vw;
+  margin-top: 20%;
+}
+footer ul {
+  position: relative;
+  display: flex;
+  font-size: 0.65vw;
+  top: 81%;
+  margin-left: 13%;
+}
+footer li {
+  margin-right: 5%;
+}
+.table {
+  display: table;
+  table-layout: fixed;
+}
+address,
+.custom,
+.footBtn {
+  display: table-cell;
+}
+address {
+  position: absolute;
+  margin-left: 77%;
+  margin-top: -9%;
+}
+address p {
+  font-weight: 100;
+  line-height: 2em;
+}
+footer .custom,
+.footBtn {
+  position: absolute;
+  margin-left: 77%;
+  margin-top: -3%;
+}
+footer .custom a {
+  display: block;
+}
+.footBtn {
+  width: 20%;
+  margin-top: 2%;
+}
+.footBtn a {
+  color: #f2efe9;
+  margin-right: 15%;
+}
+footer img {
+  position: relative;
+  top: -205px;
+  /* left: -100px; */
+  filter: invert(100%) saturate(0) brightness(100);
+}

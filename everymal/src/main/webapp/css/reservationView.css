@@ -1,0 +1,326 @@
+@charset "utf-8";
+
+body {
+  width: 100%;
+  height: auto;
+  
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #91D3F9;
+  height: 10%;
+}
+body::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  
+}
+.pagetitlte {
+  font-size: 1.6vw;
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 50%;
+  
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #91D3F9;
+}
+
+/* left_Area================================================================= */
+.grey_line{
+  position: absolute;
+  bottom: 34%;
+  left: 24%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px solid #EBE8E8;
+}
+#left_Area {
+  position: relative;
+  top: 200px;
+  width: 14%;
+  height: 700px;
+  margin: 0 8% 0 8%;
+  /*background-color: red;*/
+}
+
+.profileBox {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.proimgBox {
+  position: relative;
+  width: 41%;
+  height: 50%;
+  margin: 0 auto;
+  border-radius: 100%;
+}
+
+.proImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.speech_bubble {
+  position: relative;
+  width: 95%;
+  height: 30%;
+  margin: 0 auto;
+  
+}
+.speech_bubble p{
+    position: absolute;
+    top: 40%;
+    margin-left: 20%;
+    font-size: 1.0vw;
+}
+
+.leftCategory {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    padding: 10%;
+  }
+
+.bubbleImg{
+  width: 100%;
+}
+.firstMenu{
+    position: relative;
+    margin-bottom: 5%;
+}
+.secondMenu{
+  position: relative;
+  margin-bottom: 2%;
+  font-size: 0.9vw;
+}
+.firstMenu > a {
+    color: #91D3F9;
+    font-size: 1.2vw;
+  }
+.userID{
+  color: #91D3F9;
+}
+/* tab_Area================================================================= */
+
+#tab_Area {
+  position: absolute;
+  top: 200px;
+  width: 60%;
+  margin-right: 13%;
+  height: 700px;
+  right: 0;
+  border: 5px solid #91D3F9;
+  border-radius: 10px;
+}
+
+.tab_nav {
+  position: absolute;
+  right: -5.3%;
+  width: 5%;
+  height: 100%;
+  /* 나중에 높이값 auto */
+  display: block;
+  
+  /*background-color: palegreen;*/
+
+}
+
+
+
+.tabcontents {
+  position: relative;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+}
+/*======================폼영역*/
+
+
+
+#tabBox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+   
+    margin: -35px;
+  }
+
+.bigbox{
+  position: relative;
+  top: 20%;
+  border:1px solid red;
+}
+
+
+ .res_code{
+    display: inline-block;
+    font-size: 1vw;
+    position: absolute;
+    top: 7.5%;
+    left: 4%;
+    
+  }
+
+ form {
+    left: 1%;
+    top: 14.8%;
+    position: relative;
+    width: 100%;
+    height: 90%;
+    padding: 0% 2.4%;
+    overflow: scroll;
+  }
+  .infoTitle,
+  .genderC {
+    border-right: 2px solid #ebe8e8;
+    background-color: #fff;
+    display: inline-block;
+    width: 18%;
+    height: 6vh;
+    text-indent: 2vw;
+    line-height: 5vh;
+  }
+  input,
+  textarea {
+    margin-left: 5%;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 8px;
+    width: 16%;
+    font-size: 0.8vw;
+  }
+  textarea {
+    margin-top: 2%;
+    width: 30%;
+    height: 10vh;
+  }
+  #tel1 {
+    width: 5%;
+    text-align: center;
+  }
+  #tel {
+    margin-left: 0;
+  }
+  #bringPetInfo {
+    position: absolute;
+    margin-left: 10px;
+    top: 20%;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 20px;
+    color: #fff;
+    background-color: #64199f;
+    cursor: pointer;
+  }
+  input[name="pet_sex"],
+  input[id="personalInfo"] {
+    /* margin-left: 1%; */
+    width: auto;
+  }
+  select {
+    margin-left: 5%;
+  }
+  input#pet_types {
+    margin-left: 0;
+    width: 20%;
+  }
+  input[type="checkbox"] {
+    margin-left: 0;
+    width: 3%;
+    margin-left: 4%;
+  }
+  .notice {
+    position: relative;
+    top: -50px;
+    padding-top: 2%;
+    height: 10vh;
+  }
+  .personalText {
+    font-size: 0.7vw;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 50%;
+    height: 7vh;
+    margin-top: -4%;
+    overflow: scroll;
+    margin-left: 5%;
+  }
+  .radioInfo {
+    position: relative;
+    margin-top: -4.5%;
+    margin-left: 19.5%;
+  }
+  .personalInfoTitle {
+    position: relative;
+    height: 12vh;
+    padding-top: 3%;
+    margin-top: -3.5%;
+  }
+  #res_etc {
+    top: -80px;
+    height: 130px;
+  }
+
+  .btnOk {
+    position: relative;
+    color: #fff;
+    font-size: 0.9vw;
+    background-color:  #91D3F9;
+    ;
+    width: 15%;
+    height: 5vh;
+    border-radius: 5px;
+    margin-left: 84.5%;
+    border: none;
+    top: -10%;
+  }
+  
+
+
+
+ /* ===========================================footer */
+
+ footer {
+    position: relative;
+    bottom: 0;
+    margin-top: 20%;
+    background-color: #C5E8FD;
+  }
+  
+  
+  .tab-content.current{
+    display: inherit;
+  }
+  
+  .tab-content{
+    /*display: none;*/
+  
+  }
+  
+  
