@@ -1,0 +1,65 @@
+HosMypageInfoControllerImpl  수정 
+
+-> @RequestMapping(value = "/hos_MypageInfo/imgUpload.do", method = RequestMethod.POST) 일부 수정 
+-> VO에 hos_id와 hos_name 셋팅해줌 
+
+
+HosMypageInfoDAOImpl 수정
+
+-> 메서드 추가... getHosName (병원 이름 rmtbl에 업데이트 해줘야하기때문에 추가함 
+
+-> hosjointbl의 hos_thum 업데이트 되는 쿼리가 빠져있어 메소드와, mapper 추가함 
+-> hosjointbl의 hos_status '검토중' 업데이트 보완 
+-> hosrmtbl에 신규 데이터 삽입 (신청) 
+-> mapper에 updateThum ,updateStatus,insertRMtbl getHosName쿼리 생성 
+
+
+
+총정리 )
+
+사용자가 병원 관리 페이지에서 썸네일 등록(imgUpload.do)하면
+1. hosjointbl의 hos_thum 컬럼에 데이터 업데이트 
+2. hosjointbl의 hos_status 데이터 '검토중'으로 업데이트 
+3. hosrmtbl에 신규(썸네일 등록 신청) 데이터 삽입 
+4. 3번에서 신규 데이터 삽입시, rm_code 트리거를 통해 자동으로 생성 삽입 
+5. 트리는 rm0001부터 +1씩 증가
+6. hosrmtbl에 기존 데이터 없을 시 rm_code는 rm0001로 지정됨 
+
+
+
+테이블 hosrmtbl의 rm_code 컬럼 번호 삽입 트리거 생성 =====================================
+
+CREATE OR REPLACE TRIGGER rm_tbl_trigger
+BEFORE INSERT ON hosrmtbl
+FOR EACH ROW
+DECLARE
+  next_code VARCHAR2(20);
+BEGIN
+  SELECT 'rm' || LPAD(NVL(TO_NUMBER(SUBSTR(MAX(rm_code), 3)), 0) + 1, 4, '0') INTO next_code
+  FROM hosrmtbl;
+
+  IF next_code IS NULL THEN
+    next_code := 'rm0001';
+  END IF;
+
+  :NEW.rm_code := next_code;
+END;
+
+============================================================================
+
+
+
+hos_status 
+
+미승인
+승인
+검토중
+거절
+
+
+rm_status 
+
+미확인
+확인중
+완료 
+
