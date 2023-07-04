@@ -42,7 +42,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		인터셉터에서 만들어준 viewName을 가져온다
+//		�씤�꽣�뀎�꽣�뿉�꽌 留뚮뱾�뼱以� viewName�쓣 媛��졇�삩�떎
 		String viewName=(String) request.getAttribute("viewName");
 		List memberList = memberService.listMembers();
 		ModelAndView mav = new ModelAndView(viewName);
@@ -162,7 +162,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 //	  session.setAttribute("isLogOn", true); 
 //	  String action=(String)session.getAttribute("action");
 //	  session.removeAttribute("action"); 
-//	  if(action!=null) { //redirect 포워딩 기술중 하나 dispacher도 있음 
+//	  if(action!=null) { //redirect �룷�썙�뵫 湲곗닠以� �븯�굹 dispacher�룄 �엳�쓬 
 //		  mav.setViewName("redirect:"+action); 
 //		  }else {
 //	  mav.setViewName("redirect:/member/listMembers.do"); } 
@@ -177,44 +177,29 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	public ModelAndView login(@ModelAttribute("memberVO") MemberVO memberVO,  RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav=new ModelAndView();
 		boolean result = false;
-		
 		String user_id = request.getParameter("user_id");
 		String user_pwd = request.getParameter("user_pwd");
 		boolean hos_chk = Boolean.parseBoolean(request.getParameter("chk"));
 		memberVO.setId(user_id);
 		memberVO.setPwd(user_pwd);
 		memberVO.setHos_chk(hos_chk);
-		
-		/* memberVO=memberService.login(memberVO); */
 		result=memberService.login(memberVO);
 		if(result == true) {
-//			HttpSession session=request.getSession();
-//			session.setAttribute("member", memberVO);
-//			session.setAttribute("isLogOn", true);
-//			String action=(String)session.getAttribute("action");
-//			session.removeAttribute("action");
-//			if(action!=null) {
-//				//redirect 포워딩 기술중 하나 dispacher도 있음
-//				mav.setViewName("redirect:"+action);
-//			}else {
-//				mav.setViewName("redirect:/main.do");
-//			}
-			
-			HttpSession session = request.getSession(); //없으면 생성 있으면 가져옴
+			HttpSession session = request.getSession();
 			session.invalidate();
 			session = request.getSession();
 			session.setAttribute("isLogon", true);
 			session.setAttribute("log_id", user_id);
-			/* MemberVO memInfo=memberService.memberInfo(memberVO); */
 			HashMap<String,Object> memInfo=memberService.memberInfo(memberVO);
 			if(hos_chk) {
 				session.setAttribute("isHos", true);
-				session.setAttribute("hos_code", memInfo.get("hos_code"));
-				session.setAttribute("hos_name", memInfo.get("hos_name"));
+				session.setAttribute("hos_code", memInfo.get("HOS_CODE"));
+				session.setAttribute("hos_name", memInfo.get("HOS_NAME"));
+				String value = (String)session.getAttribute("hos_code");
 				rAttr.addAttribute("result", "loginSuccess");
 				mav.setViewName("redirect:/main.do");
 			}else {
-				session.setAttribute("user_code", memInfo.get("user_code"));
+				session.setAttribute("user_code", memInfo.get("USER_CODE"));
 				session.setAttribute("isHos", false);
 				rAttr.addAttribute("result", "loginSuccess");
 				mav.setViewName("redirect:/main.do");
