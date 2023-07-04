@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.history">
+
+  <!-- userHistoryVO -->
+  <resultMap type="userHistoryVO" id="userHistoryResult">
+    <result property="user_id" column="user_id"/>
+    <result property="hos_code" column="hos_code"/>
+    <result property="res_code" column="res_code"/>
+    <result property="user_code" column="user_code"/>
+    <result property="pet_code" column="pet_code"/>
+    <result property="user_name" column="user_name"/>
+    <result property="user_tel" column="user_tel"/>
+    <result property="hos_name" column="hos_name"/>
+    <result property="hos_sub" column="hos_sub"/>
+    <result property="receipt_date" column="receipt_date"/>
+    <result property="res_date" column="res_date"/>
+    <result property="res_time" column="res_time"/>
+    <result property="pet_name" column="pet_name"/>
+    <result property="pet_sex" column="pet_sex"/>
+    <result property="pet_age" column="pet_age"/>
+    <result property="b_type" column="b_type"/>
+    <result property="pet_weight" column="pet_weight"/>
+    <result property="pet_types" column="pet_types"/>
+    <result property="pet_number" column="pet_number"/>
+    
+  </resultMap>
+
+
+  
+	  <select id="findHos_code" resultType="String" parameterType="String">
+	    <![CDATA[
+	    select * from hosjointbl where hos_name=#{hos_name}	      
+	    ]]>
+	  </select>	
+	  
+	  <select id="userHosReservList" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    SELECT * from hosrestbl where user_id=#{user_id} and res_date < SYSDATE
+	    ]]>
+	  </select>	
+
+	  <select id="userHosRecentList" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    SELECT h.res_code, h.receipt_date, h.hos_name, h.res_date, h.hos_code ,j.hos_thum FROM hosrestbl h JOIN hosjointbl j ON h.hos_code = j.hos_code WHERE h.user_id = #{user_id} AND h.res_date > SYSDATE ORDER BY h.res_date
+	    
+	    ]]>
+	  </select>	
+
+	  <select id="selectHis" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    select * from hosrestbl where res_code=#{res_code}   
+	    ]]>
+	  </select>	
+	  
+	  
+  	  <select id="userTxReservList" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    select * from TAXIRESTBL where user_code=#{user_code} and TX_RESERV_DAY < SYSDATE
+	    
+	    ]]>
+	  </select> 
+	   
+  	  <select id="userTxRecentList" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    SELECT tr.* , ti.tx_img FROM TAXIRESTBL tr JOIN TAXIINFOTBL ti ON tr.TX_CODE = ti.TX_CODE WHERE tr.USER_CODE = #{user_code} AND tr.TX_RESERV_DAY > SYSDATE ORDER BY tr.TX_RESERV_DAY
+	    ]]>
+	  </select>
+	  
+  	  <select id="selectTxHis" resultType="userHistoryVO" parameterType="String">
+	    <![CDATA[
+	    select tr.*, ti.* from taxirestbl tr join taxiinfotbl ti on tr.tx_code=ti.tx_code where tr.tx_res_code=#{tx_res_code}
+	       
+	    ]]>
+	  </select>
+
+
+
+  
+</mapper>

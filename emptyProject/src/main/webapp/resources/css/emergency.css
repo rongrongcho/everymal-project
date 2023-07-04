@@ -1,0 +1,231 @@
+@charset "utf-8";
+body {
+  width: 100%;
+  height: auto;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #fcb232; /* 스크롤바의 색상 */
+}
+body::-webkit-scrollbar-track {
+  background: #f1f6f5;
+}
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 47%;
+  font-size: 1.6vw;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #fcb232;
+}
+.content {
+  position: relative;
+  height: 70vh;
+  width: 100%;
+  margin: 0 auto;
+  margin-left: 1.5%;
+  margin-top: 13%;
+}
+.map_wrap {
+  position: relative;
+  width: 60%;
+  height: 65vh;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 6%;
+}
+#menu_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 270px;
+  margin: 10px 0 30px 10px;
+  padding: 5px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.74);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+}
+.bg_white {
+  background: #fff;
+}
+#menu_wrap hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #d9d9d9;
+  margin: 10px 0 0 0;
+}
+#menu_wrap .option {
+  position: relative;
+  font-size: 14px;
+  margin-left: 18px;
+  margin-top: 4px;
+}
+#menu_wrap .option p {
+  margin: 10px 0;
+}
+#menu_wrap .option input {
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  font-weight: normal;
+}
+#menu_wrap .option button {
+  margin-left: 5px;
+  border: none;
+  background-color: #fcb232;
+  font-size: 14px;
+  border-radius: 5px;
+  color: #fff;
+  position: absolute;
+}
+.map_wrap ::-webkit-scrollbar {
+  width: 7px;
+}
+.map_wrap ::-webkit-scrollbar-thumb {
+  background-color: #fcb232;
+}
+#placesList li {
+  list-style: none;
+}
+#placesList .item {
+  position: relative;
+  border-bottom: 1px solid #d9d9d9;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 65px;
+}
+#placesList .item span {
+  display: block;
+  margin-top: 4px;
+}
+#placesList .item h5,
+#placesList .item .info {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#placesList .item .info {
+  padding: 10px 0 10px 55px;
+}
+#placesList .info .gray {
+  color: #8a8a8a;
+}
+#placesList .info .jibun {
+  padding-left: 26px;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+    no-repeat;
+}
+#placesList .info .tel {
+  color: #fcb232;
+}
+#placesList .item .markerbg {
+  float: left;
+  position: absolute;
+  width: 36px;
+  height: 37px;
+  margin: 10px 0 0 10px;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+    no-repeat;
+}
+#placesList .item .marker_1 {
+  background-position: 0 -10px;
+}
+#placesList .item .marker_2 {
+  background-position: 0 -56px;
+}
+#placesList .item .marker_3 {
+  background-position: 0 -102px;
+}
+#placesList .item .marker_4 {
+  background-position: 0 -148px;
+}
+#placesList .item .marker_5 {
+  background-position: 0 -194px;
+}
+#placesList .item .marker_6 {
+  background-position: 0 -240px;
+}
+#placesList .item .marker_7 {
+  background-position: 0 -286px;
+}
+#placesList .item .marker_8 {
+  background-position: 0 -332px;
+}
+#placesList .item .marker_9 {
+  background-position: 0 -378px;
+}
+#placesList .item .marker_10 {
+  background-position: 0 -423px;
+}
+#placesList .item .marker_11 {
+  background-position: 0 -470px;
+}
+#placesList .item .marker_12 {
+  background-position: 0 -516px;
+}
+#placesList .item .marker_13 {
+  background-position: 0 -562px;
+}
+#placesList .item .marker_14 {
+  background-position: 0 -608px;
+}
+#placesList .item .marker_15 {
+  background-position: 0 -654px;
+}
+#pagination {
+  margin: 10px auto;
+  text-align: center;
+}
+#pagination a {
+  display: inline-block;
+  margin-right: 10px;
+}
+#pagination .on {
+  font-weight: bold;
+  cursor: default;
+  color: #777;
+}
+.sirenImg {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: -12.5%;
+  margin-left: 20%;
+}
+
+/* ffofofofooofofoffofoofofofofofofofofoter */
+
+footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 5%;
+  background-color: #ffd68e;
+}
+
+/* ============================================================================ */
+
+/* ============================================================ */

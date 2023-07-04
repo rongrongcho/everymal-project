@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<!-- typeAlias에서 생성된 빈의 이름과 동일해야 한다  -->
+	<resultMap type="articleVO" id="articleResult">
+		<!-- sql문의 수행결과로 받을 변수명과 컬러명  -->
+		<result property="level" column="level"/>
+		<result property="articleNo" column="articleNo"/>
+		<result property="parentNo" column="parentNo"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="writeDate" column="writeDate"/>
+		<result property="id" column="id"/>
+	</resultMap>
+	
+	<select id="selectAllArticles" resultMap="articleResult">
+		<![CDATA[
+			select LEVEL, articleNo, parentNo, title, content, writeDate, id from boardtbl START WITH parentNo=0 CONNECT BY PRIOR articleNo=parentNo ORDER SIBLINGS BY articleNo desc
+		]]>
+	</select>
+	
+	<select id="selectNewArticleNo" resultType="int">
+		<![CDATA[
+			select NVL(max(articleNo),0)+1 from boardtbl
+		]]>
+	</select>
+	
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<![CDATA[
+			insert into boardtbl (articleNo, parentNo, id, title, content, imageFileName) values(#{articleNo}, #{parentNo}, #{id},#{title},#{content},#{imageFileName})
+		]]>
+	</insert>
+	
+	<select id="selectArticle" resultType="articleVO" parameterType="int">
+		<![CDATA[
+			select articleNo, parentNo, title, content, NVL(imageFileName, 'null') as imageFileName, id, writeDate from boardtbl where articleNo=#{articleNo}
+		]]>
+	</select>
+	
+	<update id="updateArticle" parameterType="java.util.Map">
+		update boardtbl set title=#{title}, content=#{content}
+		<if test="imageFileName!=null and imageFileName.length()!=0" >
+			, imageFileName=#{imageFileName}
+		</if>
+		where articleNo=?
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		<![CDATA[
+			delete from boardtbl where articleNo in (select articleNo from boardtbl START WITH articleNo=#{articleNo} CONNECT BY PRIOR articleNo=parentNo)
+		]]>
+	</delete>
+	
+	
+</mapper>

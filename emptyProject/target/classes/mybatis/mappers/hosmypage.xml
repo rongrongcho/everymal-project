@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hosMypage">
+	<!-- typeAlias에서 생성된 빈의 이름과 동일해야 한다  -->
+	<resultMap type="hosMypageInfoVO" id="hosMypageInfo">
+		<!-- sql문의 수행결과로 받을 변수명과 컬러명  -->
+		<result property="hos_id" column="hos_id"/>
+		<result property="hos_code" column="hos_code"/>
+		<result property="hos_24" column="hos_24"/>
+		<result property="hos_365" column="hos_365"/>
+		<result property="hos_time_e" column="hos_time_e"/>
+		<result property="hos_time_s" column="hos_time_s"/>
+		<result property="hos_dog" column="hos_dog"/>
+		<result property="hos_cat" column="hos_cat"/>
+		<result property="hos_small" column="hos_small"/>
+		<result property="hos_fish" column="hos_fish"/>
+		<result property="hos_bird" column="hos_bird"/>
+		<result property="hos_rep" column="hos_rep"/>
+		<result property="hos_etc" column="hos_etc"/>
+		<result property="hos_gs" column="hos_gs"/>
+		<result property="hos_im" column="hos_im"/>
+		<result property="hos_em" column="hos_em"/>
+		<result property="hos_rm" column="hos_rm"/>
+		<result property="hos_vac" column="hos_vac"/>
+		<result property="tel_front" column="tel_front"/>
+		<result property="tel_end" column="tel_end"/>
+		<result property="usertel_front" column="usertel_front"/>
+		<result property="usertel_end" column="usertel_end"/>
+		<result property="hos_pwd" column="hos_pwd"/>
+		<result property="hos_username" column="hos_username"/>
+		<result property="hos_usertel" column="hos_usertel"/>
+		<result property="hos_dno" column="hos_dno"/>
+		<result property="hos_email" column="hos_email"/>
+		<result property="hos_name" column="hos_name"/>
+		<result property="hos_tel" column="hos_tel"/>
+		<result property="hos_intro" column="hos_intro"/>
+		<result property="hos_zipcode" column="hos_zipcode"/>
+		<result property="hos_addr1" column="hos_addr1"/>
+		<result property="hos_addr2" column="hos_addr2"/>
+		<result property="hos_status" column="hos_status"/>
+		<result property="himg1" column="himg1"/>
+		<result property="himg2" column="himg2"/>
+		<result property="himg3" column="himg3"/>
+		<result property="hos_pro" column="hos_pro"/>
+	</resultMap>
+	
+	<!--비밀번호 확인 -->
+	<select id="isValid" resultType="Boolean" parameterType="hosMypageInfoVO">
+		<![CDATA[
+			select hos_pwd from hosjointbl where hos_id=#{hos_id} and hos_pwd=#{hos_pwd}
+		]]>
+	</select> 
+<!-- 	<select id="isValid" parameterType="hosMypageInfoVO">
+    <![CDATA[
+        select hos_pwd from hosjointbl
+        <where>
+            <if test="log_id != null">
+                and hos_id = #{hos_id}
+            </if>
+            <if test="hos_pwd != null">
+                and hos_pwd = #{hos_pwd}
+            </if>
+        </where>
+    ]]>
+	</select> -->
+	
+	<!--병원정보 불러오기  -->
+	<select id="selecthosInfo" resultType="hosMypageInfoVO" parameterType="hosMypageInfoVO">
+		<![CDATA[
+			select * from hosjointbl j, hosfiltertbl f where j.hos_code=f.hos_code and j.hos_id=#{hos_id}
+		]]>
+	</select>
+	
+	<!--병원정보 수정하기(1)  -->
+	<update id="modhosInfo" parameterType="hosMypageInfoVO">
+		<![CDATA[
+			update hosjointbl set hos_username=#{hos_username}, hos_pwd=#{hos_pwd}, hos_usertel=#{hos_usertel}, hos_dno=#{hos_dno}, hos_email=#{hos_email}, hos_pro=#{hos_pro} where hos_id=#{hos_id}
+		]]>
+	</update>
+	
+	<!--병원정보 수정하기(2)  -->
+	<update id="modmyHosInfo" parameterType="hosMypageInfoVO">
+	    <![CDATA[
+	        update hosjointbl set hos_name=#{hos_name}, hos_tel=#{hos_tel}, hos_intro=#{hos_intro}, hos_zipcode=#{hos_zipcode}, hos_addr1=#{hos_addr1}, hos_addr2=#{hos_addr2} where hos_code=#{hos_code}
+	    ]]>
+	</update>
+	
+ 	<update id="modmyHosInfo2" parameterType="hosMypageInfoVO">
+	    <![CDATA[
+	        update hosfiltertbl set hos_dog=#{hos_dog}, hos_cat=#{hos_cat}, hos_small=#{hos_small}, hos_fish=#{hos_fish}, hos_bird=#{hos_bird}, hos_rep=#{hos_rep}, hos_etc=#{hos_etc}, hos_365=#{hos_365}, hos_gs=#{hos_gs}, hos_im=#{hos_im}, hos_em=#{hos_em}, hos_rm=#{hos_rm}, hos_vac=#{hos_vac}, hos_24=#{hos_24}, hos_time_s=#{hos_time_s}, hos_time_e=#{hos_time_e} where hos_code=#{hos_code}
+	    ]]>
+	</update>
+	
+	<!-- 병원 썸네일 업로드 -->
+	<select id="searchuploadimg" resultType="String" parameterType="String">
+	    <![CDATA[
+	    select hos_code from hosimgtbl where hos_code = #{hos_code}
+	    ]]>
+	</select>
+	
+	<update id="uploadimg" parameterType="hosMypageInfoVO">
+	    <![CDATA[
+	    update hosimgtbl set himg1=#{himg1}, himg2=#{himg2}, himg3=#{himg3} where hos_code=#{hos_code}
+	    ]]>
+	</update>
+	
+	<insert id="newuploadimg" parameterType="hosMypageInfoVO">
+	    <![CDATA[
+	    insert into hosimgtbl(hos_code, himg1, himg2, himg3) values(#{hos_code}, #{himg1}, #{himg2}, #{himg3})
+	    ]]>
+	</insert>
+	<!-- ============================================== -->
+	<!-- hosJointbl의 thum 컬럼 업데이트  -->
+	<update id="updateThum" parameterType="hosMypageInfoVO">
+		<![CDATA[
+	    update hosjointbl set hos_thum=#{himg1} where hos_code=#{hos_code}
+	    ]]>
+	</update>
+	<!-- hosJointbl의 status 컬럼 업데이트 '검토중' -->	
+	<update id="updateStatus" parameterType="hosMypageInfoVO">
+		<![CDATA[
+	    update hosjointbl set hos_status='검토중' where hos_code=#{hos_code}
+	    ]]>
+	</update>
+	<insert id="insertRMtbl" parameterType="hosMypageInfoVO">
+	    <![CDATA[
+	    insert into hosrmtbl(hos_name, hos_id, hos_code) values(#{hos_name}, #{hos_id}, #{hos_code})
+	    ]]>
+	</insert>	
+	<select id="getHosName" resultType="String" parameterType="String">
+	    <![CDATA[
+	    select hos_name from hosjointbl where hos_code = #{hos_code}
+	    ]]>
+	</select>
+	
+	
+	
+	<!-- ============================================== -->
+	<!-- 병원 프로필 이미지 찾기  -->
+	<select id="searchProfil" resultType="String" parameterType="String">
+		<![CDATA[
+	    select hos_pro from hosjointbl where hos_id=#{hos_id}
+	    ]]>
+	</select>
+
+	<!-- 병원 썸네일 이미지 찾기  -->
+	<select id="searchThumb" resultType="java.util.Map" parameterType="String">
+	    <![CDATA[
+	    select himg1, himg2, himg3 from hosimgtbl where hos_code = #{hos_code}
+	    ]]>
+	</select>
+
+	
+</mapper>

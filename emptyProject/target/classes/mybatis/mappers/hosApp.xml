@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.hosApp">
+
+  <!-- hosAppVO -->
+  <resultMap type="hosAppVO" id="hosAppResult">
+    <result property="hos_name" column="hos_name"/>
+    <result property="hos_code" column="hos_code"/>
+    <result property="hos_id" column="hos_id"/>
+    <result property="rm_code" column="rm_code"/>
+    <result property="rv_rate" column="rm_chk"/>
+    <result property="rm_status" column="rm_status"/>
+    <result property="rm_date" column="rm_date"/>
+    <result property="rm_status" column="rm_status"/>
+    <result property="rm_say" column="rm_say"/>
+    <result property="hos_status" column="hos_status"/>
+    <result property="hos_Thum" column="hos_Thum"/>
+    <result property="hos_dno" column="hos_dno"/>
+    <result property="himg1" column="himg1"/>
+    <result property="himg2" column="himg2"/>
+    <result property="himg3" column="himg3"/>
+    
+  </resultMap>
+
+
+  
+	  <select id="appCount" resultType="hosAppVO" parameterType="String">
+	    <![CDATA[
+	    SELECT * FROM hosjoinTbl JOIN hosimgtbl ON hosjoinTbl.hos_code = hosimgtbl.hos_code JOIN hosrmtbl ON hosjoinTbl.hos_code = hosrmtbl.hos_code WHERE hosjoinTbl.hos_code=#{hos_code}
+	      
+	    ]]>
+	  </select>	
+	  
+	 <update id="checkHos_h" parameterType="String">
+	  <![CDATA[
+	    UPDATE hosjointbl SET hos_status = '검토중' WHERE hos_code=#{hos_code}
+	  ]]>
+	</update>	
+	  
+	 <update id="checkHos_a" parameterType="String">
+	  <![CDATA[
+	    UPDATE hosrmtbl SET rm_status = '확인' WHERE hos_code=#{hos_code}
+	  ]]>
+	</update>	  
+	  
+	 <update id="rejectionHos_h" parameterType="String">
+	  <![CDATA[
+	    UPDATE hosjointbl SET hos_status = '거절' WHERE hos_code=#{hos_code}
+	  ]]>
+	</update>
+  
+  
+	<update id="rejectionHos_a" parameterType="java.util.Map">
+	  <![CDATA[
+	   UPDATE hosrmtbl SET rm_status = '완료',rm_say=? WHERE hos_code=#{hos_code}
+	  ]]>
+	</update>
+	
+	<select id="viewApplication" resultType="HosAppVO" parameterType="String">
+	    <![CDATA[
+	    SELECT * FROM hosjoinTbl JOIN hosimgtbl ON hosjoinTbl.hos_code = hosimgtbl.hos_code JOIN hosrmtbl ON hosjoinTbl.hos_code = hosrmtbl.hos_code WHERE hosjoinTbl.hos_code=#{hos_code}
+	      
+	    ]]>
+	</select>	
+
+
+  
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- DB를 스프링으로 연결하기 때문에 SqlMapConfig.xml이 이 파일로 대체된다 -->
+<configuration>
+   <settings>
+	 <setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.myspring.stsproject.member.vo.MemberVO" alias="memberVO"/>
+		<typeAlias type="com.myspring.stsproject.board.vo.ArticleVO" alias="articleVO"/>
+		<typeAlias type="com.myspring.stsproject.admin.vo.AdminVO" alias="adminVO"/>
+		<typeAlias type="com.myspring.stsproject.admin.vo.AdminVO" alias="hosAppVO"/>
+		<typeAlias type="com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO" alias="hosMypageInfoVO"/>
+		<typeAlias type="com.myspring.stsproject.userHistory.vo.UserHistoryVO" alias="userHistoryVO"/>
+		<typeAlias type="com.myspring.stsproject.forImg.vo.HosImgVO" alias="hosImgVO"/>
+	    <typeAlias type="com.myspring.stsproject.userMypage.vo.UserVO" alias="userVO"/>
+	    <typeAlias type="com.myspring.stsproject.userMypage.vo.PetInfoVO" alias="petInfoVO"/>
+		<typeAlias type="com.myspring.stsproject.hosMyReplyInfo.vo.ReplyVO" alias="replyVO"/>
+	    		<typeAlias type="com.myspring.stsproject.hosReviewInfo.vo.ReviewVO" alias="reviewVO"/>
+	</typeAliases>
+</configuration>

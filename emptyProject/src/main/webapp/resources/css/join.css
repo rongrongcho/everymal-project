@@ -1,0 +1,245 @@
+@charset "utf-8";
+body {
+  width: 100%;
+  height: auto;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #9e9e9e; /* 스크롤바의 색상 */
+}
+body::-webkit-scrollbar-track {
+  background: #f1f6f5;
+}
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 50%;
+  font-size: 1.6vw;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: rgb(158, 158, 158);
+}
+.memberArea {
+  position: relative;
+  height: 49vh;
+  width: 60%;
+  margin: 0 auto;
+  margin-left: 22%;
+  margin-top: 15%;
+  overflow-y: scroll;
+}
+.memberArea::-webkit-scrollbar {
+  width: 8px;
+}
+.memberArea::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: rgb(91, 170, 84); /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+.memberArea::-webkit-scrollbar-track {
+  background: rgba(91, 170, 84, 0.3); /*스크롤바 뒷 배경 색상*/
+}
+.formSign {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+  text-align: right;
+}
+.require {
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  text-indent: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.require::before {
+  content: "√";
+  color: #f48002;
+  position: relative;
+  top: -9px;
+  left: -9px;
+}
+#joinForm p,
+.joinAnimalForm p {
+  position: relative;
+  overflow: hidden;
+  padding: 1% 0;
+}
+#joinForm label:first-child,
+.mailing em:first-child,
+.joinAnimalForm label:first-child {
+  float: left;
+  width: 15%;
+  padding: 0 2%;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.work_no2,
+.work_no3 {
+  margin-left: 1%;
+}
+label {
+  position: relative;
+  top: 5px;
+}
+input,
+select {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 1%;
+}
+input {
+  text-align: center;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  position: relative;
+  height: 15px;
+  width: 15px;
+  top: 7px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.greenbox {
+  border-radius: 5px;
+  background-color: rgb(91, 170, 84);
+  color: white;
+  cursor: pointer;
+}
+#address {
+  position: relative;
+  width: 80%;
+  left: 20%;
+}
+#address1,
+#address2 {
+  width: 30%;
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  background: rgb(91, 170, 84);
+  border: none;
+}
+input[class="blue"]:checked {
+  background: #4f94ee;
+  border: none;
+}
+.mailing span {
+  margin-right: 2%;
+}
+.mailing label,
+.mailing input {
+  position: relative;
+  top: 0;
+}
+textarea {
+  border: none;
+  resize: none;
+}
+.greenbox {
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  background-color: rgb(91, 170, 84);
+}
+fieldset div > h2 {
+  padding: 2% 0 0 2%;
+  font-size: 1.5em;
+  margin-bottom: 2%;
+}
+#user_form {
+  background-color: rgb(241, 239, 239);
+  margin-bottom: 3%;
+}
+#pet_form {
+  background-color: rgb(241, 239, 239);
+}
+#hospital_form {
+  background-color: rgb(241, 239, 239);
+}
+
+#animalinsert {
+  position: relative;
+  width: 200px;
+  top: 50px;
+  margin-left: 18%;
+  overflow: hidden;
+}
+#animalplus,
+#animalminus {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: rgb(91, 170, 84);
+  color: white;
+  text-align: center;
+  float: left;
+  cursor: pointer;
+}
+#animalplus {
+  margin-right: 15px;
+}
+.btnOk,
+.btnCancle {
+  background: rgb(91, 170, 84);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+}
+.btnOk {
+  margin: 4% 26% 0 47%;
+  padding: 10px 30px;
+  font-size: 18px;
+}
+.btnCancle {
+  font-size: 17px;
+  left: -75px;
+  padding: 5px 20px;
+  top: -65px;
+}
+
+footer {
+  background-color: rgb(217, 217, 217);
+  margin-top: 10%;
+}
+.bluebox {
+  background: #4f94ee;
+}
+.memberArea2::-webkit-scrollbar {
+  width: 8px;
+}
+.memberArea2::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #4f94ee; /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+.memberArea2::-webkit-scrollbar-track {
+  background: rgba(79, 148, 238, 0.3); }

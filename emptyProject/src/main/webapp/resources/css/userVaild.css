@@ -1,0 +1,252 @@
+@charset "utf-8";
+
+body {
+  width: 100%;
+  height: auto;
+  
+}
+body::-webkit-scrollbar{
+  width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: rgb(91, 170, 84); /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: rgba(91, 170, 84, 0.3);  /*스크롤바 뒷 배경 색상*/
+}
+
+
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  
+}
+.pagetitlte {
+  font-size: 1.6vw;
+  position: absolute;
+  display: none;
+  top: 100px;
+  margin-left: 50%;
+ 
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #5baa54;
+}
+
+/* left_Area================================================================= */
+.grey_line{
+  position: absolute;
+  bottom: 34%;
+  left: 24%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px solid #EBE8E8;
+}
+#left_Area {
+  position: relative;
+  top: 200px;
+  width: 14%;
+  height: 700px;
+  margin: 0 8% 0 8%;
+  /*background-color: red;*/
+}
+
+.profileBox {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.proimgBox {
+  position: relative;
+  width: 41%;
+  height: 50%;
+  margin: 0 auto;
+  border-radius: 100%;
+}
+
+.proImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.speech_bubble {
+  position: relative;
+  width: 95%;
+  height: 30%;
+  margin: 0 auto;
+  
+}
+.speech_bubble p{
+    position: absolute;
+    top: 40%;
+    margin-left: 20%;
+}
+
+.leftCategory {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    padding: 10%;
+  }
+
+.bubbleImg{
+  width: 100%;
+}
+.firstMenu{
+    position: relative;
+    margin-bottom: 5%;
+}
+.secondMenu{
+  position: relative;
+  margin-bottom: 2%;
+}
+.firstMenu > a {
+    color:  #5baa54;
+    font-size: 18px;
+  }
+.userID{
+  color:  #5baa54;
+}
+
+/* tab_Area================================================================= */
+
+#tab_Area {
+    position: absolute;
+    top: 140px;
+    width: 55%;
+    margin-right: 20%;
+    height: 51%;
+    right: 0;
+    border: 5px solid  #5baa54;
+    border-radius: 10px;
+  }
+
+#tabBox{
+position: absolute;
+
+width: 100%;
+height: 100%;  
+
+
+}
+
+#check_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+
+
+  #msg_box{
+    position: relative;
+    width: 80%;
+    height: 50%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    top: 15%;
+    background-color: #fafafa;  /*=========배경색========*/
+  }
+
+  #msg_box p{
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+    height: 40%;
+    text-align: center;
+    top: 7%;
+    padding-top: 5%;
+    font-size: 1.0vw;
+    line-height: 200%;
+    
+  }
+
+  #msg_box img{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 6%;
+    height: 13%;
+    top:10%;
+    z-index: 100;
+  }
+
+
+  label{
+    position: relative;
+    font-size: 0.8vw;
+    display: inline;
+    left: 42.5%;
+  }
+
+  #input_box input{
+    position: absolute;
+    border:none;
+    border-bottom: 1px solid #dfdcdc;
+    background:transparent;
+    width: 100%;
+    height: 100%;
+    color: #bfc3c5;
+    font-size: 1.0vw;
+    font-weight:lighter;
+    
+    
+  }
+#input_box{
+    position: relative;
+    width: 15%;
+    height: 4%;
+    margin: 0 auto;
+    
+    
+  }
+  .btn{
+    position: relative;
+    width: 30%;
+    height: 7%;
+    top: 15%;
+    margin: 0 auto;
+  }
+  .btn input{
+   
+    width: 40%;
+    height: 80%;
+    background-color:  #5baa54;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    
+  }
+  .btn #cancel_btn{
+    position: absolute;
+    left: 0;
+    background-color: #bfc3c5;
+  }
+  .btn #pwd_confirm{
+    position: absolute;
+    background-color: #5baa54;
+    right: 0;
+  }
+  footer {
+    position: relative;
+    bottom: 0;
+  
+    background-color:  #5baa54;
+  }
+  

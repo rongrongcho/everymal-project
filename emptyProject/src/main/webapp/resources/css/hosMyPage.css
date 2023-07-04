@@ -1,0 +1,244 @@
+@charset "utf-8";
+
+body {
+  width: 100%;
+  height: auto;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #91d3f9;
+  height: 10%;
+}
+body::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+}
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  font-size: 1.6vw;
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  display: none;
+  margin-left: 50%;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #91d3f9;
+}
+
+/* left_Area================================================================= */
+.grey_line {
+  position: absolute;
+  bottom: 34%;
+  left: 24%;
+  width: 1px;
+  height: 50%;
+  border-left: 1px solid #ebe8e8;
+}
+#left_Area {
+  position: relative;
+  top: 200px;
+  width: 14%;
+  height: 700px;
+  margin: 0 8% 0 8%;
+  /*background-color: red;*/
+}
+
+.profileBox {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.proimgBox {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  position: relative;
+  margin-left: -6%;
+  display: block;
+  object-fit: cover;
+}
+
+.proImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  position: relative;
+  margin-left: -6%;
+  display: block;
+  object-fit: cover;
+}
+
+.speech_bubble {
+  position: relative;
+  width: 95%;
+  height: 30%;
+  margin: 0 auto;
+}
+.speech_bubble p {
+    position: absolute;
+    top: 42%;
+    margin-left: 20%;
+    font-size: 0.9vw;
+}
+
+.leftCategory {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  padding: 10%;
+}
+
+.bubbleImg {
+  width: 100%;
+}
+.firstMenu {
+  position: relative;
+  margin-bottom: 10%;
+  font-size: 1vw;
+}
+.secondMenu {
+  position: relative;
+  margin-bottom: 3%;
+  font-size: 0.8vw;
+}
+.secondMenu > a:hover {
+  color: #91d3f9;
+}
+.firstMenu .secondMenu:first-child {
+  margin-top: 5px;
+}
+.userID {
+  color: #91d3f9;
+  margin-right: 5px;
+}
+
+/* tab_Area================================================================= */
+
+#tab_Area {
+    position: absolute;
+    top: 140px;
+    width: 55%;
+    margin-right: 20%;
+    height: 51%;
+    right: 0;
+    border: 5px solid  #91d3f9;
+    border-radius: 10px;
+  }
+
+#tabBox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#check_form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#msg_box {
+  position: relative;
+  width: 80%;
+  height: 50%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  top: 15%;
+  background-color: #fafafa; /*=========배경색========*/
+}
+
+#msg_box p {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  height: 40%;
+  text-align: center;
+  top: 7%;
+  padding-top: 5%;
+  font-size: 1vw;
+  line-height: 200%;
+}
+
+#msg_box img {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 6%;
+  height: 13%;
+  top: 10%;
+  z-index: 100;
+}
+
+label {
+  position: relative;
+  font-size: 0.8vw;
+  display: inline;
+  left: 42.5%;
+}
+
+#input_box input {
+  position: absolute;
+  border: none;
+  /* border-bottom: 1px solid #dfdcdc; */
+  /* background: transparent; */
+  width: 100%;
+  height: 100%;
+  color: #bfc3c5;
+  font-size: 1em;
+  font-weight: lighter;
+}
+#input_box {
+  position: relative;
+  width: 15%;
+  height: 4%;
+  margin: 0 auto;
+}
+.btn {
+  position: relative;
+  width: 30%;
+  height: 7%;
+  top: 15%;
+  margin: 0 auto;
+}
+.btn input {
+  width: 40%;
+  height: 80%;
+  background-color: #91d3f9;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+}
+.btn #cancel_btn {
+  position: absolute;
+  left: 0;
+  background-color: #bfc3c5;
+}
+.btn #pwd_confirm {
+  position: absolute;
+  background-color: #91d3f9;
+  right: 0;
+}
+footer {
+  position: relative;
+  bottom: 0;
+
+  background-color: #c5e8fd;
+}

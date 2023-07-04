@@ -1,0 +1,99 @@
+@charset "utf-8";
+* {
+  overflow-y: hidden;
+}
+body {
+  width: 100%;
+  height: auto;
+}
+
+#container_sub {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.pagetitlte {
+  position: absolute;
+  display: inline-block;
+  top: 100px;
+  margin-left: 47%;
+  font-size: 1.6vw;
+}
+#sidebar_Area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3%;
+  height: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: rgb(158, 158, 158);
+}
+.content {
+  position: relative;
+  height: 80vh;
+  width: 60%;
+  margin: 0 auto;
+  margin-left: 15%;
+  margin-top: 17%;
+}
+.content #user_choicebox {
+  float: left;
+  border: 1px solid #ccc;
+  position: relative;
+  width: 30%;
+  height: 50%;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+  margin-left: 30%;
+}
+.content #hospital_choicebox {
+  float: left;
+  border: 1px solid #ccc;
+  position: relative;
+  width: 30%;
+  height: 50%;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 5%;
+}
+.content #user_choicebox a {
+  position: relative;
+  line-height: 20px;
+  background-color: rgb(91, 170, 84);
+  border-radius: 5px;
+  padding: 3% 8%;
+  left: -63px;
+  color: white;
+  top: 30%;
+}
+.content #hospital_choicebox a {
+  position: relative;
+  line-height: 20px;
+  background-color: rgb(145, 211, 249);
+  border-radius: 5px;
+  left: -63px;
+  padding: 3% 8%;
+  color: white;
+  top: 30%;
+}
+.imgChoice {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  left: 27%;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 30px;
+  top: 20%;
+}
+
+footer {
+display: none;
+}
