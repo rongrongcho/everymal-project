@@ -19,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	    <typeAlias type="com.myspring.stsproject.userMypage.vo.PetInfoVO" alias="petInfoVO"/>
 		<typeAlias type="com.myspring.stsproject.hosMyReplyInfo.vo.ReplyVO" alias="replyVO"/>
 	    <typeAlias type="com.myspring.stsproject.hosReviewInfo.vo.ReviewVO" alias="reviewVO"/>
-		<typeAlias type="com.myspring.stsproject.animal.vo.AnimalVO" alias="animalVO"/>
-		<typeAlias type="com.myspring.stsproject.hosList.vo.hospitalVO" alias="hospitalVO"/>
+	    	    <typeAlias type="com.myspring.stsproject.petTaxi.vo.PetTaxiVO" alias="petTaxiVO"/>
 	</typeAliases>
 </configuration>

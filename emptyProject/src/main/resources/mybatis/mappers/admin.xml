@@ -187,12 +187,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	UPDATE hosjointbl SET hos_status = '승인' WHERE hos_code=#{hos_code}
   		]]>
 	</update> 
- 	<select id="viewApplication" resultType="adminVO" parameterType="String">
-    <![CDATA[
-    SELECT * FROM hosjoinTbl JOIN hosimgtbl ON hosjoinTbl.hos_code = hosimgtbl.hos_code JOIN hosrmtbl ON hosjoinTbl.hos_code = hosrmtbl.hos_code WHERE hosjoinTbl.hos_code=#{hos_code}
-      
-    ]]>
-  </select>	
+	<select id="viewApplication" resultType="adminVO" parameterType="java.util.Map">
+	  <![CDATA[
+	  SELECT * FROM hosjoinTbl
+	  JOIN hosimgtbl ON hosjoinTbl.hos_code = hosimgtbl.hos_code
+	  JOIN hosrmtbl ON hosjoinTbl.hos_code = hosrmtbl.hos_code
+	  WHERE hosjoinTbl.hos_code=#{hos_code} AND hosrmtbl.rm_code=#{rm_code}
+	  ]]>
+	</select>
+
   
   
   

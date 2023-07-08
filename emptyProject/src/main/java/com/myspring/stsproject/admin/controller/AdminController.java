@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public interface AdminController {
 	public ModelAndView reqDelReviewList (HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reviewDelete (HttpServletRequest request, HttpServletResponse response) throws Exception;
-	//public ModelAndView hosRMList (HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView approvalHosM (HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView checkApp (HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView approval (HttpServletRequest request, HttpServletResponse response) throws Exception;

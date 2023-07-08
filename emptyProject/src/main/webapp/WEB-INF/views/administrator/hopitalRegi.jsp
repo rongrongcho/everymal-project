@@ -2,8 +2,7 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- 프로젝트 이름이 각각 다르므로 어느 프로젝트에 가져다 놓아도 사용할 수 있게 컨택스트 패스를 변수로 가져온다 -->
     <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-    <%-- <c:set var="rmList" value="${adminMap.rmList }" />
-    <c:set var="totQ" value="${adminMap.totalApps }" />
+    <%-- <c:set var="totUser" value="${rmResultMap.totalList}" />
     <c:set var="section" value="${rmList.section }" />
     <c:set var="pageNum" value="${rmList.pageNum }" /> --%>
     <% request.setCharacterEncoding("utf-8"); %>
@@ -82,114 +81,38 @@
                     <option value="rmTotList" selected>전체</option>
                     <option value="uncheckedRM">미확인</option>
                     <option value="checkedRM">확인</option>
-                    <option value="confirmed">완료</option>
+                    <option value="confirmed">완료</opt /ion>
                   </select>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>선택</th>
-                        <th>신청 번호</th>
-                        <th>병원명</th>
-                        <th>신청일</th>
-                        <th>상태</th>
-                      </tr>
-                    </thead>
-                    <tbody id="hosRMListTableBody">
-                      <c:choose>
-                        <c:when test="${empty rmList}">
-                          <td colspan="5">내역이 존재하지 않습니다. </td>
-                        </c:when>
+                  <div class="tableBox">
+                    <table style="height: 100%;">
+                      <colgroup>
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                      </colgroup>
+                      <thead>
+                        <tr class="member-row">
+                          <th>선택</th>
+                          <th>신청 번호</th>
+                          <th>병원명</th>
+                          <th>신청일</th>
+                          <th>상태</th>
+                        </tr>
+                      </thead>
+                      <tbody id="userListTableBody">
 
-                        <c:when test="${!empty rmList}">
-                          <c:forEach var="rm" items="${rmList}">
-                            <tr class="conLink">
-                              <td><input type="checkbox" name="rm_chk" id="" value="${rm.hos_code}"></td>
-                              <td>
-                                <a class="goTodetailPage"
-                                  href="${contextPath}/administrator/adminApplication.do?&hos_code=${rm.hos_code}">${rm.rm_code}</a>
-                              </td>
-                              <td>
-                                <a class="goTodetailPage"
-                                  href="${contextPath}/administrator/adminApplication.do?&hos_code=${rm.hos_code}">${rm.hos_name}</a>
-                              </td>
-                              <td>${rm.rm_date}</td>
-                              <td>${rm.rm_status}</td>
-                            </tr>
-                          </c:forEach>
-                        </c:when>
-                      </c:choose>
-                    </tbody>
+                      </tbody>
 
-                  </table>
+                    </table>
+
+                  </div>
                   <button class="edit_btn" type="button" id="edit_btn3" onclick="toList(this.form);">등록 승인</button>
                 </form>
-              </div>
-              <div id="divPaging">
-                <c:if test="${totalApps !=0}">
-                  <c:choose>
-                    <c:when test="${totalApps > 40}">
-                      <c:choose>
-                        <c:when test="${totalApps%8==0}">
-                          <c:set var="tot" value="${totalApps/8}" />
-                        </c:when>
-                        <c:otherwise>
-                          <c:set var="tot" value="${totalApps/8+1}" />
-                        </c:otherwise>
-                      </c:choose>
-
-                      <c:forEach var="page" begin="1" end="${tot-(section-1)*5}" step="1">
-                        <c:if test="${not doneLoop}">
-                          <c:if test="${section>1 && page==1 }">
-                            <a
-                              href="${contextPath}/administrator/hopitalRegi.do?section=${section-1}&pageNum=${pageNum}">
-                              prev</a>
-                          </c:if>
-                          <c:choose>
-                            <c:when test="${page==pageNum}">
-                              <a class="selPage"
-                                href="${contextPath}/administrator/hopitalRegi.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
-                            </c:when>
-                            <c:otherwise>
-                              <a class="noLine"
-                                href="${contextPath}/administrator/hopitalRegi.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
-                            </c:otherwise>
-                          </c:choose>
-                          <c:if test="${page==5}">
-                            <a
-                              href="${contextPath}/administrator/hopitalRegi.do?section=${section+1}&pageNum=${pageNum}">
-                              next</a>
-                            <c:set var="doneLoop" value="true" />
-                          </c:if>
-                        </c:if>
-                      </c:forEach>
-                    </c:when>
-
-                    <c:when test="${totalApps <= 40 }">
-                      <c:choose>
-                        <c:when test="${totalApps%8==0}">
-                          <c:set var="tot" value="${totalApps/8}" />
-                        </c:when>
-                        <c:otherwise>
-                          <c:set var="tot" value="${totalApps/8+1}" />
-                        </c:otherwise>
-                      </c:choose>
-
-                      <c:forEach var="page" begin="1" end="${tot}" step="1">
-                        <c:choose>
-                          <c:when test="${page==pageNum}">
-                            <a class="selPage"
-                              href="${contextPath}/administrator/hopitalRegi.do?section=${section}&pageNum=${page}">${page}</a>
-                          </c:when>
-                          <c:otherwise>
-                            <a class="noLine"
-                              href="${contextPath}/administrator/hopitalRegi.do?section=${section}&pageNum=${page}">${page}</a>
-                          </c:otherwise>
-                        </c:choose>
-                      </c:forEach>
-                    </c:when>
-                  </c:choose>
-                </c:if>
-
+                <div id="divPaging">
+                  <!-- 페이징 링크가 여기에 동적으로 생성됩니다. -->
+                </div>
 
               </div>
 
@@ -197,12 +120,7 @@
 
             </div>
 
-
           </section>
-
-
-
-
           <!-- fooooooooooooooooooooooooooooooooooooooooooooooooooooooter -->
           <footer>
             <ul class="bottomNav">
@@ -248,45 +166,155 @@
             </div>
           </footer>
 
+
         </div>
+
+
+
+
+
+
+
+
+
       </body>
 
       <script>
 
+        $("#orderby").change(function () {
+          var contextPath = "${pageContext.request.contextPath}";
+          var selectedValue = $(this).val(); // 선택된 값 가져오기
+          console.log(selectedValue);
+          $.ajax({
+            type: "GET",
+            url: contextPath + "/administrator/hos_pitalRegi.do",
+            dataType: "json",
+            data: { orderby: selectedValue },
+            success: function (data) {
+              updateList(data);
+              updatePaging(data);
 
-        $(document).ready(function () {
-          // select 요소 값 변경 시 이벤트 처리
-          $("#orderby").change(function () { // select 태그의 id 값을 가져옴 , 사용자가 샐렉트 값을 임의로 바꾸면 ajax 시작 
-            var contextPath = "${pageContext.request.contextPath}";
-            var selectedValue = $(this).val(); // select 태그의 옵션(gList~hList~등등) 선택된 값 가져오기
-            console.log(selectedValue); // console log 확인
-            $.ajax({
-              type: "GET",
-              url: contextPath + "/administrator/hopitalRegi.do", //절대 경로 삽입
-              data: { orderby: selectedValue }, // data는 내가 다른 것은 서버로 보내지 않고 select 태그에서 선택된 옵션의 값만 서버로 보낼거야! ex) 옶ㄴ gList가 선택되었다면
-              // orderby 는 value값으로 서버로 전송 됨. 
-              success: function (data) { //data를 서버로 전송시키는데 성공했다면 (중요) 
-                // 받아온 데이터로 테이블의 tbody 내용 변경
-                var tbody = $(data).find("#hosRMListTableBody"); //data는 서버로부터 리턴받은 값이 들어있음. 그래서 data에 들어있는 값을 저장할 영역의 태그를 find로 찾는다. 
-                //find(바꾸고 싶은 부분 찾기 , ex) html 속 #hosRMListTableBody 를 가진 태그를 찾는다.) 
-                $("#hosRMListTableBody").html(tbody.html());
-              },
-              error: function (error) {
-                alert("데이터를 가져오는데 실패했습니다.");
-                console.log("error: " + error);
-              }
-            });
+            },
+            error: function (error) {
+              alert("데이터를 가져오는데 실패했습니다.");
+              console.log("error: " + error);
+            }
           });
         });
+        //처음에는 자동으로 전체회원이 나오게 하기 위해서 (이거를 해야, 처음에 전체회원이 나온다.)
+        $("#orderby").val("list").change();
+
+        function updateList(data) {
+          var userList = data.userList; // 업데이트할 부분에 해당하는 데이터 추출
+          var count = data.totalList;
+          $("#count").text(count);
+
+          var tbody = ""; // 업데이트할 tbody를 담을 변수
+
+          if (userList.length === 0) {
+            // userList가 비어있을 경우 메시지를 표시
+            tbody = "<tr><td colspan='5' align='center'>신청 이력이 존재하지 않습니다.</td></tr>";
+          } else {
+            // userList를 순회하며 테이블의 각 행을 생성하여 tbody에 추가
+            var contextPath = "<%= request.getContextPath() %>";
+            for (var i = 0; i < userList.length; i++) {
+
+              var rm = userList[i];
+              tbody += "<tr>";
+              tbody += "<td><input type='checkbox' name='rm_chk' id='' value='" + rm.hos_code + "'></td>";
+              tbody += "<td><a href='" + contextPath + "/administrator/adminApplication.do?hos_code=" + rm.hos_code + "&rm_code=" + rm.rm_code + "'>" + rm.rm_code + "</a></td>";
+              tbody += "<td><a href='" + contextPath + "/administrator/adminApplication.do?hos_code=" + rm.hos_code + "&rm_code=" + rm.rm_code + "'>" + rm.hos_name + "</a></td>";
+              tbody += "<td><a href='" + contextPath + "/administrator/adminApplication.do?hos_code=" + rm.hos_code + "&rm_code=" + rm.rm_code + "'>" + rm.rm_date + "</a></td>";
+
+              tbody += "<td>" + rm.rm_status + "</td>";
+              tbody += "</tr>";
+            }
+          }
+
+          // 업데이트된 tbody로 기존의 tbody를 교체하여 업데이트
+          $("#userListTableBody").html(tbody);
+        }
+
+
+        function updatePaging(data) {
+          var currentPage = data.currentPage;
+          var totalPages = data.totalPages;
+          var totalList = data.totalList;
+
+          var pagingInfo = "전체 " + totalList + "개 중 " + currentPage + " 페이지";
+          $("#pagingInfo").text(pagingInfo);
+          console.log(pagingInfo);
+
+          var pagingHtml = ""; // 페이징 링크를 담을 변수
+
+          // 이전 페이지 링크 생성
+          if (currentPage > 1) {
+            pagingHtml += "<a href='#' onclick='goToPage(" + (currentPage - 1) + ")'>&lt; 이전</a> ";
+          }
+
+          // 페이지 번호 링크 생성
+          var startPage = Math.max(1, currentPage - 2); // 현재 페이지를 중심으로 앞쪽에 2개 페이지 번호 출력
+          var endPage = Math.min(totalPages, startPage + 4); // 시작 페이지로부터 최대 5개의 페이지 번호 출력
+
+          if (startPage > 1) {
+            pagingHtml += "<a href='#' onclick='goToPage(1)'>1</a> "; // 첫 번째 페이지로 이동하는 링크
+            if (startPage > 2) {
+              pagingHtml += "... "; // 중간 페이지 생략 부분 표시
+            }
+          }
+
+          for (var i = startPage; i <= endPage; i++) {
+            if (i === currentPage) {
+              pagingHtml += "<span style='color: #9e9e9e;'>" + i + "</span> ";
+            } else {
+              pagingHtml += "<a href='#' onclick='goToPage(" + i + ")'>" + i + "</a> ";
+            }
+          }
+
+          if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+              pagingHtml += "... "; // 중간 페이지 생략 부분 표시
+            }
+            pagingHtml += "<a href='#' onclick='goToPage(" + totalPages + ")'>" + totalPages + "</a> "; // 마지막 페이지로 이동하는 링크
+          }
+
+          // 다음 페이지 링크 생성
+          if (currentPage < totalPages) {
+            pagingHtml += "<a href='#' onclick='goToPage(" + (currentPage + 1) + ")'>다음 &gt;</a> ";
+          }
+
+          // 생성된 페이징 HTML을 페이징 영역에 업데이트
+          $("#divPaging").html(pagingHtml);
+        };
+
+
+        // 페이지 이동 함수
+        function goToPage(page) {
+          var contextPath = "${pageContext.request.contextPath}";
+          var selectedValue = $("#orderby").val();
+          console.log(selectedValue);
+          $.ajax({
+            type: "GET",
+            url: contextPath + "/administrator/hos_pitalRegi.do",
+            dataType: "json",
+            data: { orderby: selectedValue, pageNum: page },
+            success: function (data) {
+              updateList(data);
+              updatePaging(data);
+            },
+            error: function (error) {
+              alert("데이터를 가져오는데 실패했습니다.");
+              console.log("error: " + error);
+            }
+          });
+        };
 
         function toList(obj) {
           obj.action = "${contextPath}/administrator/approvalHosM.do";
           obj.submit();
         }
       </script>
-      <!-- <script type="text/javascript">
 
-      </script> -->
 
 
       </html>
