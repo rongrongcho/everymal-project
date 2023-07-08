@@ -26,19 +26,51 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public void addMember(MemberVO memVO) throws DataAccessException {
-		memberDAO.insertMember(memVO);
+	public String addMember(MemberVO memVO) throws DataAccessException {
+		String userCode = (String)memberDAO.insertMember(memVO);
+		return userCode;
 	}
-
-
+	
+	@Override
+	public void addHospital(MemberVO memVO) throws DataAccessException {
+		memberDAO.addHospital(memVO);
+	}
+	
+	@Override
+	public String selectUsercode(MemberVO memVO) throws DataAccessException {
+		String code = (String)memberDAO.selectUsercode(memVO);
+		return code;
+	}
+	
+	@Override
+	public String selectHoscode(MemberVO memVO) throws DataAccessException {
+		String code = (String)memberDAO.selectHoscode(memVO);
+		return code;
+	}
 
 	@Override
-	public MemberVO findMember(String id) throws DataAccessException {
-		MemberVO memVO=(MemberVO)memberDAO.findMember(id);
-		return memVO;
+	public String searchId(MemberVO memVO) throws DataAccessException {
+		String id=(String)memberDAO.searchId(memVO);
+		return id;
 	}
-
-
+	
+	@Override
+	public boolean searchPass(MemberVO memberVO) throws DataAccessException {
+		boolean result = (boolean)memberDAO.searchPass(memberVO);
+		return result;
+	}
+	
+	@Override
+	public String idChk(MemberVO memVO) throws DataAccessException {
+		String id=(String)memberDAO.idChk(memVO);
+		return id;
+	}
+	
+	@Override
+	public String HosidChk(MemberVO memVO) throws DataAccessException {
+		String id=(String)memberDAO.HosidChk(memVO);
+		return id;
+	}
 
 	@Override
 	public void updateMember(MemberVO memVO) throws DataAccessException {

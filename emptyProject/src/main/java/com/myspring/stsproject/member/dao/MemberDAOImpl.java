@@ -25,15 +25,52 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 	@Override
-	public void insertMember(MemberVO memVO) throws DataAccessException {
+	public String insertMember(MemberVO memVO) throws DataAccessException {
 		sqlSession.insert("mapper.member.insertMember", memVO);
+		String userCode = memVO.getUser_code();
+		return userCode;
+	}
+	
+	@Override
+	public void addHospital(MemberVO memVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.addHospital", memVO);
 		
+	}
+	
+	@Override
+	public String selectUsercode(MemberVO memVO) throws DataAccessException {
+		String code =sqlSession.selectOne("mapper.member.selectUsercode", memVO);
+		return code;
+	}
+	
+	@Override
+	public String selectHoscode(MemberVO memVO) throws DataAccessException {
+		String code =sqlSession.selectOne("mapper.member.selectHoscode", memVO);
+		return code;
 	}
 
 	@Override
-	public MemberVO findMember(String id) throws DataAccessException {
-		MemberVO memVO=(MemberVO) sqlSession.selectOne("mapper.member.findMember", id);
-		return memVO;
+	public String searchId(MemberVO memVO) throws DataAccessException {
+		String id=(String)sqlSession.selectOne("mapper.member.searchId", memVO);
+		return id;
+	}
+	
+	@Override
+	public boolean searchPass(MemberVO memberVO) throws DataAccessException {
+		boolean result=sqlSession.selectOne("mapper.member.searchPass", memberVO);
+		return result;
+	}
+	
+	@Override
+	public String idChk(MemberVO memVO) throws DataAccessException {
+		String id=(String)sqlSession.selectOne("mapper.member.idChk", memVO);
+		return id;
+	}
+	
+	@Override
+	public String HosidChk(MemberVO memVO) throws DataAccessException {
+		String id=(String)sqlSession.selectOne("mapper.member.HosidChk", memVO);
+		return id;
 	}
 
 	@Override
