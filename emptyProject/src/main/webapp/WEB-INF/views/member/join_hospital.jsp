@@ -21,15 +21,6 @@
           }).open();
         };
 
-        $(function () {
-          /* if (document.getElementById("input_check").checked) {
-            document.getElementById("input_check_hidden").disabled = true;
-          } */
-          /* if($("#input_check").checked){
-        	  $("#input_check_hidden").attr("disabled", true);
-          } */
-        });
-
         function submit() {
           //회원정보 저장
           data = $("#joinForm").serialize();
@@ -284,10 +275,13 @@
                   <c:when test="${!empty isLogon}">
                     <c:choose>
                       <c:when test="${isHos}">
-                        <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/userMypage">회원마이페이지</a>
+                        <a href="${contextPath}/user_Page/myInfo.do">회원마이페이지</a>
                       </c:otherwise>
                     </c:choose>
                   </c:when>
