@@ -57,13 +57,13 @@ import com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO;
 		}
 		
 		@Override
-		public String searchProfil(String hos_id) throws DataAccessException {
+		public String searchProfil(String hos_id,String hos_code) throws DataAccessException {
 		    String hosPro = hosmypageinfoDAO.searchProfil(hos_id);
 		    if (hosPro == null || hosPro.isEmpty()) {
-		        return "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\hos_images\\profile\\img\\blankProfil.png";
+		        return "/Users/kyungminkim/Desktop/everymalSpring 2/emptyProject/src/main/webapp/resources/img/blankProfil.png";
 		    } else {
-		        String hos_code = "hos0001";
-		        return "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\hos_images\\profile\\" + hos_code + "\\" + hosPro;
+		        String hosCode = hos_code;
+		        return "/Users/kyungminkim/Desktop/everymalSpring 2/emptyProject/src/main/webapp/resources/imgRepo/hos_images/profile/" + hosCode + "/" + hosPro;
 		    }
 		}
 

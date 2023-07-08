@@ -166,7 +166,7 @@
                         alt="전화하기" title="전화하기"></a></div>
 
                   <div class="info_btn" id="reservation"><a
-                      href="${contextPath}/hospital/reservationForm.do?hos_code=${hos_code}">예약하기</a></div>
+                      href="${contextPath}/hos_Reservation/reservationForm.do?hos_code=${hos_code}&hos_name=${hos_name}">예약하기</a></div>
                 </div>
                 <div id="hos_tel">
                   &nbsp;📞${hos_tel}
@@ -308,7 +308,7 @@
                 var popupY = (window.screen.height - popupHeight) / 2;
                 var options = "width=" + popupWidth + ", height=" + popupHeight + ", left=" + popupX + ", top=" + popupY + ", resizable=no";
                 window.name = "reservationForm";
-                openWin = window.open("${pageContext.request.contextPath}/hos_List/reviewPopup.jsp", "childForm", options);
+                openWin = window.open("${pageContext.request.contextPath}/hos_List/reviewPopup.do", "childForm", options);
               }
               openPopup();
             };

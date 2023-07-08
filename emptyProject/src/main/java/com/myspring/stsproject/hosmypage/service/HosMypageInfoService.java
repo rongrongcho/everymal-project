@@ -3,6 +3,8 @@ package com.myspring.stsproject.hosmypage.service;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +19,9 @@ public interface HosMypageInfoService {
 //	public String uploadimg(String hos_code) throws DataAccessException;
 //	public void modmyHosInfo2(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
 	public void uploadimg(String hos_code, HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
-	public String searchProfil(String hos_id) throws DataAccessException;
+	//public String searchProfil(String hos_id) throws DataAccessException;
+	//public String searchProfil(String hos_id, HttpServletRequest request) throws DataAccessException;
+	public String searchProfil(String hos_id, String hos_code) throws DataAccessException;
 	
 
 	//	public HosMypageInfoVO callhosInfo(String hos_id) throws DataAccessException;

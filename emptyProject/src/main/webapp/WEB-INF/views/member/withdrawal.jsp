@@ -13,9 +13,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <title>회원 탈퇴</title>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript"></script>
-    <link rel="stylesheet" href="${contextPath }/css/reset.css" />
-    <link rel="stylesheet" href="${contextPath }/css/common.css" />
-    <link rel="stylesheet" href="${contextPath }/css/withdrawal.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/reset.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/withdrawal.css" />
   </head>
 
   <body>
@@ -96,7 +96,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 반드시 탈퇴 전 삭제하시기 바랍니다.</span
               >
             </p>
-            <form action="${contextPath }/withdrawal/updateEnabled.do" method="post">
+            <form action="${contextPath }/member/updateEnabled.do" method="post">
             <input type="hidden" name="id" value="${log_id}">
             <input type="submit" class="btn" value="탈퇴하겠습니다">
             </form>

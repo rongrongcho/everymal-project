@@ -1,6 +1,7 @@
 package com.myspring.stsproject.hosList.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,25 @@ public class hospitalDAOImpl implements hospitalDAO {
 		String tel = sqlSession.selectOne("mapper.hosDetail.hos_tel", hos_code);
 		return tel;
 	}
+	
+	@Override
+	public String getNewRevCode() throws DataAccessException {
+		int code=sqlSession.selectOne("mapper.writeReview.getNewRevCode");
+		int maxNum=code+1;
+		String rv_code=String.format("rv%04d", maxNum);
+		return rv_code;
+	}
+	
+	@Override
+	public void addReview(hospitalVO hospitalVO) throws DataAccessException{
+		sqlSession.insert("mapper.writeReview.addReview",hospitalVO);
+	}
+	
+	@Override
+	public String getResCode(hospitalVO hospitalVO) throws DataAccessException {
+	    String rescode = sqlSession.selectOne("mapper.writeReview.getResCode", hospitalVO);
+	    return rescode;
+	}
+
+
 }

@@ -81,23 +81,26 @@
                   <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
                   <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
                   <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
-                  <li>
+                   <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
                     <c:choose>
-                      <c:when test="${!empty isLogon}">
-                        <c:choose>
-                          <c:when test="${isHos}">
-                            <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                          </c:when>
-                          <c:otherwise>
-                            <a href="${contextPath}/userMypage">회원마이페이지</a>
-                          </c:otherwise>
-                        </c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/login.jsp">로그인•회원가입</a>
+                        <a href="${contextPath}/userMypage">회원마이페이지</a>
                       </c:otherwise>
                     </c:choose>
-                  </li>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
                 </ul>
               </nav>
             </header>
@@ -120,45 +123,39 @@
                 </div>
               </div>
               <div class="leftCategory">
-                <ul class="CatrgoryBox">
-                  <li class="firstMenu"> 마이페이지
-                    <ul>
-                      <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 정보 관리</a></li>
-                      <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 병원 관리</a></li>
-                      <li class="secondMenu"><a href="${contextPath }/hosReview/hosReviewList.do">병원리뷰 관리</a></li>
-                      <li class="secondMenu"><a href="${contextPath }/hosReply/listMyReply.do">답변 관리</a></li>
-                    </ul>
-                  </li>
-                  <li class="firstMenu"> 예약 관리
-                    <ul>
-                      <li class="secondMenu"><a href="${contextPath}/hosres">예약관리</a></li>
-                    </ul>
-                  </li>
-
-
-                </ul>
-              </div>
-
-
+                  <ul class="CatrgoryBox">
+                    <li class="firstMenu"> 마이페이지
+                      <ul>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 정보 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 병원 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_ReviewInfo/hosReviewList.do">병원리뷰 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MyReplyInfo/listMyReply.do">답변 관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="firstMenu"> 예약 관리
+                      <ul>
+                        <li class="secondMenu"><a href="${contextPath}/hos_ResInfo/hosResList.do">예약관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="firstMenu"><a href="${contextPath }/member/withdrawal.do">회원탈퇴</a></li>
+                  </ul>
+                </div>
             </section>
             <div class="grey_line"></div>
             <section id="tab_Area">
               <div class="tab_nav">
-                <ul class="tab_Btns">
-                  <li class="tBtn tBtn1 notChoice"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
-                          class="pointT">내</span><span>
-                          정보</span></a></li>
-                  <li class="tBtn tBtn2 choiceTabNav"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
+                  <ul class="tab_Btns">
+                    <li class="tBtn tBtn1 choiceTabNav"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
+                          class="pointT">내</span><span>정보</span></a></li>
+                    <li class="tBtn tBtn2 notChoice"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
                           class="pointT">내</span><span> 병원</span></a></li>
-                  <li class="tBtn tBtn3 notChoice"><a href="${contextPath }/hosReview/hosReviewList.do"><span
-                        class="pointT span3">병원</span><span class="span3"> 리뷰</span></a></li>
-                  <li class="tBtn tBtn4 notChoice"><a href="${contextPath }/hosReply/listMyReply.do"><span
-                        class=" span4">답변</span></a>
-                  </li>
-
-
-                </ul>
-              </div>
+                    <li class="tBtn tBtn3 notChoice"><a href="${contextPath }/hos_ReviewInfo/hosReviewList.do"><span
+                          class="pointT span3">병원</span><span class="span3"> 리뷰</span></a></li>
+                    <li class="tBtn tBtn4 notChoice"><a href="${contextPath }/hos_MyReplyInfo/listMyReply.do"><span
+                          class=" span4">답변</span></a>
+                    </li>
+                  </ul>
+                </div>
               <div class="tabcontents">
                 <div id="tabBox" class="tab-content current">
                   <div class="inputbox"></div>
@@ -243,7 +240,7 @@
             <footer>
               <ul class="bottomNav">
                 <li>
-                  <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
+                  <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                       alt="로고" style="width: 250px; height: auto" /></a>
                 </li>
                 <li>
@@ -257,10 +254,10 @@
                 <li>
                   <c:choose>
                     <c:when test="${!empty isLogon}">
-                      <a href="${contextPath}/logindb/logout">로그아웃</a>
+                      <a href="${contextPath}/member/logout.do">로그아웃</a>
                     </c:when>
                     <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인</a>
+                      <a href="${contextPath}/member/loginForm.do">로그인</a>
                     </c:otherwise>
                   </c:choose>
                 </li>

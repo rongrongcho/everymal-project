@@ -1,5 +1,6 @@
 package com.myspring.stsproject.hosList.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,12 +12,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myspring.stsproject.hosList.dao.hospitalDAO;
 import com.myspring.stsproject.hosList.service.hospitalService;
 import com.myspring.stsproject.hosList.vo.hospitalVO;
 import com.myspring.stsproject.hosReviewInfo.dao.HosReviewDAO;
@@ -39,6 +44,9 @@ public class hospitalControllerImpl extends MultiActionController implements hos
 	
 	@Autowired
 	private hospitalVO hospitalVO;
+	
+	@Autowired
+	private hospitalDAO hospitalDAO;
 
 	@Override
 	@RequestMapping(value = "/hos_List/Hospital_detail.do", method = RequestMethod.GET)
@@ -97,6 +105,62 @@ public class hospitalControllerImpl extends MultiActionController implements hos
 		
 		return mav;
 
+	}
+	
+	@RequestMapping(value = "/hos_List/reviewPopup.do", method = RequestMethod.GET)
+	public ModelAndView valid(@ModelAttribute("hospitalVO") hospitalVO hospitalVO, @RequestParam(value = "action", required = false) String action, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName=(String) request.getAttribute("viewName");
+		HttpSession session=request.getSession();
+		session.setAttribute("action", action);
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/hos_List/addReview.do")
+	private ModelAndView reservation(@ModelAttribute("hospitalVO") hospitalVO hospitalVO, Model model, RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String viewName=(String)request.getAttribute("viewName");
+		response.setCharacterEncoding("UTF-8"); //alert한글 깨짐 현상 
+		response.setContentType("text/html; charset=UTF-8");//alert한글 깨짐 현상 
+		HttpSession session=request.getSession();
+		PrintWriter out = response.getWriter();
+		String user_id=(String)session.getAttribute("log_id");
+		String user_code=(String)session.getAttribute("user_code");
+		
+		if(user_code==null) {
+			out.println("<script>");
+            out.println("alert('로그인 후 리뷰작성을 해주세요.');");
+            out.println("window.close();");
+            out.println("</script>");
+            out.flush();
+            return null;
+		}
+		String hos_code=request.getParameter("hos_code");
+		String rv_title=request.getParameter("rv_title");
+		int rv_rate=Integer.parseInt(request.getParameter("rv_rate"));
+        String rv_text=request.getParameter("rv_text");
+        String hos_name=request.getParameter("hos_name");
+        //////
+        hospitalVO.setUser_id(user_id);
+        hospitalVO.setRv_code(hospitalDAO.getNewRevCode());
+        hospitalVO.setHos_name(hos_name);
+        hospitalVO.setRv_text(rv_text);
+        hospitalVO.setRv_title(rv_title);
+        hospitalVO.setRv_rate(rv_rate);
+        hospitalVO.setHos_code(hos_code);
+        hospitalVO hosvo=new hospitalVO();
+        hosvo.setUser_code(user_code);
+        hosvo.setHos_code(hos_code);
+        String resCode=hospitalDAO.getResCode(hosvo);
+        hospitalVO.setRes_code(resCode);
+        hospitalDAO.addReview(hospitalVO);
+        
+        out=response.getWriter();
+        out.print("<script>");
+        out.print("setTimeout(function(){ window.close(); }, 1000);");
+        out.print("opener.location.reload();"); //내 정보에서 예약페이지 확인으로 넘어가도록 
+        out.print("</script>");
+        out.flush();
+        return null;
 	}
 	
 }
