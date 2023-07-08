@@ -21,17 +21,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from membertbl order by joinDate desc
 		]]>
 	</select>
-	<!-- 회원찾기 쿼리문 -->
-	<select id="findMember" resultType="memberVO" parameterType="String">
-		<![CDATA[
-			select * from membertbl where id=#{id}
-		]]>
+	<!-- 아이디찾기 쿼리문 -->
+	<select id="searchId" resultType="String" parameterType="memberVO">
+		<if test='hos_chk == true'>
+			select hos_id from hosjointbl where hos_username=#{name} and hos_dno=#{hos_dno}
+ 		</if>
+ 		 <if test='hos_chk == false'>
+ 		 	select user_id from gmembertbl where user_name=#{name} and user_email=#{email}
+		</if>
+	</select>
+	<!-- 비밀번호찾기 쿼리문 -->
+	<select id="searchPass" resultType="Boolean" parameterType="memberVO">
+		<if test='hos_chk == true'>
+			select decode(count(*), 1, '1', '0') as result from hosjointbl where hos_username=#{name} and hos_id=#{id} and hos_dno=#{hos_dno} and hos_enabled=0
+ 		</if>
+ 		 <if test='hos_chk == false'>
+ 		 	select decode(count(*), 1, '1', '0') as result from gmembertbl where user_name=#{name} and user_id=#{id} and user_email=#{email} and user_enabled=0
+		</if>
+	</select>
+	<!-- 중복찾기 쿼리문 -->
+	<select id="idChk" resultType="String" parameterType="memberVO">
+		select decode(count(*),1,'true','false') as result from gmembertbl where user_id=#{id}
+	</select>
+	<select id="HosidChk" resultType="String" parameterType="memberVO">
+		select decode(count(*),1,'true','false') as result from hosjointbl where hos_id=#{id}
+	</select>
+	<!-- Code 생성 쿼리문 -->
+	<select id="selectUsercode" resultType="String" parameterType="memberVO">
+		SELECT MAX(SUBSTR(user_code, 4)) AS max_num FROM gmembertbl
+	</select>
+	<select id="selectHoscode" resultType="String" parameterType="memberVO">
+		SELECT MAX(SUBSTR(hos_code, 4)) AS max_num FROM hosjointbl
 	</select>
 	<!-- 회원가입 쿼리문 -->
 	<insert id="insertMember" parameterType="memberVO">
-		<![CDATA[
-			insert into membertbl(id, pwd, name, email) values(#{id}, #{pwd}, #{name}, #{email})
-		]]>
+		insert into gmembertbl (USER_CODE, USER_ID, USER_PWD, USER_NAME, USER_TEL, USER_EMAIL, USER_ADDR1,USER_ADDR2,USER_ZIPCODE) values(#{user_code},#{user_id},#{user_pwd},#{user_name},#{user_tel},#{user_email},#{user_addr1},#{user_addr2},#{user_zipcode})
+		<selectKey resultType="String" keyProperty="userCode" order="AFTER">
+			select USER_CODE from gmembertbl where USER_ID = #{user_id}
+	    </selectKey>
+	</insert>
+	<insert id="addHospital" parameterType="memberVO">
+		insert all into hosjointbl (hos_code, hos_id, hos_username, hos_usertel, hos_pwd, hos_dno, hos_name, hos_tel, hos_zipcode, hos_addr1, hos_addr2, hos_email, hos_intro) values(#{hos_code}, #{hos_id}, #{hos_username}, #{hos_usertel}, #{hos_pwd}, #{hos_dno}, #{hos_name}, #{hos_tel}, #{hos_zipcode}, #{hos_addr1}, #{hos_addr2}, #{hos_email}, #{hos_intro}) into hosfiltertbl (hos_code, hos_24, hos_365, hos_time_s, hos_time_e, hos_dog, hos_cat, hos_small, hos_fish, hos_bird, hos_rep, hos_etc, hos_gs, hos_im, hos_em, hos_rm, hos_vac) values(#{hos_code}, #{hos_24}, #{hos_365}, #{hos_time_s}, #{hos_time_e}, #{hos_dog}, #{hos_cat}, #{hos_small}, #{hos_fish}, #{hos_bird}, #{hos_rep}, #{hos_etc}, #{hos_gs}, #{hos_im}, #{hos_em}, #{hos_rm}, #{hos_vac}) SELECT * FROM DUAL
 	</insert>
 	<!-- 회원수정 쿼리문 -->
 	<update id="updateMember" parameterType="memberVO">
