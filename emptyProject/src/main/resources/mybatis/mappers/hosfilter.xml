@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hosfilter">
+	<!-- typeAlias에서 생성된 빈의 이름과 동일해야 한다  -->
+	<resultMap type="filterVO" id="hosResult">
+		<!-- sql문의 수행결과로 받을 변수명과 컬러명  -->
+		<result property="hos_code" column="hos_code"/>
+		<result property="hos_pro" column="hos_pro"/>
+		<result property="hos_id" column="hos_id"/>
+		<result property="hos_username" column="hos_username"/>
+		<result property="hos_usertel" column="hos_usertel"/>
+		<result property="hos_pwd" column="hos_pwd"/>
+		<result property="hos_dno" column="hos_dno"/>
+		<result property="hos_name" column="hos_name"/>
+		<result property="hos_tel" column="hos_tel"/>
+		<result property="hos_zipcode" column="hos_zipcode"/>
+		<result property="hos_addr1" column="hos_addr1"/>
+		<result property="hos_addr2" column="hos_addr2"/>
+		<result property="hos_email" column="hos_email"/>
+		<result property="hos_intro" column="hos_intro"/>
+		<result property="hos_24" column="hos_24"/>
+		<result property="hos_365" column="hos_365"/>
+		<result property="hos_time_s" column="hos_time_s"/>
+		<result property="hos_time_e" column="hos_time_e"/>
+		<result property="hos_dog" column="hos_dog"/>
+		<result property="hos_cat" column="hos_cat"/>
+		<result property="hos_small" column="hos_small"/>
+		<result property="hos_fish" column="hos_fish"/>
+		<result property="hos_bird" column="hos_bird"/>
+		<result property="hos_rep" column="hos_rep"/>
+		<result property="hos_etc" column="hos_etc"/>
+		<result property="hos_gs" column="hos_gs"/>
+		<result property="hos_im" column="hos_im"/>
+		<result property="hos_em" column="hos_em"/>
+		<result property="hos_rm" column="hos_rm"/>
+		<result property="hos_vac" column="hos_vac"/>
+		<result property="hos_mon" column="hos_mon"/>
+		<result property="hos_tue" column="hos_tue"/>
+		<result property="hos_wed" column="hos_wed"/>
+		<result property="hos_thu" column="hos_thu"/>
+		<result property="hos_fri" column="hos_fri"/>
+		<result property="hos_sat" column="hos_sat"/>
+		<result property="hos_sun" column="hos_sun"/>
+		<result property="hos_sch_name" column="hos_sch_name"/>
+		<result property="hos_thum" column="hos_thum"/>
+	</resultMap>
+	
+	<!-- 일반정렬 병원목록 -->
+	<select id="selectAllHos" resultMap="hosResult" parameterType="filterVO">
+		<![CDATA[
+			SELECT * FROM(SELECT ROWNUM AS recNum, res.* FROM(SELECT * from hosfiltertbl NATURAL JOIN hosjointbl order by hos_code) res where 1=1
+		]]>
+		<if test="hos_dog!=null and !hos_dog.equals('')">
+    		and hos_dog=#{hos_dog}
+		</if>
+		<if test="hos_cat!=null and !hos_cat.equals('')">
+    		and hos_cat=#{hos_cat}
+		</if>
+		<if test="hos_small!=null and !hos_small.equals('')">
+    		and hos_small=#{hos_small}
+		</if>
+		<if test="hos_fish!=null and !hos_fish.equals('')">
+    		and hos_fish=#{hos_fish}
+		</if>
+		<if test="hos_bird!=null and !hos_bird.equals('')">
+    		and hos_bird=#{hos_bird}
+		</if>
+		<if test="hos_rep!=null and !hos_rep.equals('')">
+    		and hos_rep=#{hos_rep}
+		</if>
+		<if test="hos_etc!=null and !hos_etc.equals('')">
+    		and hos_etc=#{hos_etc}
+		</if>
+		<if test="hos_gs!=null and !hos_gs.equals('')">
+    		and hos_gs=#{hos_gs}
+		</if>
+		<if test="hos_im!=null and !hos_im.equals('')">
+    		and hos_im=#{hos_im}
+		</if>
+		<if test="hos_em!=null and !hos_em.equals('')">
+    		and hos_em=#{hos_em}
+		</if>
+		<if test="hos_rm!=null and !hos_rm.equals('')">
+    		and hos_rm=#{hos_rm}
+		</if>
+		<if test="hos_vac!=null and !hos_vac.equals('')">
+    		and hos_vac=#{hos_vac}
+		</if>
+		<if test="hos_24!=null and !hos_24.equals('')">
+    		and hos_24=#{hos_24}
+		</if>
+		
+		<if test="hos_mon!=null and !hos_mon.equals('')">
+    		and hos_365 like '%mon%'
+		</if>
+		<if test="hos_tue!=null and !hos_tue.equals('')">
+    		and hos_365 like '%tue%'
+		</if>
+		<if test="hos_wed!=null and !hos_wed.equals('')">
+    		and hos_365 like '%wed%'
+		</if>
+		<if test="hos_thu!=null and !hos_thu.equals('')">
+    		and hos_365 like '%thu%'
+		</if>
+		<if test="hos_fri!=null and !hos_fri.equals('')">
+    		and hos_365 like '%fri%'
+		</if>
+		<if test="hos_sat!=null and !hos_sat.equals('')">
+    		and hos_365 like '%sat%'
+		</if>
+		<if test="hos_sun!=null and !hos_sun.equals('')">
+    		and hos_365 like '%sun%'
+		</if>
+		<if test="hos_sch_name!=null and !hos_sch_name.equals('')">
+    		and hos_name like '%'||#{hos_sch_name}||'%'
+		</if>
+		) WHERE recNum BETWEEN (#{pageNum}-1)*12+1 AND #{section}*12
+	</select>
+	
+	<!-- 리뷰정렬 병원목록 -->
+	<select id="selectRevAllHos" resultMap="hosResult" parameterType="filterVO">
+		<![CDATA[
+			SELECT * FROM(SELECT ROWNUM AS recNum, res.* FROM(select * from(select a.hos_code, count(reviewtbl.hos_code) as revnum from hosfiltertbl a left OUTER JOIN reviewtbl on reviewtbl.hos_code = a.hos_code GROUP BY a.hos_code) revt NATURAL JOIN (select * from hosfiltertbl NATURAL JOIN hosjointbl) ORDER BY revnum DESC) res where 1=1
+		]]>
+		<if test="hos_dog!=null and !hos_dog.equals('')">
+    		and hos_dog=#{hos_dog}
+		</if>
+		<if test="hos_cat!=null and !hos_cat.equals('')">
+    		and hos_cat=#{hos_cat}
+		</if>
+		<if test="hos_small!=null and !hos_small.equals('')">
+    		and hos_small=#{hos_small}
+		</if>
+		<if test="hos_fish!=null and !hos_fish.equals('')">
+    		and hos_fish=#{hos_fish}
+		</if>
+		<if test="hos_bird!=null and !hos_bird.equals('')">
+    		and hos_bird=#{hos_bird}
+		</if>
+		<if test="hos_rep!=null and !hos_rep.equals('')">
+    		and hos_rep=#{hos_rep}
+		</if>
+		<if test="hos_etc!=null and !hos_etc.equals('')">
+    		and hos_etc=#{hos_etc}
+		</if>
+		<if test="hos_gs!=null and !hos_gs.equals('')">
+    		and hos_gs=#{hos_gs}
+		</if>
+		<if test="hos_im!=null and !hos_im.equals('')">
+    		and hos_im=#{hos_im}
+		</if>
+		<if test="hos_em!=null and !hos_em.equals('')">
+    		and hos_em=#{hos_em}
+		</if>
+		<if test="hos_rm!=null and !hos_rm.equals('')">
+    		and hos_rm=#{hos_rm}
+		</if>
+		<if test="hos_vac!=null and !hos_vac.equals('')">
+    		and hos_vac=#{hos_vac}
+		</if>
+		<if test="hos_24!=null and !hos_24.equals('')">
+    		and hos_24=#{hos_24}
+		</if>
+		
+		<if test="hos_mon!=null and !hos_mon.equals('')">
+    		and hos_365 like '%mon%'
+		</if>
+		<if test="hos_tue!=null and !hos_tue.equals('')">
+    		and hos_365 like '%tue%'
+		</if>
+		<if test="hos_wed!=null and !hos_wed.equals('')">
+    		and hos_365 like '%wed%'
+		</if>
+		<if test="hos_thu!=null and !hos_thu.equals('')">
+    		and hos_365 like '%thu%'
+		</if>
+		<if test="hos_fri!=null and !hos_fri.equals('')">
+    		and hos_365 like '%fri%'
+		</if>
+		<if test="hos_sat!=null and !hos_sat.equals('')">
+    		and hos_365 like '%sat%'
+		</if>
+		<if test="hos_sun!=null and !hos_sun.equals('')">
+    		and hos_365 like '%sun%'
+		</if>
+		<if test="hos_sch_name!=null and !hos_sch_name.equals('')">
+    		and hos_name like '%'||#{hos_sch_name}||'%'
+		</if>
+		) WHERE recNum BETWEEN (#{pageNum}-1)*12+1 AND #{section}*12 ORDER BY recNum
+	</select>
+	
+	<!-- 병원갯수 쿼리문 -->
+	<select id="selectTotHos" resultType="Integer" parameterType="filterVO">
+		<![CDATA[
+			select count(hos_code) from hosfiltertbl where 1=1
+		]]>
+		<if test="hos_dog!=null and !hos_dog.equals('')">
+    		and hos_dog=#{hos_dog}
+		</if>
+		<if test="hos_cat!=null and !hos_cat.equals('')">
+    		and hos_cat=#{hos_cat}
+		</if>
+		<if test="hos_small!=null and !hos_small.equals('')">
+    		and hos_small=#{hos_small}
+		</if>
+		<if test="hos_fish!=null and !hos_fish.equals('')">
+    		and hos_fish=#{hos_fish}
+		</if>
+		<if test="hos_bird!=null and !hos_bird.equals('')">
+    		and hos_bird=#{hos_bird}
+		</if>
+		<if test="hos_rep!=null and !hos_rep.equals('')">
+    		and hos_rep=#{hos_rep}
+		</if>
+		<if test="hos_etc!=null and !hos_etc.equals('')">
+    		and hos_etc=#{hos_etc}
+		</if>
+		<if test="hos_gs!=null and !hos_gs.equals('')">
+    		and hos_gs=#{hos_gs}
+		</if>
+		<if test="hos_im!=null and !hos_im.equals('')">
+    		and hos_im=#{hos_im}
+		</if>
+		<if test="hos_em!=null and !hos_em.equals('')">
+    		and hos_em=#{hos_em}
+		</if>
+		<if test="hos_rm!=null and !hos_rm.equals('')">
+    		and hos_rm=#{hos_rm}
+		</if>
+		<if test="hos_vac!=null and !hos_vac.equals('')">
+    		and hos_vac=#{hos_vac}
+		</if>
+		<if test="hos_24!=null and !hos_24.equals('')">
+    		and hos_24=#{hos_24}
+		</if>
+		
+		<if test="hos_mon!=null and !hos_mon.equals('')">
+    		and hos_365 like '%mon%'
+		</if>
+		<if test="hos_tue!=null and !hos_tue.equals('')">
+    		and hos_365 like '%tue%'
+		</if>
+		<if test="hos_wed!=null and !hos_wed.equals('')">
+    		and hos_365 like '%wed%'
+		</if>
+		<if test="hos_thu!=null and !hos_thu.equals('')">
+    		and hos_365 like '%thu%'
+		</if>
+		<if test="hos_fri!=null and !hos_fri.equals('')">
+    		and hos_365 like '%fri%'
+		</if>
+		<if test="hos_sat!=null and !hos_sat.equals('')">
+    		and hos_365 like '%sat%'
+		</if>
+		<if test="hos_sun!=null and !hos_sun.equals('')">
+    		and hos_365 like '%sun%'
+		</if>
+		<if test="hos_sch_name!=null and !hos_sch_name.equals('')">
+    		and hos_name like '%'||#{hos_sch_name}||'%'
+		</if>
+	</select>
+</mapper>
