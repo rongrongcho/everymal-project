@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
         <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
         <link rel="stylesheet" href="${contextPath}/resources/css/search_id.css" />
-        <script src="js/jquery-3.6.3.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery-3.6.3.min.js"></script>
         <script>
           let disa_sw = true;
           $(function () {
@@ -75,7 +75,7 @@
             <div class="tabcontents">
               <div id="tabBox01" class="tabBox">
                 <h3 class="skip">가입 정보 입력</h3>
-                <form name="searchId" method="post" action="${contextPath}/logindb/searchId">
+                <form name="searchId" method="post" action="${contextPath}/member/searchId.do">
                   <div class="memberForm_1">
                     <fieldset>
                       <legend>회원가입 정보</legend>

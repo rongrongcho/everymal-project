@@ -57,7 +57,7 @@
 
         function next() {
           alert('회원가입완료.');
-          location.href = "${contextPath}/index.jsp";
+          location.href = "${contextPath}/main.do";
         }
 
         function reset() {
@@ -322,7 +322,7 @@
                   <label for="user_tel1">연락처<strong class="require">필수</strong></label>
                   <select name="user_tel1" id="user_tel1" required>
                     <option value="" selected="selected">선택</option>
-                    <option value="010">010</option>
+                    <option value="010" checked>010</option>
                     <option value="011">011</option>
                     <option value="016">016</option>
                     <option value="017">017</option>
