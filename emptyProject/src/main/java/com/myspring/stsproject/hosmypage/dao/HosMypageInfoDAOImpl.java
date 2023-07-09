@@ -42,17 +42,17 @@ public class HosMypageInfoDAOImpl implements HosMypageInfoDAO {
 	@Override
 	public void uploadimg(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException {
 	    sqlSession.update("mapper.hosMypage.uploadimg", hosmypageinfoVO);
-	    sqlSession.update("mapper.hosMypage.updateThum",hosmypageinfoVO); // hosjoin thum ÄÃ·³ ¾÷µ¥ÀÌÆ® 
-	    sqlSession.update("mapper.hosMypage.updateStatus",hosmypageinfoVO); //°ËÅäÁß ¾÷µ¥ÀÌÆ®
-	    sqlSession.insert("mapper.hosMypage.insertRMtbl", hosmypageinfoVO); //rm tbl µ¥ÀÌÅÍ »ğÀÔ
+	    sqlSession.update("mapper.hosMypage.updateThum",hosmypageinfoVO); // hosjoin thum ì»¬ëŸ¼ ì—…ë°ì´íŠ¸ 
+	    sqlSession.update("mapper.hosMypage.updateStatus",hosmypageinfoVO); //ê²€í† ì¤‘ ì—…ë°ì´íŠ¸
+	    sqlSession.insert("mapper.hosMypage.insertRMtbl", hosmypageinfoVO); //rm tbl ë°ì´í„° ì‚½ì…
 	}
 
 	@Override
 	public void newuploadimg(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException {
 	    sqlSession.insert("mapper.hosMypage.newuploadimg", hosmypageinfoVO);
-	    sqlSession.update("mapper.hosMypage.updateThum",hosmypageinfoVO); // hosjoin thum ÄÃ·³ ¾÷µ¥ÀÌÆ®
-	    sqlSession.update("mapper.hosMypage.updateStatus",hosmypageinfoVO);//°ËÅäÁß ¾÷µ¥ÀÌÆ®
-	    sqlSession.insert("mapper.hosMypage.insertRMtbl", hosmypageinfoVO); //rm tbl µ¥ÀÌÅÍ »ğÀÔ
+	    sqlSession.update("mapper.hosMypage.updateThum",hosmypageinfoVO); // hosjoin thum ì»¬ëŸ¼ ì—…ë°ì´íŠ¸
+	    sqlSession.update("mapper.hosMypage.updateStatus",hosmypageinfoVO);//ê²€í† ì¤‘ ì—…ë°ì´íŠ¸
+	    sqlSession.insert("mapper.hosMypage.insertRMtbl", hosmypageinfoVO); //rm tbl ë°ì´í„° ì‚½ì…
 	}
 
 	@Override
@@ -75,6 +75,14 @@ public class HosMypageInfoDAOImpl implements HosMypageInfoDAO {
 		return sqlSession.selectOne("mapper.hosMypage.getHosName",hos_code);
 	}
 
+	@Override
+	public HosMypageInfoVO rm_say(String hos_code) throws DataAccessException {
+	    return sqlSession.selectOne("mapper.hosMypage.rmSay", hos_code);
+	}
 	
+	@Override
+	public HosMypageInfoVO rm_status(String hos_code) throws DataAccessException {
+	    return sqlSession.selectOne("mapper.hosMypage.rmStatus", hos_code);
+	}
 }
 
