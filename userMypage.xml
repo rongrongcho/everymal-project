@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.userMypage">
+
+
+<select id="selectUserInfo" resultType="userVO" parameterType="String">
+
+<![CDATA[
+	SELECT * FROM GMemberTbl WHERE user_id=#{user_id}	
+		]]>
+
+</select>
+
+
+<!--비밀번호 확인 -->
+	<select id="isValid" resultType="Boolean" parameterType="userVO">
+		<![CDATA[			
+			select user_pwd from Gmembertbl where user_id=#{user_id} and user_pwd=#{user_pwd}
+		]]>
+	</select> 
+	
+	
+	<!-- 프로필 파일 이름 찾기 -->
+	<select id="searchProfil" resultType="String" parameterType="String">
+	<![CDATA[
+	    select user_imgName from gmembertbl where user_id=#{user_id}
+	    ]]>
+	</select>
+	
+	<!-- 리뷰 불러오기 쿼리 -->
+<select id="selectAllReview" resultType="userVO" parameterType="java.util.Map">
+<![CDATA[
+			SELECT * FROM (SELECT ROWNUM AS row_num, reviewtbl.* FROM (SELECT * FROM reviewtbl WHERE user_id = #{user_id} ORDER BY rv_date desc) reviewtbl) WHERE row_num BETWEEN (#{section}-1)*80+(#{pageNum}-1)*8+1 AND (#{section}-1)*80+(#{pageNum})*8
+		]]>
+</select>
+
+
+<!-- 리뷰 개수 구하기 쿼리 -->
+<select id="reviewcount" resultType="Integer" parameterType="String">
+<![CDATA[			
+			select count(*)as count from reviewtbl where user_id=#{user_id}
+		]]>
+</select>
+
+<!-- 리뷰 상세보기 쿼리 -->
+<select id="selectReview" resultType="userVO" parameterType="String">
+<![CDATA[			
+			select * from reviewtbl where rv_code=#{rv_code}
+		]]>
+</select>
+
+
+<!-- 리뷰 수정 쿼리-->
+<update id="updateUserMyreview" parameterType="userVO">
+update reviewtbl set rv_title=#{rv_title} ,rv_text=#{rv_text} ,rv_rate=#{rv_rate}
+	where user_id=#{user_id} and rv_code=#{rv_code}
+</update>
+
+
+
+
+<!-- 선택 리뷰 삭제 -->
+<delete id="requestDelRev" parameterType="java.util.Map">
+	<![CDATA[		
+           delete from reviewtbl where rv_code in
+          ]]> 
+           <foreach collection="array" item="rv_code" open="(" close=")" separator=",">
+            #{rv_code}	
+            </foreach>
+</delete>
+
+<!-- 내 질문 불러오기 쿼리 -->
+<select id="selectAllQ" resultType="userVO" parameterType="java.util.Map">
+<![CDATA[
+			SELECT * FROM (SELECT ROWNUM AS row_num, boardtbl.* FROM (SELECT * FROM boardtbl WHERE user_code = #{user_code} ORDER BY q_code) boardtbl) WHERE row_num BETWEEN (#{section}-1)*80+(#{pageNum}-1)*8+1 AND (#{section}-1)*80+(#{pageNum})*8
+		]]>
+		 
+
+</select>
+
+<!-- 질문 개수 구하기 쿼리 -->
+<select id="qCount" resultType="Integer" parameterType="String">
+  <![CDATA[
+    select count(*) as count from boardtbl where user_code=#{user_code}
+  ]]>
+</select>
+
+<!-- 내 질문 삭제 -->
+<delete id="requestDelQus" parameterType="java.util.Map">
+<![CDATA[		
+           delete from boardtbl where q_code in
+          ]]> 
+           <foreach collection="array" item="q_code" open="(" close=")" separator=",">
+            #{q_code}	
+            </foreach>
+
+</delete>
+
+<!-- 내정보수정 -->
+<update id="updateUserInfo" parameterType="userVO">
+<![CDATA[
+    update GmemberTbl set user_pwd=#{user_pwd},user_tel=#{user_tel},
+			user_email=#{user_email} ,user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, user_zipcode=#{user_zipcode},
+			 user_imgName=#{user_imgName} where user_id=#{user_id}
+  ]]>
+
+</update>
+
+</mapper>
