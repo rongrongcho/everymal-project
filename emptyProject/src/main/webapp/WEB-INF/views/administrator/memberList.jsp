@@ -30,7 +30,7 @@
             <nav>
               <ul class="topNav">
                 <li>
-                  <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
                 <li>
                   <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
@@ -142,7 +142,7 @@
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
                 <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>

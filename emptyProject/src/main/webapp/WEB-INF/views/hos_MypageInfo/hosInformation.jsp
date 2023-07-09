@@ -27,7 +27,7 @@
                 <nav>
                   <ul class="topNav">
                 <li>
-                  <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
                 <li>
                   <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
@@ -120,23 +120,23 @@
                       <div class="apphosYorN">
 
                         <c:choose>
-                          <c:when test="${hosmypageinfoVO.hos_status == '승인'}">
+                          <c:when test="${hosmypagermstatusVO.rm_status == '승인'}">
                             <div class="yOrNo">
                               <p>승인된 병원 입니다.</p>
                               <a href="${contextPath }/hos_MypageInfo/hosApplication.do?hos_id=${hosmypageinfoVO.hos_id}" class="barogagy">썸네일
                                 수정</a>
                             </div>
                           </c:when>
-                          <c:when test="${hosmypageinfoVO.hos_status == '미승인'}">
+                          <c:when test="${hosmypagermstatusVO.rm_status == '미승인'}">
                             <div class="yOrNo">
                               <p>미승인된 병원 입니다.</p>
                               <a href="${contextPath }/hos_MypageInfo/hosApplication.do?hos_id=${hosmypageinfoVO.hos_id}" class="barogagy">등록 신청</a>
                             </div>
                           </c:when>
-                          <c:when test="${hosmypageinfoVO.hos_status == '거절'}">
+                          <c:when test="${hosmypagermstatusVO.rm_status == '거절'}">
                             <div class="yOrNo">
                               <p>등록 거절되었습니다.</p>
-                              <a href="${contextPath }/hos_MypageInfoe/hosApplication.do?hos_id=${hosmypageinfoVO.hos_id}" class="barogagy">사유확인</a>
+                              <a href="${contextPath }/hos_MypageInfo/hosApplication.do?hos_id=${hosmypageinfoVO.hos_id}" class="barogagy">사유확인</a>
                             </div>
                           </c:when>
                           <c:otherwise>
@@ -146,7 +146,6 @@
                             </div>
                           </c:otherwise>
                         </c:choose>
-                        ${rm.rmstatus} 
 
 
 
@@ -434,7 +433,7 @@
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
                 <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>

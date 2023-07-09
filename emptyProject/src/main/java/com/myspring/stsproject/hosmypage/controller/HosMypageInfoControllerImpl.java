@@ -71,6 +71,11 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 	    hosInfo.setHimg2(himg2);
 	    hosInfo.setHimg3(himg3);
 		mav.addObject("hosmypageinfoVO", hosInfo);
+		HosMypageInfoVO hosrm=hosmypageinfoDAO.rm_say(hos_code);
+		System.out.println("rmsay;;;;;"+hosrm);
+		mav.addObject("hosmypagermsayVO",hosrm);
+		HosMypageInfoVO hosstatus=hosmypageinfoDAO.rm_status(hos_code);
+		mav.addObject("hosmypagermstatusVO",hosstatus);
 		System.out.println(himg1);
 		System.out.println(himg2);
 		System.out.println(himg3);
@@ -97,8 +102,15 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView(viewName);
 		String _hos_id=(String) session.getAttribute("log_id");
+		String hos_code=(String)session.getAttribute("hos_code");
 		HosMypageInfoVO hosInfo=hosmypageinfoService.selecthosInfo(_hos_id);
+		HosMypageInfoVO hosrm=hosmypageinfoDAO.rm_say(hos_code);
+		HosMypageInfoVO hosstatus=hosmypageinfoDAO.rm_status(hos_code);
+		System.out.println("hosCode;;;;;"+hos_code);
+		System.out.println("rmstatys;;;;;;"+hosstatus);
+		mav.addObject("hosmypagermsayVO",hosrm);
 		mav.addObject("hosmypageinfoVO", hosInfo);
+		mav.addObject("hosmypagermstatusVO",hosstatus);
 		System.out.println("다시물어본다 낰낰33 " + mav);
 		return mav;
 	}

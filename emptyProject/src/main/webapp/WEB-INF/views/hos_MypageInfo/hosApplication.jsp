@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false" import="java.util.*" %> <%@ taglib
 prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
 uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -40,7 +40,7 @@ request.setCharacterEncoding("utf-8"); %>
         <nav>
           <ul class="topNav">
                 <li>
-                  <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
                 <li>
                   <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
@@ -199,18 +199,18 @@ request.setCharacterEncoding("utf-8"); %>
                 <div id="resultDiv"><p th:text="${log }"></div>
               </div>
               <c:choose>
-                <c:when test="${hosmypageinfoVO.hos_status == '승인'}">
+                <c:when test="${hosmypagermstatusVO.rm_status == '승인'}">
                   <div class="adminNotice noticebox">지켜야할 수칙</div>
                   <input type="button" class="btns" onclick="dataSubmit();" value="썸네일 수정 요청">
                   <a href="#" class="btns">등록취소</a>
                 </c:when>
-                <c:when test="${hosmypageinfoVO.hos_status == '미승인'}">
+                <c:when test="${hosmypagermstatusVO.rm_status == '미승인'}">
                   <div class="adminNotice noticebox">최대 3장의 사진이 등록 가능합니다.</div>
                   <input type="button" class="btns" onclick="dataSubmit();" value="등록 신청">
                 </c:when>
-                <c:when test="${hosmypageinfoVO.hos_status == '거절'}">
+                <c:when test="${hosmypagermstatusVO.rm_status == '거절'}">
                   <div class="adminNotice noticebox">
-                    그냥 마음에 안들어서용; 신청 철회 후 다시 신청해주세요 !
+                    ${hosmypagermsayVO.rm_say }
                   </div>
                   <input type="button" class="btns" onclick="dataSubmit();" value="등록 재신청">
                 </c:when>
@@ -234,7 +234,7 @@ request.setCharacterEncoding("utf-8"); %>
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/qna_board/qnaboardMain.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
                 <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
