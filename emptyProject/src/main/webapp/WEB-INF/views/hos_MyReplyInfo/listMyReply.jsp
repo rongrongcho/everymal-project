@@ -25,28 +25,35 @@
         <div id="container_sub">
           <header id="header">
             <nav>
-              <ul class="topNav">
-                <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+               <ul class="topNav">
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
+                <li>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                </li>
+	              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+	              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
+                <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -60,7 +67,7 @@
             <div class="profileBox">
               <div class="proimgBox">
                 <img class="proImg"
-                  src="${contextPath}/hosProImgDown.do?hos_pro=${hosImgVO.hos_pro}&hos_code=${hos_code}"
+                 src="${contextPath}/hos_MypageInfo/searchProfil.do?hos_id=${hosmypageinfoVO.hos_id}"
                   alt="나의 프로필 이미지" />
               </div>
               <div class="speech_bubble">
@@ -69,24 +76,23 @@
               </div>
             </div>
             <div class="leftCategory">
-              <ul class="CatrgoryBox">
-                <li class="firstMenu">마이페이지
-                  <ul>
-                   <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosInfo.do?hos_id=${hosmypageinfoVO.hos_id }">내 정보 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/myHosInfo.do?hos_id=${hosmypageinfoVO.hos_id }">내 병원 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath }/hos_ReviewInfo/hosReviewList.do">병원리뷰 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath }/hos_MyReplyInfo/listMyReply.do">답변 관리</a></li>
+                  <ul class="CatrgoryBox">
+                    <li class="firstMenu"> 마이페이지
+                      <ul>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 정보 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }">내 병원 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_ReviewInfo/hosReviewList.do">병원리뷰 관리</a></li>
+                        <li class="secondMenu"><a href="${contextPath }/hos_MyReplyInfo/listMyReply.do">답변 관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="firstMenu"> 예약 관리
+                      <ul>
+                        <li class="secondMenu"><a href="${contextPath}/hos_ResInfo/hosResList.do">예약관리</a></li>
+                      </ul>
+                    </li>
+                    <li class="firstMenu"><a href="${contextPath }/member/withdrawal.do">회원탈퇴</a></li>
                   </ul>
-                </li>
-                <li class="firstMenu"> 예약 관리
-                  <ul>
-                    <li class="secondMenu"><a href="${contextPath }/hosres/hosResList.do">예약관리</a></li>
-                  </ul>
-                </li>
-
-
-              </ul>
-            </div>
+                </div>
 
 
           </section>
@@ -94,9 +100,9 @@
           <section id="tab_Area">
             <div class="tab_nav">
               <ul class="tab_Btns">
-                <li class="tBtn tBtn1 notChoice"><a href="${contextPath }/hos_MypageInfo/hosInfo.do?hos_id=${hosmypageinfoVO.hos_id }"><span
+                <li class="tBtn tBtn1 notChoice"><a href="${contextPath }/hos_MypageInfo/hosUserInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
                       class="pointT">내</span><span> 정보</span></a></li>
-                <li class="tBtn tBtn2 notChoice"><a href="${contextPath }/hos_MypageInfo/myHosInfo.do?hos_id=${hosmypageinfoVO.hos_id }"><span
+                <li class="tBtn tBtn2 notChoice"><a href="${contextPath }/hos_MypageInfo/hosInformation.do?hos_id=${hosmypageinfoVO.hos_id }"><span
                       class="pointT">내</span><span> 병원</span></a></li>
                 <li class="tBtn tBtn3 notChoice"><a href="${contextPath }/hos_ReviewInfo/hosReviewList.do"><span
                       class="pointT span3">병원</span><span class="span3"> 리뷰</span></a></li>
@@ -241,26 +247,26 @@
 
           <!-- fooooooooooooooooooooooooooooooooooooooooooooooooooooooter -->
           <footer>
-            <ul class="bottomNav">
+             <ul class="bottomNav">
               <li>
-                <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
+                <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
-                <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
               </li>
-              <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-              <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
               <li>
                 <c:choose>
                   <c:when test="${!empty isLogon}">
                     <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/login.jsp">로그인</a>
+                    <a href="${contextPath}/member/loginForm.do">로그인</a>
                   </c:otherwise>
                 </c:choose>
               </li>

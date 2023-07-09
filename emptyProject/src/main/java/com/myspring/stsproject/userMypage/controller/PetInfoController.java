@@ -12,5 +12,7 @@ import com.myspring.stsproject.userMypage.vo.PetInfoVO;
 
 public interface PetInfoController {
 	public ModelAndView  myPetList(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView modPet (Model model,  HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView modPet (@ModelAttribute("petInfoVO") PetInfoVO petInfoVO,Model model,  HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView addPet (Model model,  HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView removePetInfo (Model model,  HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -54,14 +54,8 @@ public class HosReviewControllerImpl implements HosReviewController {
 		String viewName=(String) request.getAttribute("viewName");
 		HttpSession session=request.getSession();
 		String hos_id=(String)session.getAttribute("log_id");
-		String hos_code=(String)session.getAttribute("hos_code");
-		hos_code="hos0001";
-		hos_id="kkm1234";
-		model.addAttribute("hos_code",hos_code);
-		//이미지
-		hosImgVO=hosImgDAO.getHosPro(hos_code);
-		//hos_pro 담아옴
-		//
+		String hos_code=(String)session.getAttribute("hos_code");		
+		model.addAttribute("hos_code",hos_code);		
 		System.out.println("병원코드 불러왔나?>>>>"+ hos_code);
 		System.out.println("병원아이디 불러왔나?>>>>"+ hos_id);
 		hosMypageInfoVO =hosmypageinfoService.selecthosInfo(hos_id);
@@ -77,14 +71,13 @@ public class HosReviewControllerImpl implements HosReviewController {
 		pagingMap.put("pageNum", pageNum);
 		Map hosReviewMap=hosReviewService.listRev(pagingMap, hos_code);
 		hosReviewMap.put("section", section);
-		hosReviewMap.put("pageNum", pageNum);
-		//List<ReviewVO> hosReviewList = hosReviewService.listRev2(hos_code);
+		hosReviewMap.put("pageNum", pageNum);		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("hosReviewMap", hosReviewMap); 
 		mav.addObject("review_avg", review_avg);
 		mav.addObject("hosMypageInfoVO", hosMypageInfoVO);
 		mav.addObject("hosImgVO", hosImgVO);
-		//mav.addObject("hosReviewList", hosReviewList); 
+
 		return mav;
 	}
 
@@ -126,8 +119,7 @@ public class HosReviewControllerImpl implements HosReviewController {
 		}
 		 
 		 
-		//mav.setViewName("redirect:/hosReview/hosReviewList.do");		   
-	    //return mav;
+		
 	}
 
 	

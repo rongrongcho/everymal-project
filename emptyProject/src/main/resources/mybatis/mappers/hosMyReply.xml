@@ -47,4 +47,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </foreach>
 	</update>
 	
+	
+	<!-- 답변 상세보기 쿼리 -->
+	<select id="selectReply" resultType="String" parameterType="String">
+	select q_code from  boardtbl where a_code=#{a_code}
+	</select>
 </mapper>	

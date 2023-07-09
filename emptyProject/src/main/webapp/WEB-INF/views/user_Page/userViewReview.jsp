@@ -2,7 +2,7 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- core라이브러리를 c라는 접두사를 따와서 쓰겠다 -->
     <c:set var="contextPath" value="${pageContext.request.contextPath}" />
     <c:set var="hosRev" value="${hosReview}" />
-    <% request.setCharacterEncoding("utf-8"); %>
+ <% request.setCharacterEncoding("utf-8"); %>
 
       <!DOCTYPE html>
       <html lang="ko">
@@ -12,20 +12,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>리뷰 작성</title>
-        <link rel="stylesheet" href="${contextPath}/css/reset.css" />
-        <link rel="stylesheet" href="${contextPath}/css/common.css" />
-        <link rel="stylesheet" href="${contextPath}/css/review.css" />
-        <link rel="shortcut icon" href="${contextPath}/img/favicon.ico">
-        <link rel="icon" type="image/png" href="${contextPath}/img/EverymalLogo.svg">
+        <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/review.css" />
+        <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+        <link rel="icon" type="image/png" href="${contextPath}/resources/img/EverymalLogo.svg">
         <script type="text/javascript">
 
           function fn_modSubmit(obj) {
-            obj.action = "${contextPath}/userMypage/modMyReview.do";
+            obj.action = "${contextPath}/user_Page/modMyReview.do";
             obj.submit();
           }
 
           function fn_delSubmit(obj) {
-            obj.action = "${contextPath}/userMypage/returnMyReview.do";
+            obj.action = "${contextPath}/user_Page/returnMyReview.do";
             obj.submit();
           }
 
@@ -37,27 +37,34 @@
           <header id="header">
             <nav>
               <ul class="topNav">
-                <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
+                <li>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                </li>
+	              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+	              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
+                <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -71,7 +78,7 @@
 
           <section class="contentWrap">
             <div class="content">
-              <form action=" ${contextPath}/userMypage/modMyReview.do" name="myInfoForm" method="post">
+              <form action=" ${contextPath}/user_Page/modMyReview.do" name="myInfoForm" method="post">
                 <fieldset>
                   <legend>예약하기 폼</legend>
                   <p class="title">
@@ -114,26 +121,26 @@
 
           <!-- fooooooooooooooooooooooooooooooooooooooooooooooooooooooter -->
           <footer>
-            <ul class="bottomNav">
+             <ul class="bottomNav">
               <li>
-                <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/img/EverymalLogo_w.svg"
+                <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
-                <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
               </li>
-              <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-              <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
               <li>
                 <c:choose>
                   <c:when test="${!empty isLogon}">
-                    <a href="${contextPath}/logindb/logout">로그아웃</a>
+                    <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/login.jsp">로그인</a>
+                    <a href="${contextPath}/member/loginForm.do">로그인</a>
                   </c:otherwise>
                 </c:choose>
               </li>

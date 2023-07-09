@@ -286,7 +286,18 @@ td {
 	white-space: nowrap;
 }
 
+
+
+
+.text-ellipsis {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	white-space: nowrap;
+}
+
 .text-ellipsis > * {
+	display: table-cell;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myspring.stsproject.animal.dao.AnimalDAO;
+import com.myspring.stsproject.animal.vo.AnimalVO;
 import com.myspring.stsproject.forImg.dao.HosImgDAO;
 import com.myspring.stsproject.forImg.vo.HosImgVO;
 import com.myspring.stsproject.userMypage.dao.PetInfoDAO;
@@ -42,13 +44,14 @@ public class PetInfoControllerImpl implements PetInfoController{
 	@Autowired
 	UserService userService;
 	
-	//pet Ãß°¡ÇÒ¶§
-	/*@Autowired
+	//pet ì¶”ê°€í• ë•Œ
+	@Autowired
 	AnimalDAO animalDAO;
 	
 	
 	@Autowired
-	AnimalVO animalVO;*/
+	AnimalVO animalVO;
+	
 	
 	@Override
 	@RequestMapping(value = "/user_Page/myPetList.do", method = RequestMethod.GET)
@@ -58,22 +61,17 @@ public class PetInfoControllerImpl implements PetInfoController{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8;");
 		HttpSession session = request.getSession();
-		String user_code=(String) session.getAttribute("user_code");
-		user_code="use0001";
-		System.out.println("user_code°¡ ¹¹³Ä>>>>>:"+user_code);
-		model.addAttribute("user_code",user_code); //jsp·Î °ª ³Ñ°ÜÁà¾ß ÇÒ ¶§ »ç¿ë
+		String user_code=(String) session.getAttribute("user_code");		
+		System.out.println("user_codeê°€ ë­ëƒ>>>>>:"+user_code);
+		model.addAttribute("user_code",user_code); //jspë¡œ ê°’ ë„˜ê²¨ì¤˜ì•¼ í•  ë•Œ ì‚¬ìš©
 		List<PetInfoVO> petList=petInfoDAO.selectPetList(user_code);		
 		mav.addObject("petList", petList);
-		//===========È¸¿ø ¸¶ÀÌ ÆäÀÌÁö ÇÁ»ç 
-		String user_id= (String)session.getAttribute("log_id");
-		userVO=userService.calluserInfo(user_id);               
-        mav.addObject("userVO", userVO);
 		return mav;
 	}
 
 	@Override
 	@RequestMapping(value = "/user_Page/modPet.do", method = RequestMethod.POST)
-	public ModelAndView modPet( Model model, HttpServletRequest request,		
+	public ModelAndView modPet( @ModelAttribute("petInfoVO") PetInfoVO petInfoVO, Model model, HttpServletRequest request,		
 		HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8;");
@@ -82,29 +80,78 @@ public class PetInfoControllerImpl implements PetInfoController{
 		
 		HttpSession session = request.getSession();
 		String user_code=(String) session.getAttribute("user_code");
-		user_code="use0001";
-		 //ModelAndView mav = new ModelAndView(viewName);
 		
-		
+				
 		String pet_code=request.getParameter("pet_code");
-		String pet_name=request.getParameter("name");
-		int pet_age=Integer.parseInt(request.getParameter("age"));
-		String pet_sex=request.getParameter("gender");
-		String pet_types=request.getParameter("petRace");
-		String pet_number=request.getParameter("perNumber");
-		String b_type=request.getParameter("bloodType");
-		float pet_weight=Float.parseFloat(request.getParameter("weight"));
-		String pet_etc=request.getParameter("notice");
+		String pet_name=request.getParameter("pet_name");
+		int pet_age=Integer.parseInt(request.getParameter("pet_age"));
+		String pet_sex=request.getParameter("pet_sex");
+		String pet_types=request.getParameter("pet_types");
+	    String pet_number=request.getParameter("pet_number");
+		String b_type=request.getParameter("b_type");
+		float pet_weight=Float.parseFloat(request.getParameter("pet_weight"));
+		String pet_etc=request.getParameter("pet_etc");
 		System.out.println(pet_code);
 		System.out.println(pet_name);
 		petInfoVO=new PetInfoVO(pet_code, pet_name, pet_age, pet_sex, pet_types, pet_number, b_type, pet_weight, pet_etc);
+		
+		
 		petInfoDAO.updatePet(petInfoVO);
 		out=response.getWriter();
 		out.print("<script>");
-		out.print("alert('µ¿¹°À» ¼öÁ¤Çß½À´Ï´Ù');");
+		out.print("alert('ë™ë¬¼ì„ ìˆ˜ì •í–ˆìŠµë‹ˆë‹¤');");
 		out.print("location.href='"+request.getContextPath()+"/user_Page/myPetList.do';");
 		out.print("</script>");
-		//ModelAndView mav=new ModelAndView("redirect:/petinfo/myPetList.do?user_id="+user_code);
+		
+		return null;
+	}
+
+	@Override
+	@RequestMapping(value = "/user_Page/addPet.do", method = RequestMethod.POST)
+	public ModelAndView addPet(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		HttpSession session = request.getSession();
+		String user_code=(String) session.getAttribute("user_code");
+		
+		String viewName=(String) request.getAttribute("viewName");
+		PrintWriter out = response.getWriter();
+		String pet_name=request.getParameter("pet_name");
+		int pet_age=Integer.parseInt(request.getParameter("pet_age"));
+		String pet_sex=request.getParameter("pet_sex");
+		String pet_types=request.getParameter("pet_types");
+		String pet_number=request.getParameter("pet_number");
+		String b_type=request.getParameter("b_type");
+		float pet_weight=Float.parseFloat(request.getParameter("pet_weight"));
+		String pet_etc=request.getParameter("pet_etc");
+		System.out.println(pet_name);
+		AnimalVO animalVO = new AnimalVO(user_code, pet_name, pet_age, pet_sex, pet_types, pet_number, b_type, pet_weight, pet_etc);
+		animalDAO.addAnimal(animalVO);
+		out=response.getWriter();
+		out.print("<script>");
+		out.print("alert('ë™ë¬¼ì„ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤');");
+		out.print("location.href='"+request.getContextPath()+"/user_Page/myPetList.do';");
+		out.print("</script>");
+		
+		return null;
+	}
+
+	@Override
+	@RequestMapping(value = "/user_Page/removePetInfo.do", method = RequestMethod.POST)
+	public ModelAndView removePetInfo(Model model, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
+		String pet_code=request.getParameter("pet_code");
+		System.out.println("ì‚­ì œìˆ˜í–‰");
+		petInfoDAO.removePetInfo(pet_code);
+		out=response.getWriter();
+		out.print("<script>");
+		out.print("alert('ë™ë¬¼ì„ ì‚­ì œí–ˆìŠµë‹ˆë‹¤');");
+		out.print("location.href='"+request.getContextPath()+"/user_Page/myPetList.do';");
+		out.print("</script>");
 		return null;
 	}
 

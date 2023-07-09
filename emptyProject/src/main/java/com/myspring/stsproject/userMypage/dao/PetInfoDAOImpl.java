@@ -30,4 +30,10 @@ public class PetInfoDAOImpl implements PetInfoDAO{
 		
 	}
 
+	@Override
+	public void removePetInfo(String pet_code) throws DataAccessException {
+		sqlSession.delete("mapper.petInfo.removePetInfo", pet_code);
+		
+	}
+
 }

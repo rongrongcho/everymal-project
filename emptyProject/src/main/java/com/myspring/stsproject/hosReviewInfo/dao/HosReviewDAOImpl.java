@@ -25,7 +25,7 @@ public class HosReviewDAOImpl implements HosReviewDAO{
          int section = pagingMap.get("section");
          int pageNum = pagingMap.get("pageNum");
          Map map = new HashMap();
-         //원래 여기 없던 부분인데 mappers에서 쿼리문에 변수 2개 이상 전달하기 위해서 HashMap map 만들어서 거기에 다 넣어줌. 그래서 변수 3개 보냄
+      
          map.put("section", section);
          map.put("pageNum", pageNum);
          map.put("hos_code", hos_code);

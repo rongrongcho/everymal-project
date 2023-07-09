@@ -15,9 +15,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> 내 질문 관리 </title>
-        <link rel="stylesheet" href="${contextPath}/css/reset.css" />
-        <link rel="stylesheet" href="${contextPath}/css/common.css" />
-        <link rel="stylesheet" href="${contextPath}/css/myReview.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/myReview.css" />
       </head>
 
       <body>
@@ -25,27 +25,34 @@
           <header id="header">
             <nav>
               <ul class="topNav">
-                <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
+                <li>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                </li>
+	              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+	              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
+                <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -59,10 +66,10 @@
             <div class="profileBox">
               <div class="proimgBox">
                 <img class="proImg"
-                  src="${contextPath}/proimgdown.do?imageFileName=${userVO.user_imgName}&user_id=${log_id}" width="200">
+                   src="${contextPath}/user_Page/searchProfil.do?user_id=${log_id}" width="200">
               </div>
               <div class="speech_bubble">
-                <img class="bubbleImg" src="${contextPath}/img/말풍선.png" alt="말풍선 배경">
+                <img class="bubbleImg" src="${contextPath}/resources/img/말풍선.png" alt="말풍선 배경">
                 <p><span class="userID">${userVO.user_name}</span>님 환영합니다!</p>
               </div>
             </div>
@@ -71,10 +78,11 @@
                 <li class="firstMenu">마이페이지
 
                   <ul>
-                    <li class="secondMenu"><a href="${contextPath}/userMypage/myInfo.do">내 정보 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath}/petinfo/myPetList.do">내 동물 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath}/userMypage/myReview.do">내 리뷰 관리</a></li>
-                    <li class="secondMenu"><a href="${contextPath}/userMypage/myQuestion.do">내 질문 관리</a></li>
+                   <li class="secondMenu"><a href="${contextPath}/user_Page/myInfo.do">내 정보 관리</a></li>
+                    <li class="secondMenu"><a href="${contextPath}/user_Page/myPetList.do">내 동물 관리</a></li>
+                    <li class="secondMenu"><a href="${contextPath}/user_Page/myReview.do">내 리뷰 관리</a></li>
+                    <li class="secondMenu"><a href="${contextPath}/user_Page/myQuestion.do">내 질문 관리</a></li>
+                    
                   </ul>
                 </li>
                 <li class="firstMenu">
@@ -84,6 +92,7 @@
                     <li class="secondMenu"><a href="${contextPath}/history/myPetTaxiReserv.do">택시 예약 관리</a></li>
                   </ul>
                 </li>
+                <li class="firstMenu"><a href="${contextPath }/member/withdrawal.do">회원탈퇴</a></li>
               </ul>
             </div>
           </section>
@@ -92,16 +101,16 @@
             <div class="tab_nav">
               <ul class="tab_Btns">
                 <li class="tBtn tBtn1 notChoice">
-                  <a href="${contextPath}/userMypage/myInfo.do"><span class="pointT">내</span><span>정보</span></a>
+                  <a href="${contextPath}/user_Page/myInfo.do"><span class="pointT">내</span><span>정보</span></a>
                 </li>
                 <li class="tBtn tBtn2 notChoice">
-                  <a href="${contextPath}/petinfo/myPetList.do"><span class="pointT">펫</span><span>정보</span></a>
+                  <a href="${contextPath}/user_Page/myPetList.do"><span class="pointT">펫</span><span>정보</span></a>
                 </li>
                 <li class="tBtn tBtn3 notChoice">
-                  <a href="${contextPath}/userMypage/myReview.do"><span class="pointT">내</span><span>리뷰</span></a>
+                  <a href="${contextPath}/user_Page/myReview.do"><span class="pointT">내</span><span>리뷰</span></a>
                 </li>
                 <li class="tBtn tBtn4 choiceTabNav">
-                  <a href="${contextPath}/userMypage/myQuestion.do"><span class="pointT">내</span><span>질문</span></a>
+                  <a href="${contextPath}/user_Page/myQuestion.do"><span class="pointT">내</span><span>질문</span></a>
                 </li>
               </ul>
             </div>
@@ -110,8 +119,16 @@
 
               <div id="tabBox" class="tab-content">
 
-                <form action="${contextPath}/userMypage/myQusDel.do" method="post" name="del">
+                <form action="${contextPath}/user_Page/myQusDel.do" method="post" name="del">
                   <table>
+                   <colgroup>
+                        <col width="10%" />
+                        <col width="15%" />
+                        <col width="45%" />
+                        <col width="15%" />
+                        <col width="15%" />
+
+                      </colgroup>
                     <thead>
                       <tr>
                         <th>선택</th>
@@ -133,11 +150,13 @@
                               <td><input type="checkbox" name="del_chk" id="" value="${qus.q_code}"></td>
                               <td>
                                 <a class="goTodetailPage"
-                                  href="${contextPath}/board/viewArticle.do?q_code=${qus.q_code}">${qus.q_code}</a>
+                                  href="${contextPath}/qna_Board/viewArticle.do?q_code=${qus.q_code}">${qus.q_code}</a>
                               </td>
                               <td>
+                               <div class="text-ellipsis">
                                 <a class="goTodetailPage"
-                                  href="${contextPath}/board/viewArticle.do?q_code=${qus.q_code}">${qus.q_title}</a>
+                                  href="${contextPath}/qna_Board/viewArticle.do?q_code=${qus.q_code}">${qus.q_title}</a>
+                                </div>
                               </td>
                               <td>${qus.q_date}</td>
                               <td>${qus.isAnswer}</td>
@@ -169,21 +188,21 @@
                       <c:forEach var="page" begin="1" end="${tot-(section-1)*5}" step="1">
                         <c:if test="${not doneLoop}">
                           <c:if test="${section>1 && page==1 }">
-                            <a href="${contextPath}/userMypage/myQuestion.do?section=${section-1}&pageNum=${pageNum}">
+                            <a href="${contextPath}/user_Page/myQuestion.do?section=${section-1}&pageNum=${pageNum}">
                               prev</a>
                           </c:if>
                           <c:choose>
                             <c:when test="${page==pageNum}">
                               <a class="selPage"
-                                href="${contextPath}/userMypage/myQuestion.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
+                                href="${contextPath}/user_Page/myQuestion.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
                             </c:when>
                             <c:otherwise>
                               <a class="noLine"
-                                href="${contextPath}/userMypage/myQuestion.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
+                                href="${contextPath}/user_Page/myQuestion.do?section=${section}&pageNum=${page}">${(section-1)*5+page}</a>
                             </c:otherwise>
                           </c:choose>
                           <c:if test="${page==5}">
-                            <a href="${contextPath}/userMypage/myQuestion.do?section=${section+1}&pageNum=${pageNum}">
+                            <a href="${contextPath}/user_Page/myQuestion.do?section=${section+1}&pageNum=${pageNum}">
                               next</a>
                             <c:set var="doneLoop" value="true" />
                           </c:if>
@@ -205,11 +224,11 @@
                         <c:choose>
                           <c:when test="${page==pageNum}">
                             <a class="selPage"
-                              href="${contextPath}/userMypage/myQuestion.do?section=${section}&pageNum=${page}">${page}</a>
+                              href="${contextPath}/user_Page/myQuestion.do?section=${section}&pageNum=${page}">${page}</a>
                           </c:when>
                           <c:otherwise>
                             <a class="noLine"
-                              href="${contextPath}/userMypage/myQuestion.do?section=${section}&pageNum=${page}">${page}</a>
+                              href="${contextPath}/user_Page/myQuestion.do?section=${section}&pageNum=${page}">${page}</a>
                           </c:otherwise>
                         </c:choose>
                       </c:forEach>
@@ -234,24 +253,24 @@
           <footer>
             <ul class="bottomNav">
               <li>
-                <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/img/EverymalLogo_w.svg"
+                <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
-                <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
               </li>
-              <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-              <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
               <li>
                 <c:choose>
                   <c:when test="${!empty isLogon}">
-                    <a href="${contextPath}/logindb/logout">로그아웃</a>
+                    <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/login.jsp">로그인</a>
+                    <a href="${contextPath}/member/loginForm.do">로그인</a>
                   </c:otherwise>
                 </c:choose>
               </li>

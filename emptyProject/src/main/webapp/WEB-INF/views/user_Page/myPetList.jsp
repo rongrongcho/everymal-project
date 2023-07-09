@@ -18,7 +18,7 @@
           function init() {
             if (${empty isLogon }) {
               alert("마이페이지를 보려면 로그인 해주세요");
-              document.location.href = "${contextPath}/login.jsp";
+              document.location.href = "${contextPath}/member/loginForm.do";
             }else {
               if (${empty user_code }) {
                 alert("병원 회원은 병원 마이페이지에 접속해 주세요");
@@ -36,19 +36,7 @@
             }
           }
           
-          /*function submitForm() {
-              var forms = new Array();
-            	forms=document.getElementsByClassName("myPetInfoForm");
-              if (forms.length > 0) {
-                for(int i=0; i<forms.length; i++){
-                	forms[i].submit();
-                }
-                
-              }
-            }*/
-          
-          
-
+                   
 
           function delPetInfo(url, pet_code) {
             let d_form = document.createElement("form"); //createElement=>태그를 만들어준다
@@ -85,28 +73,34 @@
           <header id="header">
             <nav>
               <ul class="topNav">
-                <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
-
+                <li>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                </li>
+	              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+	              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
+                <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -121,7 +115,7 @@
             <div class="profileBox">
               <div class="proimgBox">
                 <img class="proImg"
-                  src="${contextPath}/proimgdown.do?imageFileName=${userVO.user_imgName}&user_id=${log_id}" width="200"
+                  src="${contextPath}/user_Page/searchProfil.do?user_id=${log_id}" width="200"
                   alt="사용자 프로필 사진">
               </div>
               <div class="speech_bubble">
@@ -138,6 +132,7 @@
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myPetList.do">내 동물 관리</a></li>
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myReview.do">내 리뷰 관리</a></li>
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myQuestion.do">내 질문 관리</a></li>
+                  
                   </ul>
                 </li>
                 <li class="firstMenu">
@@ -147,6 +142,7 @@
                     <li class="secondMenu"><a href="${contextPath}/history/myPetTaxiReserv.do">택시 예약 관리</a></li>
                   </ul>
                 </li>
+                <li class="firstMenu"><a href="${contextPath }/member/withdrawal.do">회원탈퇴</a></li>
               </ul>
             </div>
           </section>
@@ -195,13 +191,13 @@
 
                             <p>
                               <label class="infoTitle" for="name">반려동물 이름</label>
-                              <input class="answer" type="text" id="name" name="name" value="${petinfo.pet_name}"
+                              <input class="answer" type="text" id="name" name="pet_name" value="${petinfo.pet_name}"
                                 required />
                               <input type="hidden" name="pet_code" value="${petinfo.pet_code}">
                             </p>
                             <p>
                               <label class="infoTitle" for="age">나이</label>
-                              <input class="answer" type="number" id="age" name="age" value="${petinfo.pet_age}" />
+                              <input class="answer" type="number" id="age" name="pet_age" value="${petinfo.pet_age}" />
                             </p>
                             <!-- <p>
                               <label class="infoTitle" for="genderChoice">성별</label>
@@ -241,7 +237,7 @@
                             <p>
                               <label class="infoTitle" for="race">동물 종</label>
                               <!-- <span style="margin-left:250px;">현재 종 : ${petinfo.pet_types}</span> -->
-                              <select name="petRace" id="petRace" class="answer selectPet" required>
+                              <select name="pet_types" id="petRace" class="answer selectPet" required>
                                 <option>${petinfo.pet_types}</option>
                                 <option value="개">개</option>
                                 <option value="고양이">고양이</option>
@@ -254,13 +250,13 @@
                             </p>
                             <p>
                               <label class="infoTitle" for="petNumber">동물등록번호</label>
-                              <input class="answer" type="number" id="petNumber" name="perNumber"
+                              <input class="answer" type="number" id="petNumber" name="pet_number"
                                 value="${petinfo.pet_number}" required />
                             </p>
                             <p>
                               <label class="infoTitle" for="bloodType">혈액형</label>
                               <!-- <span style="margin-left:250px;">현재 혈액형 : ${petinfo.b_type}</span> -->
-                              <select name="bloodType" id="bloodType" class="answer selectBT" required>
+                              <select name="b_type" id="bloodType" class="answer selectBT" required>
                                 <option>${petinfo.b_type} </option>
                                 <option value="dea1">DEA1</option>
                                 <option value="dea1.1">DEA1.1</option>
@@ -278,7 +274,7 @@
                             </p>
                             <p>
                               <label class="infoTitle" for="weight">몸무게</label>
-                              <input class="answer" type="number" id="weight" name="weight"
+                              <input class="answer" type="number" id="weight" name="pet_weight"
                                 value="${petinfo.pet_weight}" required />
                             </p>
                             <p>
@@ -286,7 +282,7 @@
                               <!-- <input class="answer writeNote" type="text" id="notice" name="notice"
                                 value="${petinfo.pet_etc}" /> -->
 
-                              <textarea class="answer writeNote" id="notice" name="notice"
+                              <textarea class="answer writeNote" id="notice" name="pet_etc"
                                 maxlength="200">${petinfo.pet_etc}</textarea>
 
                             </p>
@@ -312,22 +308,22 @@
                       </button>
                       <p>
                         <label class="infoTitle" for="name">반려동물 이름</label>
-                        <input class="answer" type="text" id="name" name="name" required />
+                        <input class="answer" type="text" id="name" name="pet_name" required />
                       </p>
                       <p>
                         <label class="infoTitle" for="age">나이</label>
-                        <input class="answer" type="number" id="age" name="age" required />
+                        <input class="answer" type="number" id="age" name="pet_age" required />
                       </p>
                       <p>
                         <label class="infoTitle" for="genderChoice">성별</label>
                         <label class="genderTitle gt1" for="genderChoice1">♀</label>
-                        <input class="answer g_C1" type="radio" id="genderChoice1" name="gender" value="0" />
+                        <input class="answer g_C1" type="radio" id="genderChoice1" name="pet_sex" value="0" />
                         <label class="genderTitle gt2" for="genderChoice2">♂︎</label>
-                        <input class="answer g_C2" type="radio" id="genderChoice2" name="gender" value="1" />
+                        <input class="answer g_C2" type="radio" id="genderChoice2" name="pet_sex" value="1" />
                       </p>
                       <p>
                         <label class="infoTitle" for="race">동물 종</label>
-                        <select name="petRace" id="petRace" class="answer selectPet" required>
+                        <select name="pet_types" id="petRace" class="answer selectPet" required>
                           <option value="개">개</option>
                           <option value="고양이">고양이</option>
                           <option value="소동물">소동물</option>
@@ -339,11 +335,11 @@
                       </p>
                       <p>
                         <label class="infoTitle" for="petNumber">동물등록번호</label>
-                        <input class="answer" type="number" id="petNumber" name="perNumber" />
+                        <input class="answer" type="number" id="petNumber" name="pet_number" />
                       </p>
                       <p>
                         <label class="infoTitle" for="bloodType">혈액형</label>
-                        <select name="bloodType" id="bloodType" class="answer selectBT">
+                        <select name="b_type" id="bloodType" class="answer selectBT">
                           <option value="dea1">DEA1</option>
                           <option value="dea1.1">DEA1.1</option>
                           <option value="dea1.2">DEA1.2</option>
@@ -360,11 +356,11 @@
                       </p>
                       <p>
                         <label class="infoTitle" for="weight">몸무게</label>
-                        <input class="answer" type="number" id="weight" name="weight" required />
+                        <input class="answer" type="number" id="weight" name="pet_weight" required />
                       </p>
                       <p>
                         <label class="infoTitle" for="notice">유의사항</label>
-                        <input class="answer writeNote" type="text" id="notice" name="notice" />
+                        <input class="answer writeNote" type="text" id="notice" name="pet_etc" />
                       </p>
                       <button class="btnOk" type="submit">추가하기</button>
                     </fieldset>
@@ -380,26 +376,26 @@
 
           <!-- fooooooooooooooooooooooooooooooooooooooooooooooooooooooter -->
           <footer>
-            <ul class="bottomNav">
+             <ul class="bottomNav">
               <li>
-                <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
+                <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
-                <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
               </li>
-              <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-              <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
               <li>
                 <c:choose>
                   <c:when test="${!empty isLogon}">
                     <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/login.jsp">로그인</a>
+                    <a href="${contextPath}/member/loginForm.do">로그인</a>
                   </c:otherwise>
                 </c:choose>
               </li>

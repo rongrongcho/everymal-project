@@ -9,5 +9,6 @@ import com.myspring.stsproject.userMypage.vo.PetInfoVO;
 public interface PetInfoDAO {
 	public List<PetInfoVO> selectPetList (String user_code) throws DataAccessException;
 	public void updatePet(PetInfoVO petInfoVO)throws DataAccessException;
+	public void removePetInfo (String pet_code) throws DataAccessException;
 	
 }

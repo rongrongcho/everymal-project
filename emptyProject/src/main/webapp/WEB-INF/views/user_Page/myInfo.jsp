@@ -83,27 +83,34 @@
           <header id="header">
             <nav>
               <ul class="topNav">
-                <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
+                <li>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                </li>
+	              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+	              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
+                <li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -117,7 +124,7 @@
             <div class="profileBox">
               <div class="proimgBox">
                 <img class="proImg"
-                  src="${contextPath}/proimgdown.do?imageFileName=${userVO.user_imgName}&user_id=${log_id}" width="200"
+                   src="${contextPath}/user_Page/searchProfil.do?user_imgName=${userVO.user_imgName}&user_id=${log_id}" width="200"
                   alt="사용자 프로필 사진">
               </div>
               <div class="speech_bubble">
@@ -134,6 +141,7 @@
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myPetList.do">내 동물 관리</a></li>
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myReview.do">내 리뷰 관리</a></li>
                     <li class="secondMenu"><a href="${contextPath}/user_Page/myQuestion.do">내 질문 관리</a></li>
+                     
                   </ul>
                 </li>
                 <li class="firstMenu">
@@ -143,6 +151,7 @@
                     <li class="secondMenu"><a href="${contextPath}/history/myPetTaxiReserv.do">택시 예약 관리</a></li>
                   </ul>
                 </li>
+                <li class="firstMenu"><a href="${contextPath }/member/withdrawal.do">회원탈퇴</a></li>
               </ul>
             </div>
           </section>
@@ -171,7 +180,7 @@
                 <div class="inputBck"></div>
                 <div class="myInfoTitle">
 
-                  <form action=" ${contextPath}/modInfo.do" name="myInfoForm" method="post"
+                  <form action=" ${contextPath}/user_Page/modInfo.do" name="myInfoForm" method="post"
                     enctype="multipart/form-data">
                     <fieldset>
                       <legend>내 정보 수정 폼</legend>
@@ -192,7 +201,7 @@
                       <p>
                         <label class="infoTitle" for="passwordCheck">비밀번호 확인</label>
                         <input class="answer" type="password" id="passwordCheck" name="passwordCheck"
-                          value="${userVO.user_pwd}" />
+                           required />
                       </p>
                       <p>
                         <label class="tel infoTitle" for="tel">연락처</label>
@@ -230,11 +239,11 @@
                             <label class="proImg infoTitle" for="">프로필 등록</label>
                             <input type="hidden" name="originalFileName" value="${userVO.user_imgName}">
 
-                            <input class="answer uploadImg" type="file" id="proimgup" name="user_imgName"
+                            <input class="answer uploadImg" type="file" id="proimgup" name="file"
                               onchange="readImage(this)" />
                             <img id="preview"
-                              src="${contextPath}/proimgdown.do?imageFileName=${userVO.user_imgName}&user_id=${log_id}"
-                              width="200" alt="${userVO.user_imgName}">
+                              src="${contextPath}/resources/imgRepo/user_profil/${log_id}/${userVO.user_imgName}"
+                              width="200" alt="${userVO.user_imgName}"/>
                           </p>
 
                         </c:when>
@@ -242,9 +251,9 @@
                         <c:when test="${empty userVO.user_imgName}">
                           <p>
                             <label class="proImg infoTitle" for="proimgup">프로필 등록</label>
-                            <input class="answer uploadImg" type="file" id="proimgup" name="user_imgName"
-                              onchange="readImage(this)" />
-                            <img id="preview" src="#" width="200" height="200" alt="${userVO.user_imgName}">
+                            <input class="answer uploadImg" type="file" id="proimgup" name="file"
+                              onchange="readImage(this)" value="${userVO.user_imgName}"/>
+                            <img id="preview" src="${contextPath}/resources/img/blankProfil.png" width="200" height="200" alt="${userVO.user_imgName}">
                           </p>
                         </c:when>
                       </c:choose>
@@ -268,26 +277,26 @@
 
           <!-- fooooooooooooooooooooooooooooooooooooooooooooooooooooooter -->
           <footer>
-            <ul class="bottomNav">
+             <ul class="bottomNav">
               <li>
                 <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                     alt="로고" style="width: 250px; height: auto" /></a>
               </li>
               <li>
-                <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
               </li>
               <li>
-                <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
               </li>
-              <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-              <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+              <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+              <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
               <li>
                 <c:choose>
                   <c:when test="${!empty isLogon}">
                     <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:when>
                   <c:otherwise>
-                    <a href="${contextPath}/login.jsp">로그인</a>
+                    <a href="${contextPath}/member/loginForm.do">로그인</a>
                   </c:otherwise>
                 </c:choose>
               </li>
