@@ -69,7 +69,11 @@ public class BoardControllerImpl implements BoardController{
 		
 		HttpSession session = request.getSession();
 		articleVO.setUser_id((String)session.getAttribute("log_id"));
-		articleVO.setUser_code((String)session.getAttribute("user_code"));
+		if((boolean) session.getAttribute("isHos")) {
+			articleVO.setUser_code((String)session.getAttribute("hos_code"));
+		}else {
+			articleVO.setUser_code((String)session.getAttribute("user_code"));
+		}
 		boardService.addArticle(articleVO);
 		
 		return mav;

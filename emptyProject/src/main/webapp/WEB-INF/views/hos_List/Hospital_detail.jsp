@@ -20,7 +20,7 @@
               var url = '';
               var textarea = document.createElement("textarea");
               document.body.appendChild(textarea);
-              url = '${hosData.hos_addr1} ${hosData.hos_addr2}';
+              url = '${hos_addr1} ${hos_addr2}';
               textarea.value = url;
               textarea.select();
               document.execCommand("copy");
@@ -76,7 +76,7 @@
                         </c:choose>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/login.jsp">로그인•회원가입</a>
+                        <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
                       </c:otherwise>
                     </c:choose>
                   </li>
@@ -90,75 +90,75 @@
             <!--컨텐츠영역 시작-->
             <div class="contentArea">
 
-              <h2>${hosData.hos_name}</h2>
-              <input type="hidden" name="hos_name" id="hos_name" value="${hosData.hos_name }" />
-              <input type="hidden" name="hos_code" id="hos_code" value="${hosData.hos_code }" />
+              <h2>${hos_name}</h2>
+              <input type="hidden" name="hos_name" id="hos_name" value="${hos_name }" />
+              <input type="hidden" name="hos_code" id="hos_code" value="${hos_code }" />
               <div id="line"></div>
               <!--동물병원정보 섹션 시작-->
               <section id="hospitalInfo">
                 <div class="hospitalPic">
 
-                  <img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg1}&hos_code=${hosData.hos_code}"
+                  <img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg1}&hos_code=${hos_code}"
                     class="bigPic" alt="내부사진1">
 
                   <ul>
-                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg1}&hos_code=${hosData.hos_code}"
+                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg1}&hos_code=${hos_code}"
                         class="smallPic" alt="내부사진1"></li>
-                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg2}&hos_code=${hosData.hos_code}"
+                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg2}&hos_code=${hos_code}"
                         class="smallPic" alt="내부사진2"></li>
-                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg3}&hos_code=${hosData.hos_code}"
+                    <li><img src="${contextPath}/mainImgDown.do?hos_img=${hosImgVO.himg3}&hos_code=${hos_code}"
                         class="smallPic" alt="내부사진3"></li>
                   </ul>
                 </div>
                 <div id="infoDetail">
                   <div class="small_p">
                     <h3>진료시간 : <span>
-                        <c:if test="${hosData.hos_24 eq 1}">24시간 영업</c:if>
-                        <c:if test="${hosData.hos_24 eq 0}"> ${hosData.hos_time_s}~${hosData.hos_time_e}</c:if>
+                        <c:if test="${hos_24 eq 1}">24시간 영업</c:if>
+                        <c:if test="${hos_24 eq 0}"> ${hos_time_s}~${hos_time_e}</c:if>
                       </span></h3>
                     <h3>영업 요일 :
                       <span>
-                        ${fn:contains(hosData.hos_365, 'mon') ? '월요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'tue') ? '화요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'wed') ? '수요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'thu') ? '목요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'fri') ? '금요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'sat') ? '토요일' : ''}/
-                        ${fn:contains(hosData.hos_365, 'sun') ? '일요일' : ''}
+                        ${fn:contains(hos_365, 'mon') ? '월요일' : ''}/
+                        ${fn:contains(hos_365, 'tue') ? '화요일' : ''}/
+                        ${fn:contains(hos_365, 'wed') ? '수요일' : ''}/
+                        ${fn:contains(hos_365, 'thu') ? '목요일' : ''}/
+                        ${fn:contains(hos_365, 'fri') ? '금요일' : ''}/
+                        ${fn:contains(hos_365, 'sat') ? '토요일' : ''}/
+                        ${fn:contains(hos_365, 'sun') ? '일요일' : ''}
                       </span>
                     </h3>
                     <div id="hos_intro">
-                      <p>「${hosData.hos_intro}」</p>
+                      <p>「${hos_intro}」</p>
                     </div>
                   </div>
                   <div class="big_p">
                     <h3 class="h3_first">진료과목 : <span>
-                        <c:if test="${hosData.hos_gs eq 1}">외과 /</c:if>
-                        <c:if test="${hosData.hos_gs eq 0}"></c:if>
-                        <c:if test="${hosData.hos_im eq 1}">내과/ </c:if>
-                        <c:if test="${hosData.hos_im eq 0}"></c:if>
-                        <c:if test="${hosData.hos_em eq 1}">응급의학과 /</c:if>
-                        <c:if test="${hosData.hos_em eq 0}"></c:if>
-                        <c:if test="${hosData.hos_rm eq 1}">재활의학과 /</c:if>
-                        <c:if test="${hosData.hos_rm eq 0}"></c:if>
-                        <c:if test="${hosData.hos_vac eq 1}">예방접종</c:if>
-                        <c:if test="${hosData.hos_vac eq 0}"></c:if>
+                        <c:if test="${hos_gs eq 1}">외과 /</c:if>
+                        <c:if test="${hos_gs eq 0}"></c:if>
+                        <c:if test="${hos_im eq 1}">내과/ </c:if>
+                        <c:if test="${hos_im eq 0}"></c:if>
+                        <c:if test="${hos_em eq 1}">응급의학과 /</c:if>
+                        <c:if test="${hos_em eq 0}"></c:if>
+                        <c:if test="${hos_rm eq 1}">재활의학과 /</c:if>
+                        <c:if test="${hos_rm eq 0}"></c:if>
+                        <c:if test="${hos_vac eq 1}">예방접종</c:if>
+                        <c:if test="${hos_vac eq 0}"></c:if>
                       </span></h3>
                     <h3 class="h3_first">진료동물 : <span>
-                        <c:if test="${hosData.hos_dog eq 1}">개/ </c:if>
-                        <c:if test="${hosData.hos_dog eq 0}"></c:if>
-                        <c:if test="${hosData.hos_cat eq 1}">고양이/ </c:if>
-                        <c:if test="${hosData.hos_cat eq 0}"></c:if>
-                        <c:if test="${hosData.hos_small eq 1}">소동물/ </c:if>
-                        <c:if test="${hosData.hos_small eq 0}"></c:if>
-                        <c:if test="${hosData.hos_fish eq 1}">어류/ </c:if>
-                        <c:if test="${hosData.hos_fish eq 0}"></c:if>
-                        <c:if test="${hosData.hos_bird eq 1}">조류/ </c:if>
-                        <c:if test="${hosData.hos_bird eq 0}"></c:if>
-                        <c:if test="${hosData.hos_rep eq 1}">파충류 </c:if>
-                        <c:if test="${hosData.hos_rep eq 0}"></c:if>
-                        <c:if test="${hosData.hos_etc eq 1}">기타 </c:if>
-                        <c:if test="${hosData.hos_etc eq 0}"></c:if>
+                        <c:if test="${hos_dog eq 1}">개/ </c:if>
+                        <c:if test="${hos_dog eq 0}"></c:if>
+                        <c:if test="${hos_cat eq 1}">고양이/ </c:if>
+                        <c:if test="${hos_cat eq 0}"></c:if>
+                        <c:if test="${hos_small eq 1}">소동물/ </c:if>
+                        <c:if test="${hos_small eq 0}"></c:if>
+                        <c:if test="${hos_fish eq 1}">어류/ </c:if>
+                        <c:if test="${hos_fish eq 0}"></c:if>
+                        <c:if test="${hos_bird eq 1}">조류/ </c:if>
+                        <c:if test="${hos_bird eq 0}"></c:if>
+                        <c:if test="${hos_rep eq 1}">파충류 </c:if>
+                        <c:if test="${hos_rep eq 0}"></c:if>
+                        <c:if test="${hos_etc eq 1}">기타 </c:if>
+                        <c:if test="${hos_etc eq 0}"></c:if>
                       </span></h3>
                   </div>
 
@@ -166,10 +166,10 @@
                         alt="전화하기" title="전화하기"></a></div>
 
                   <div class="info_btn" id="reservation"><a
-                      href="${contextPath}/hospital/reservationForm.do?hos_code=${hosData.hos_code}">예약하기</a></div>
+                      href="${contextPath}/hos_Reservation/reservationForm.do?hos_code=${hos_code}&hos_name=${hos_name}">예약하기</a></div>
                 </div>
                 <div id="hos_tel">
-                  &nbsp;📞${hosData.hos_tel}
+                  &nbsp;📞${hos_tel}
                 </div>
 
               </section>
@@ -227,12 +227,12 @@
                 <div id="map" style="width:50%;height:350px;"></div>
                 <div id="map_info">
                   <p id="address">주소 : <br>
-                    <span>${hosData.hos_addr1} ${hosData.hos_addr2}</span>
+                    <span>${hos_addr1} ${hos_addr2}</span>
                   </p>
                 </div>
                 <div class="map_btn">
                   <!-- <a class="map_share" href="#"><img src="${contextPath }/img/share.png" alt="공유하기">공유하기</a> -->
-                  <a class="map_addr" href="#" onclick="clip();"><img src="${contextPath }/img/addr_copy.png"
+                  <a class="map_addr" href="#" onclick="clip();"><img src="${contextPath }/resources/img/addr_copy.png"
                       alt="주소복사">주소복사</a>
                 </div>
               </section>
@@ -244,7 +244,7 @@
             <footer>
               <ul class="bottomNav">
                 <li>
-                  <a id="footerLogo" href="${contextPath}/index.jsp"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
+                  <a id="footerLogo" href="${contextPath}/main.do"><img src="${contextPath}/resources/img/EverymalLogo_w.svg"
                       alt="로고" style="width: 250px; height: auto" /></a>
                 </li>
                 <li>
@@ -308,7 +308,7 @@
                 var popupY = (window.screen.height - popupHeight) / 2;
                 var options = "width=" + popupWidth + ", height=" + popupHeight + ", left=" + popupX + ", top=" + popupY + ", resizable=no";
                 window.name = "reservationForm";
-                openWin = window.open("${pageContext.request.contextPath}/hos_List/reviewPopup.jsp", "childForm", options);
+                openWin = window.open("${pageContext.request.contextPath}/hos_List/reviewPopup.do", "childForm", options);
               }
               openPopup();
             };
@@ -393,7 +393,7 @@
             var geocoder = new kakao.maps.services.Geocoder();
 
             // 주소로 좌표를 검색합니다
-            geocoder.addressSearch('${hosData.hos_addr1}', function (result, status) {
+            geocoder.addressSearch('${hos_addr1}', function (result, status) {
 
               // 정상적으로 검색이 완료됐으면 
               if (status === kakao.maps.services.Status.OK) {
@@ -408,7 +408,7 @@
 
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                  content: '<div style="width:150px;text-align:center;padding:6px 0;">${hosData.hos_name}</div>'
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">${hos_name}</div>'
                 });
                 infowindow.open(map, marker);
 

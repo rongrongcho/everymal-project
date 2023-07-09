@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.withdrawal">
+	<!-- typeAlias에서 생성된 빈의 이름과 동일해야 한다  -->
+	<resultMap type="withdrawalVO" id="withdrawalResult">
+		<!-- sql문의 수행결과로 받을 변수명과 컬러명  -->
+		<result property="id" column="id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="hos_id" column="hos_id"/>
+		<result property="hos_enabled" column="hos_enabled"/>
+		<result property="user_enabled" column="user_enabled"/>
+	</resultMap>
+	
+	<select id="selectGmember" resultType="adminVO">
+	    <![CDATA[
+	    	select user_enabled from gemembertbl where user_id=#{user_id}
+	    ]]>	
+	</select>
+	
+	<update id="updateGmember" parameterType="java.lang.String">
+	  <![CDATA[
+	  	update gmembertbl set user_enabled=1 where user_id=#{user_id}
+	  ]]>
+	</update>
+	
+	<select id="selectHosmember" resultType="adminVO">
+	    <![CDATA[
+	    	select hos_enabled from hosjointbl where hos_id=#{hos_id}
+	    ]]>	
+	</select>
+	
+	<update id="updateHosmember" parameterType="java.lang.String">
+	  <![CDATA[
+	  	update hosjointbl set hos_enabled=1 where hos_id=#{hos_id}
+	  ]]>
+	</update>
+</mapper>

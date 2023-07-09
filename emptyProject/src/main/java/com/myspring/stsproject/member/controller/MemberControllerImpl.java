@@ -1,5 +1,6 @@
 package com.myspring.stsproject.member.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		�씤�꽣�뀎�꽣�뿉�꽌 留뚮뱾�뼱以� viewName�쓣 媛��졇�삩�떎
+//		인터셉터에서 만들어준 viewName을 가져온다
 		String viewName=(String) request.getAttribute("viewName");
 		List memberList = memberService.listMembers();
 		ModelAndView mav = new ModelAndView(viewName);
@@ -54,14 +55,172 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void addMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		memberService.addMember(memberVO); 
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		
-		return mav;
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String code = memberService.selectUsercode(memberVO);
+		int maxNum = Integer.parseInt(code) + 1;
+        code = String.format("use%04d", maxNum);
+		String user_tel1 = request.getParameter("user_tel1");
+		String user_tel2 = request.getParameter("user_tel2");
+		String user_tel3 = request.getParameter("user_tel3");
+		String user_tel = user_tel1+user_tel2+user_tel3;
+		memberVO.setUser_tel(user_tel);
+		memberVO.setUser_code(code);
+		String userCode = memberService.addMember(memberVO);
+		out.print(userCode);
 	}
-
+	
+	@Override
+	@RequestMapping(value = "/member/addHospital.do", method = RequestMethod.POST)
+	public void addHospital(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String code = memberService.selectHoscode(memberVO);
+		int maxNum = Integer.parseInt(code) + 1;
+        code = String.format("hos%04d", maxNum);
+		String hos_usertel1 = request.getParameter("hos_usertel1");
+        String hos_usertel2 = request.getParameter("hos_usertel2");
+        String hos_usertel3 = request.getParameter("hos_usertel3");
+        String hos_usertel = hos_usertel1+hos_usertel2+hos_usertel3;
+        String hos_dno1 = request.getParameter("hos_dno1");
+        String hos_dno2 = request.getParameter("hos_dno2");
+        String hos_dno3 = request.getParameter("hos_dno3");
+        String hos_dno = hos_dno1+hos_dno2+hos_dno3;
+        String hos_tel1 = request.getParameter("hos_tel1");
+        String hos_tel2 = request.getParameter("hos_tel2");
+        String hos_tel3 = request.getParameter("hos_tel3");
+        String hos_tel = hos_tel1+hos_tel2+hos_tel3;
+        String hos_365_1 = request.getParameter("hos_365_1");
+        String hos_365_2 = request.getParameter("hos_365_2");
+        String hos_365_3 = request.getParameter("hos_365_3");
+        String hos_365_4 = request.getParameter("hos_365_4");
+        String hos_365_5 = request.getParameter("hos_365_5");
+        String hos_365_6 = request.getParameter("hos_365_6");
+        String hos_365_7 = request.getParameter("hos_365_7");
+        String hos_365 = "";
+        if(hos_365_1 != null && !hos_365_1.equals("") ){
+           hos_365 += hos_365_1;
+        }
+        if(hos_365_2 != null && !hos_365_2.equals("") ){
+           hos_365 += hos_365_2;
+        }
+        if(hos_365_3 != null && !hos_365_3.equals("") ){
+           hos_365 += hos_365_3;
+        }
+        if(hos_365_4 != null && !hos_365_4.equals("") ){
+           hos_365 += hos_365_4;
+        }
+        if(hos_365_5 != null && !hos_365_5.equals("") ){
+           hos_365 += hos_365_5;
+        }
+        if(hos_365_6 != null && !hos_365_6.equals("") ){
+           hos_365 += hos_365_6;
+        }
+        if(hos_365_7 != null && !hos_365_7.equals("") ){
+           hos_365 += hos_365_7;
+        }
+        String hos_24 = request.getParameter("hos_24");
+        String hos_dog = request.getParameter("hos_dog");
+        String hos_cat = request.getParameter("hos_cat");
+        String hos_small = request.getParameter("hos_small");
+        String hos_fish = request.getParameter("hos_fish");
+        String hos_bird = request.getParameter("hos_bird");
+        String hos_rep = request.getParameter("hos_rep");
+        String hos_etc = request.getParameter("hos_etc");
+        String hos_gs = request.getParameter("hos_gs");
+        String hos_im = request.getParameter("hos_im");
+        String hos_em = request.getParameter("hos_em");
+        String hos_rm = request.getParameter("hos_rm");
+        String hos_vac = request.getParameter("hos_vac");
+        if(hos_24 == null){
+        	memberVO.setHos_24("0");
+         }
+        else if(hos_24 != null){
+        	memberVO.setHos_24("1");
+        }
+        if(hos_dog == null){
+        	memberVO.setHos_dog("0");
+         }
+        else if(hos_dog != null){
+        	memberVO.setHos_dog("1");
+        }
+        if(hos_cat == null){
+        	memberVO.setHos_cat("0");
+         }
+        else if(hos_cat != null){
+        	memberVO.setHos_cat("1");
+        }
+        if(hos_small == null){
+        	memberVO.setHos_small("0");
+         }
+        else if(hos_small != null){
+        	memberVO.setHos_small("1");
+        }
+        if(hos_fish == null){
+        	memberVO.setHos_fish("0");
+         }
+        else if(hos_fish != null){
+        	memberVO.setHos_fish("1");
+        }
+        if(hos_bird == null){
+        	memberVO.setHos_bird("0");
+         }
+        else if(hos_bird != null){
+        	memberVO.setHos_bird("1");
+        }
+        if(hos_rep == null){
+        	memberVO.setHos_rep("0");
+         }
+        else if(hos_rep != null){
+        	memberVO.setHos_rep("1");
+        }
+        if(hos_etc == null){
+        	memberVO.setHos_etc("0");
+         }
+        else if(hos_etc != null){
+        	memberVO.setHos_etc("1");
+        }
+        if(hos_gs == null){
+        	memberVO.setHos_gs("0");
+         }
+        else if(hos_gs != null){
+        	memberVO.setHos_gs("1");
+        }
+        if(hos_im == null){
+        	memberVO.setHos_im("0");
+         }
+        else if(hos_im != null){
+        	memberVO.setHos_im("1");
+        }
+        if(hos_em == null){
+        	memberVO.setHos_em("0");
+         }
+        else if(hos_em != null){
+        	memberVO.setHos_em("1");
+        }
+        if(hos_rm == null){
+        	memberVO.setHos_rm("0");
+         }
+        else if(hos_rm != null){
+        	memberVO.setHos_rm("1");
+        }
+        if(hos_vac == null){
+        	memberVO.setHos_vac("0");
+         }
+        else if(hos_vac != null){
+        	memberVO.setHos_vac("1");
+        }
+        
+        memberVO.setHos_usertel(hos_usertel);
+        memberVO.setHos_dno(hos_dno);
+        memberVO.setHos_tel(hos_tel);
+        memberVO.setHos_365(hos_365);
+        memberVO.setHos_code(code);
+        memberService.addHospital(memberVO);
+	}
 
 	@RequestMapping(value = "/member/join_user.do", method = RequestMethod.GET)
 	public ModelAndView join_user(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -76,20 +235,6 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
-
-
-	@RequestMapping(value = "/member/modMemberForm.do", method = RequestMethod.GET)
-	public ModelAndView modMemberForm(@RequestParam("id") String id, MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-
-		String viewName=(String) request.getAttribute("viewName");
-
-		memberVO=memberService.findMember(id);
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("member", memberVO);
-		return mav;
-	}
-
 
 	@Override
 	@RequestMapping(value = "/member/updateMember.do", method = RequestMethod.POST)
@@ -147,31 +292,6 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
-
-	
-//	  @Override
-//	  @RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-//	  public ModelAndView login(@ModelAttribute("memberVO") MemberVO memberVO,
-//	  RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse
-//	  response) throws Exception { 
-//		  ModelAndView mav=new ModelAndView();
-//	  memberVO=memberService.login(memberVO); 
-//	  if(memberVO!=null) { 
-//		  HttpSession session=request.getSession(); 
-//	  session.setAttribute("member", memberVO);
-//	  session.setAttribute("isLogOn", true); 
-//	  String action=(String)session.getAttribute("action");
-//	  session.removeAttribute("action"); 
-//	  if(action!=null) { //redirect �룷�썙�뵫 湲곗닠以� �븯�굹 dispacher�룄 �엳�쓬 
-//		  mav.setViewName("redirect:"+action); 
-//		  }else {
-//	  mav.setViewName("redirect:/member/listMembers.do"); } 
-//	  }else {
-//	  rAttr.addAttribute("result", "loginFailed");
-//	  mav.setViewName("redirect:/member/loginForm.do"); 
-//	  } return mav; 
-//	  }
-	 
 	
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("memberVO") MemberVO memberVO,  RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -224,7 +344,100 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/member/searchId.do", method = RequestMethod.POST)
+	public void searchId(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		boolean hos_chk = Boolean.parseBoolean(request.getParameter("chk"));
+		if(hos_chk) {
+			String name=request.getParameter("rname2");
+			String hos_dno=request.getParameter("work_no1")+'-'+request.getParameter("work_no2")+'-'+request.getParameter("work_no3");
+			memberVO.setName(name);
+			memberVO.setHos_dno(hos_dno);
+		}else {
+			String name=request.getParameter("rname1");
+			String email=request.getParameter("ident")+'@'+request.getParameter("ident1");
+			memberVO.setName(name);
+			memberVO.setEmail(email);
+		}
+		String id = memberService.searchId(memberVO);
+		out.print("<script>");
+		if(id==null) {
+			out.print("alert('회원정보가 존재하지 않습니다!');");
+		}else {
+			id=id.substring(0, 3)+"***";
+			out.print("alert('회원님의 아이디는 "+id+" 입니다!');");
+		}
+		out.print("location.href='"+request.getContextPath()+"/member/loginForm.do';");
+		out.print("</script>");
+	}
+	
+	@RequestMapping(value = "/member/searchPass.do", method = RequestMethod.POST)
+	public void searchPass(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		boolean hos_chk = Boolean.parseBoolean(request.getParameter("chk"));
+		if(hos_chk) {
+			String name=request.getParameter("rname2");
+			String id=request.getParameter("rid2");
+			String hos_dno=request.getParameter("work_no1")+request.getParameter("work_no2")+request.getParameter("work_no3");
+			memberVO.setHos_chk(hos_chk);
+			memberVO.setName(name);
+			memberVO.setId(id);
+			memberVO.setHos_dno(hos_dno);
+		}else {
+			String name=request.getParameter("rname1");
+			String id=request.getParameter("rid1");
+			String email=request.getParameter("ident")+'@'+request.getParameter("ident1");
+			memberVO.setHos_chk(hos_chk);
+			memberVO.setName(name);
+			memberVO.setId(id);
+			memberVO.setEmail(email);
+		}
+		boolean result = false;
+		result = memberService.searchPass(memberVO);
+		out.print("<script>");
+		if(result) {
+			out.print("alert('회원님의 이메일로 비밀번호를 재설정 할 수 있는 링크를 보냈습니다!');");
+		}else {
+			out.print("alert('회원정보가 존재하지 않습니다!');");
+		}
+		out.print("location.href='"+request.getContextPath()+"/member/loginForm.do';");
+		out.print("</script>");
+	}
+	
+	@RequestMapping(value = "/member/idChk.do", method = RequestMethod.POST)
+	public void idChk(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		boolean result=false;
+		String id = memberService.idChk(memberVO);
+		result=Boolean.parseBoolean(id);
+		if(result==true) {
+			out.print("not_usable");
+		}else{
+			out.print("usable");
+		}
+	}
+	
+	@RequestMapping(value = "/member/HosidChk.do", method = RequestMethod.POST)
+	public void HosidChk(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		boolean result=false;
+		String id = memberService.HosidChk(memberVO);
+		result=Boolean.parseBoolean(id);
+		if(result==true) {
+			out.print("not_usable");
+		}else{
+			out.print("usable");
+		}
+	}
 
 
 }

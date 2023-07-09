@@ -20,6 +20,8 @@ public interface HosMypageInfoDAO {
 	public void newuploadimg(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
 	public String searchProfil(String hos_id) throws DataAccessException;
 	public Map<String, String> searchThumb(String hos_code) throws DataAccessException;
-	//�߰�
+	//Ãß°¡
 	public String getHosName(String hos_code) throws DataAccessException;
+	public HosMypageInfoVO rm_say(String hos_code) throws DataAccessException;
+	public HosMypageInfoVO rm_status(String hos_code) throws DataAccessException;
 }

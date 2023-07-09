@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
         <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
         <link rel="stylesheet" href="${contextPath}/resources/css/search_pass.css" />
-        <script src="js/jquery-3.6.3.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery-3.6.3.min.js"></script>
         <script>
           let disa_sw = true;
           $(function () {
@@ -45,22 +45,25 @@
                 <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
                 <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
                 <li>
-                  <c:choose>
-                    <c:when test="${!empty isLogon}">
-                      <c:choose>
-                        <c:when test="${isHos}">
-                          <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
-                        </c:when>
-                        <c:otherwise>
-                          <a href="${contextPath}/userMypage">회원마이페이지</a>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인•회원가입</a>
-                    </c:otherwise>
-                  </c:choose>
-                </li>
+                <c:choose>
+                  <c:when test="${!empty isLogon}">
+                    <c:choose>
+                      <c:when test="${isHos}">
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
+                      </c:when>
+                      <c:otherwise>
+                        <a href="${contextPath}/user_Page/myInfo.do">회원마이페이지</a>
+                      </c:otherwise>
+                    </c:choose>
+                  </c:when>
+                  <c:otherwise>
+                    <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
+                  </c:otherwise>
+                </c:choose>
+              </li>
               </ul>
             </nav>
           </header>
@@ -75,7 +78,7 @@
             <div class="tabcontents">
               <div id="tabBox01" class="tabBox">
                 <h3 class="skip">가입 정보 입력</h3>
-                <form name="searchPass" method="post" action="${contextPath}/logindb/searchPass">
+                <form name="searchPass" method="post" action="${contextPath}/member/searchPass.do">
                   <div class="memberForm_1">
                     <fieldset>
                       <legend>회원가입 정보</legend>

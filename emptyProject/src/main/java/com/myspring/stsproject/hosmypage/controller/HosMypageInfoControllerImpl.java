@@ -60,20 +60,22 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView(viewName);
 		String _hos_id=(String) session.getAttribute("log_id");
-		String hos_code="hos0005";
+		String hos_code=(String)session.getAttribute("hos_code");
 		HosMypageInfoVO hosInfo=hosmypageinfoService.selecthosInfo(_hos_id);
 		Map<String, String> thumbMap = hosmypageinfoDAO.searchThumb(hos_code);
 		System.out.println("thumbMap:::::::::"+thumbMap);
 	    String himg1 = thumbMap.get("HIMG1");
 	    String himg2 = thumbMap.get("HIMG2");
 	    String himg3 = thumbMap.get("HIMG3");
-	    System.out.println("이미지를 못 받아오는 걸까?" +himg1);
-	    hosInfo.setHos_code(hos_code);
-	    System.out.println("그렇다면 호스코드?" +hosInfo.getHos_code());
 	    hosInfo.setHimg1(himg1);
 	    hosInfo.setHimg2(himg2);
 	    hosInfo.setHimg3(himg3);
 		mav.addObject("hosmypageinfoVO", hosInfo);
+		HosMypageInfoVO hosrm=hosmypageinfoDAO.rm_say(hos_code);
+		System.out.println("rmsay;;;;;"+hosrm);
+		mav.addObject("hosmypagermsayVO",hosrm);
+		HosMypageInfoVO hosstatus=hosmypageinfoDAO.rm_status(hos_code);
+		mav.addObject("hosmypagermstatusVO",hosstatus);
 		System.out.println(himg1);
 		System.out.println(himg2);
 		System.out.println(himg3);
@@ -89,7 +91,7 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 		String _hos_id=(String) session.getAttribute("log_id");
 		HosMypageInfoVO hosInfo=hosmypageinfoService.selecthosInfo(_hos_id);
 		mav.addObject("hosmypageinfoVO", hosInfo);
-		System.out.println("�떎�떆臾쇱뼱蹂몃떎 �궛�궛22 " + mav);
+		System.out.println("다시물어본다 낰낰22 " + mav);
 		return mav;
 	}
 	
@@ -100,9 +102,16 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView(viewName);
 		String _hos_id=(String) session.getAttribute("log_id");
+		String hos_code=(String)session.getAttribute("hos_code");
 		HosMypageInfoVO hosInfo=hosmypageinfoService.selecthosInfo(_hos_id);
+		HosMypageInfoVO hosrm=hosmypageinfoDAO.rm_say(hos_code);
+		HosMypageInfoVO hosstatus=hosmypageinfoDAO.rm_status(hos_code);
+		System.out.println("hosCode;;;;;"+hos_code);
+		System.out.println("rmstatys;;;;;;"+hosstatus);
+		mav.addObject("hosmypagermsayVO",hosrm);
 		mav.addObject("hosmypageinfoVO", hosInfo);
-		System.out.println("�떎�떆臾쇱뼱蹂몃떎 �궛�궛33 " + mav);
+		mav.addObject("hosmypagermstatusVO",hosstatus);
+		System.out.println("다시물어본다 낰낰33 " + mav);
 		return mav;
 	}
 	
@@ -113,6 +122,8 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 	        HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    ModelAndView mav = new ModelAndView();
 	    HttpSession session=request.getSession();
+	    response.setCharacterEncoding("UTF-8"); //alert한글 깨짐 현상 
+		response.setContentType("text/html; charset=UTF-8");//alert한글 깨짐 현상 
 		String hos_pwd=request.getParameter("hos_pwd");
 		hosmypageinfoVO= new HosMypageInfoVO();
 		hosmypageinfoVO.setHos_id(hos_id);
@@ -124,14 +135,15 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 	        String _hos_id= (String)session.getAttribute("log_id");
 	        hosmypageinfoVO=hosmypageinfoService.selecthosInfo(_hos_id);
 	        request.setAttribute("hosmypageinfoVO", hosmypageinfoVO);
+	        //=========================이미지 ===================
 	        mav.setViewName("redirect:/hos_MypageInfo/hosUserInformation.do?hos_id=" + hos_id);
+	        
 
 		}else {
 			PrintWriter out=response.getWriter();
-			out.print("<script>alert('鍮꾨�踰덊샇瑜� �떎�떆 �솗�씤�빐二쇱꽭�슂.');window.history.back();</script>");
-			rAttr.addAttribute("result", "failed");
+			out.print("<script>alert('비밀번호를 다시 확인해주세요.');window.history.back();</script>");
 			out.flush();
-			mav.setViewName("redirect:/hos_MypageInfo/hosMypage.do");
+			return null;
 		}
 	    return mav;
 	}
@@ -145,12 +157,14 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 	    request.setCharacterEncoding("utf-8");
 	    String hos_usertel = usertelFront + usertelEnd;
 	    hosmypageinfoVO.setHos_usertel(hos_usertel);
-	    String hos_code="hos0005";
+	    HttpSession session = request.getSession();
+	    String hos_code = (String) session.getAttribute("hos_code");
+	    //String hos_code="hos0001";
 	    
 	    
-	    String savePath = "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\hos_images\\profile\\" + hos_code;
+	    String savePath = "/Users/kyungminkim/Desktop/everymalSpring 2/emptyProject/src/main/webapp/resources/imgRepo/hos_images/profile/" + hos_code;
 
-        // 기존 이미지 파일 삭제 
+        // 기존 이미지 파일 삭제
         File directory = new File(savePath);
         if (directory.exists() && directory.isDirectory()) {
             File[] existingFiles = directory.listFiles();
@@ -159,22 +173,21 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
             }
         }
 
-        // 디렉터리 생성
+        // 디렉토리 생성
         if (!directory.exists()) {
             directory.mkdirs();
         }
         
-        // 업로드 처리 
+        // 이미지 파일 업로드 처리
         if (!file.isEmpty()) {
         	String originalFilename = file.getOriginalFilename();
-            String saveFilename = savePath + "\\" + originalFilename;
+            String saveFilename = savePath + "/" + originalFilename;
             file.transferTo(new File(saveFilename));
         }
         
         hosmypageinfoVO.setHos_pro(file.getOriginalFilename());
 	    
 		hosmypageinfoService.modhosInfo(hosmypageinfoVO);
-		HttpSession session=request.getSession();
 		String _hos_id=(String)session.getAttribute("log_id");
 		ModelAndView mav=new ModelAndView("redirect:/hos_MypageInfo/hosUserInformation.do?hos_id="+_hos_id);
 		return mav;
@@ -271,7 +284,7 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
         hosmypageinfoVO.setHos_24(hos_24_value);
 		hosmypageinfoVO.setHos_time_s(hos_time_s);
 		hosmypageinfoVO.setHos_time_e(hos_time_e);
-        System.out.println("�굹�삤�굹���끂�븘�끂�븘�뀠�궃���넄�삤�굹���끂"+hos_time_s); 
+        System.out.println("나오나와노아노아ㅗ난와놔오나와노"+hos_time_s); 
         String tel_front=request.getParameter("tel_front");
     	String tel_end=request.getParameter("tel_end");
     	String hos_tel=tel_front+tel_end;
@@ -285,59 +298,50 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 		return mav;
 	}
 	
-	//썸네일 등록 
-	// multiFileList로 받기 -> 필수 MultipartHttpServletRequest req
 	
 	@RequestMapping(value = "/hos_MypageInfo/imgUpload.do", method = RequestMethod.POST)
 	public void imgUpload(HosMypageInfoVO hosmypageinfoVO, MultipartHttpServletRequest req, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    HttpSession session = request.getSession();
-	    //String hos_code = (String) session.getAttribute("hos_code");
-	    String hos_code="hos0005";
+	    String hos_code = (String) session.getAttribute("hos_code");
+	    //String hos_code="hos0001";
 	    
-	    //수정 추가 ==========================================================================
-	    
-	    String hos_name=hosmypageinfoDAO.getHosName(hos_code);
-
-	    List<MultipartFile> multipartFileList = new ArrayList<>(); // 1. 리스트 객체 생성 
+	    List<MultipartFile> multipartFileList = new ArrayList<>();
 	    try {
-	        MultiValueMap<String, MultipartFile> files = req.getMultiFileMap(); //2. 멀티파일 받은 것을 files 객체 안에 삽입 
+	        MultiValueMap<String, MultipartFile> files = req.getMultiFileMap();
 	        for (String key : files.keySet()) {
-	            List<MultipartFile> fileList = files.get(key); //3. files의 값을 새로 만든 fileList안에 삽입 (key를 입력하면 value값을 가져옴)
-	            for (MultipartFile file : fileList) { //4. fileList 끊길 때 까지 반복 
-	                if (file.isEmpty()) continue; //5. file이 빌 때 까지 반복 (필수임 설명 확실 ㄴㄴ by 경민)
-	                multipartFileList.add(file); //6. fileList 객체에서 하나씩 꺼낸 값을 file을 multipartFileList에 넣어줌 
-	                // 여기까지는 사용자가 업로드한 이미지 파일이 총 몇개인지 세어주는 단계라고 볼수있다. 
+	            List<MultipartFile> fileList = files.get(key);
+	            for (MultipartFile file : fileList) {
+	                if (file.isEmpty()) continue;
+	                multipartFileList.add(file);
 	            }
 	        }
 
-	        if (multipartFileList.size() > 0) { 
-	        	//7.session에서 받은 코드로 경로를 설정해준다. 
-	            String savePath = "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\hos_images\\thumbnail\\" + hos_code;
+	        if (multipartFileList.size() > 0) {
+	            String savePath = "/Users/kyungminkim/Desktop/everymalSpring 2/emptyProject/src/main/webapp/resources/imgRepo/hos_images/thumbnail/" + hos_code;
 
-	            File directory = new File(savePath); //8. 7번에서 받아온 경로로 디렉터리 설정 , 7번 경로에 기존 hos#### 폴더가 존재하는지 확인하는 과정을 if문을 통해 진행 
-	            if (directory.exists() && directory.isDirectory()) { //9. if문은 폴더 유무  
-	                File[] existingFiles = directory.listFiles(); // 9번에서 찾은 폴더 안에 파일이 존재하던 안 하던 일단 existingFiles 배열에 삽입. 0~3 
-	                for (File existingFile : existingFiles) { //10. for문  hos####폴더 안에 이미지 몇개가 있든 무조건 이미지 삭제함. 0~3
+	            // 기존 이미지 파일 삭제
+	            File directory = new File(savePath);
+	            if (directory.exists() && directory.isDirectory()) {
+	                File[] existingFiles = directory.listFiles();
+	                for (File existingFile : existingFiles) {
 	                    existingFile.delete();
 	                }
 	            }
 
-	            // 8. hos####이라는 폴더가 존재하지 않을 때, 디렉토리로 폴더 생성
+	            // 디렉토리 생성
 	            if (!directory.exists()) {
 	                directory.mkdirs();
 	            }
-	            
-	            // 9.폴더안에 이미지 삽입하기 
 
-	            for (int i = 0; i < multipartFileList.size(); i++) { //10. 각 테이블 안에 삽입되는 사진이 다르기 때문에 for문을 돌린다. (다중이미지)
-	                MultipartFile file = multipartFileList.get(i); 
+	            for (int i = 0; i < multipartFileList.size(); i++) {
+	                MultipartFile file = multipartFileList.get(i);
 	                if (file.isEmpty()) continue;
-	                String originalFilename = file.getOriginalFilename(); //11. 6번에서 받은 파일 원본이름 받기 
-	                String saveFilename = savePath + "\\" + originalFilename; // 12. 경로 + 11번에서 받은 파일의 원본 이름 합친 것을 savaFilename에 담기
-	                file.transferTo(new File(saveFilename)); //13. transferTo 는 물리적으로 저장한다는 뜻 ex) file(i) 번째를 savaFilename으로 저장한다는 뜻. 
+	                String originalFilename = file.getOriginalFilename();
+	                String saveFilename = savePath + "/" + originalFilename;
+	                file.transferTo(new File(saveFilename));
 
 	                if (i == 0) {
-	                    hosmypageinfoVO.setHimg1(originalFilename); // 14. 0 이면 himg1에 저장 ~~~~~hImg3까지 
+	                    hosmypageinfoVO.setHimg1(originalFilename);
 	                } else if (i == 1) {
 	                    hosmypageinfoVO.setHimg2(originalFilename);
 	                } else if (i == 2) {
@@ -345,62 +349,63 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
 	                }
 	                System.out.println("파일 이름: " + originalFilename);
 	            }
-	            System.out.println("파일 개수 :" + multipartFileList.size());
+	            System.out.println("파일 개수: " + multipartFileList.size());
 	        }
 	        
+	        System.out.println("이미지 잘 들어가있니????"+hosmypageinfoVO.getHimg1());
+            System.out.println("이미지 잘 들어가있니????"+hosmypageinfoVO.getHimg2());
+            System.out.println("이미지 잘 들어가있니????"+hosmypageinfoVO.getHimg3());
 	        
 	        String hos_id = (String) session.getAttribute("log_id");
-	
-	        String hosCode = hosmypageinfoDAO.searchuploadimg(hos_code); // 테이블에 신청 이력이 있는지 없는지 검색 
-	        //15. 한번도 신청하지 않은 병원은 hoscode가 존재하지 않아서 쿼리를 두개로 나눔
-	        if (hosCode == null || hosCode.isEmpty()) { //15-1. 한번도 신청하지 않았다면 insert 
+	        String hosCode = hosmypageinfoDAO.searchuploadimg(hos_code);
+	        System.out.println("넘나 빡쳐염;;;;;;;;;;"+hosCode);
+	        if (hosCode == null || hosCode.isEmpty()) {
 	            hosmypageinfoVO.setHos_code(hos_code);
-	            hosmypageinfoVO.setHos_id(hos_id); // 롱이 추가 
-	            hosmypageinfoVO.setHos_name(hos_name);// 롱이 추가 
 	            hosmypageinfoDAO.newuploadimg(hosmypageinfoVO);
+	            System.out.println("코드 잘있니????" + hosmypageinfoVO.getHos_code());
+	            System.out.println("코드 잘있니????"+hosmypageinfoVO.getHos_code());
+	            System.out.println("이미지 잘 들어가있니????2트.."+hosmypageinfoVO.getHimg1());
+	            System.out.println("이미지 잘 들어가있니????2트.."+hosmypageinfoVO.getHimg2());
+	            System.out.println("이미지 잘 들어가있니????2트.."+hosmypageinfoVO.getHimg3());
 	        } else {
-	        	hosmypageinfoVO.setHos_code(hos_code); //15-2. 신청한 이력이 존재 update
-	            hosmypageinfoVO.setHos_id(hos_id); // 롱이 추가
-	            hosmypageinfoVO.setHos_name(hos_name);// 롱이 추가 
-	        	hosmypageinfoService.uploadimg(hosCode, hosmypageinfoVO);
-
+	        	hosmypageinfoVO.setHos_code(hos_code);
+	            hosmypageinfoService.uploadimg(hosCode, hosmypageinfoVO);
+	            System.out.println("이미지 잘 들어가있니????3트.."+hosmypageinfoVO.getHimg1());
+	            System.out.println("이미지 잘 들어가있니????3트.."+hosmypageinfoVO.getHimg2());
+	            System.out.println("이미지 잘 들어가있니????3트.."+hosmypageinfoVO.getHimg3());
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
 	}
-	
-	
-	//프로필 이미지 불러오기 다운로드 보여주기 
 
 	@RequestMapping(value = "/hos_MypageInfo/searchProfil.do")
     public ResponseEntity<byte[]> searchProfil(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session=request.getSession();
     	String hos_id = (String)session.getAttribute("log_id");
+    	String hos_code=(String)session.getAttribute("hos_code");
         
         try {
-            String imagePath = hosmypageinfoService.searchProfil(hos_id);
+            String imagePath = hosmypageinfoService.searchProfil(hos_id, hos_code);
             
-            // 이미지 파일 읽어드리기 
+            // 이미지 파일을 읽어들입니다.
             File imageFile = new File(imagePath);
             FileInputStream fis = new FileInputStream(imageFile);
             
-            // 이미지 바이트 배열로 변환 
+            // 이미지를 byte 배열로 변환합니다.
             byte[] imageBytes = new byte[(int) imageFile.length()];
             fis.read(imageBytes);
             
-            // HTTP 응답으로 이미지 전송 
+            // HTTP 응답으로 이미지를 전송합니다.
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
             
-            //jsp 받으려면 필수 (공식임)
             return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-            
         } catch (Exception e) {
             e.printStackTrace();
             
-            // 예외 발생 시 빈 프로필 사진 디폴트로 띄워줌 
-            String blankImagePath = "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\img\\blankProfil.png";
+            // 예외 발생 시 빈 프로필 이미지를 전송합니다.
+            String blankImagePath = "/Users/kyungminkim/Desktop/everymalSpring 2/emptyProject/src/main/webapp/resources/img/blankProfil.png";
             
             try {
                 File blankImageFile = new File(blankImagePath);
@@ -416,7 +421,7 @@ public class HosMypageInfoControllerImpl extends MultiActionController implement
             } catch (Exception ex) {
                 ex.printStackTrace();
                 
-                // Try 구문 마저 생성하지 못하면 500 error 반환 
+                // 빈 프로필 이미지를 생성하지 못하는 경우 500 Internal Server Error 응답을 반환합니다.
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }

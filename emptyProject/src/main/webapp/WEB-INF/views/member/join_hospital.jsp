@@ -21,12 +21,6 @@
           }).open();
         };
 
-        $(function () {
-          if (document.getElementById("input_check").checked) {
-            document.getElementById("input_check_hidden").disabled = true;
-          }
-        });
-
         function submit() {
           //회원정보 저장
           data = $("#joinForm").serialize();
@@ -34,11 +28,11 @@
             type: "post",
             async: false,
             dataType: "text",
-            url: "${contextPath}/hospital/addHospital.do",
+            url: "${contextPath}/member/addHospital.do",
             data: data,
             success: function () {
               alert('회원가입완료.');
-              location.href = "${contextPath}/index.jsp";
+              location.href = "${contextPath}/main.do";
             }
           });
         }
@@ -53,7 +47,7 @@
             type: "post",
             async: true, //비동기로 수행
             dataType: "text",
-            url: "${contextPath}/hospital/idChk.do",
+            url: "${contextPath}/member/HosidChk.do",
             data: { id: _id }, //서버에 전송할 자료= > 매개변수이름:값 _id(체크할ID)를 id이름으로 서버에 전송
             success: function (idChkVal, textStatus) { //idChkVal는 서버에서 받은 자료
               if (idChkVal == 'usable') {
@@ -281,10 +275,13 @@
                   <c:when test="${!empty isLogon}">
                     <c:choose>
                       <c:when test="${isHos}">
-                        <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/userMypage">회원마이페이지</a>
+                        <a href="${contextPath}/user_Page/myInfo.do">회원마이페이지</a>
                       </c:otherwise>
                     </c:choose>
                   </c:when>
@@ -303,7 +300,7 @@
         </section>
         <section class="memberArea memberJoin memberArea2">
           <p class="formSign"><strong class="require">필수</strong>는 반드시 입력하여야 하는 항목입니다.</p>
-          <form action="${contextPath}/hospital/addHospital.do" method="post" id="joinForm" name="joinForm">
+          <form action="${contextPath}/member/addHospital.do" method="post" id="joinForm" name="joinForm">
             <fieldset>
               <legend>회원가입 정보 입력 폼</legend>
               <div id="hospital_form" class="formBox">
@@ -396,7 +393,7 @@
                     </label>
                       <label for="hos_24">24시간</label>
                       <input type="checkbox" name="hos_24" id="input_check" value="1" class="blue">
-                      <input type="hidden" name="hos_24" value="0" id="input_check_hidden" />
+                      <!-- <input type="hidden" name="hos_24" value="0" id="input_check_hidden" /> -->
                 </p>
                 <p>
                   <label for="hos_365" class="needS">영업일 선택<strong class="require">필수</strong></label>
@@ -419,43 +416,43 @@
                   <label>진료동물 종류<strong class="require">필수</strong></label>
                   <label for="hos_dog">개</label>
                   <input type="checkbox" name="hos_dog" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_dog" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_dog" value="0" id="input_check_hidden" /> -->
                   <label for="hos_cat">고양이</label>
                   <input type="checkbox" name="hos_cat" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_cat" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_cat" value="0" id="input_check_hidden" /> -->
                   <label for="hos_small">소동물</label>
                   <input type="checkbox" name="hos_small" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_small" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_small" value="0" id="input_check_hidden" /> -->
                   <label for="hos_fish">어류</label>
                   <input type="checkbox" name="hos_fish" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_fish" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_fish" value="0" id="input_check_hidden" /> -->
                   <label for="hos_bird">조류</label>
                   <input type="checkbox" name="hos_bird" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_bird" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_bird" value="0" id="input_check_hidden" /> -->
                   <label for="hos_rep">파충류</label>
                   <input type="checkbox" name="hos_rep" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_rep" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_rep" value="0" id="input_check_hidden" /> -->
                   <label for="hos_etc">기타</label>
                   <input type="checkbox" name="hos_etc" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_etc" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_etc" value="0" id="input_check_hidden" /> -->
                 </p>
                 <p>
                   <label>진료과목<strong class="require">필수</strong></label>
                   <label for="hos_gs">외과</label>
                   <input type="checkbox" name="hos_gs" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_gs" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_gs" value="0" id="input_check_hidden" /> -->
                   <label for="hos_im">내과</label>
                   <input type="checkbox" name="hos_im" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_im" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_im" value="0" id="input_check_hidden" /> -->
                   <label for="hos_em">응급의학과</label>
                   <input type="checkbox" name="hos_em" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_em" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_em" value="0" id="input_check_hidden" /> -->
                   <label for="hos_rm">재활의학과</label>
                   <input type="checkbox" name="hos_rm" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_rm" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_rm" value="0" id="input_check_hidden" /> -->
                   <label for="hos_vac">예방접종</label>
                   <input type="checkbox" name="hos_vac" id="input_check" value="1" class="blue">
-                  <input type="hidden" name="hos_vac" value="0" id="input_check_hidden" />
+                  <!-- <input type="hidden" name="hos_vac" value="0" id="input_check_hidden" /> -->
                 </p>
                 <p class="hos_intro">
                   <label for="hos_intro">병원 소개글</label>

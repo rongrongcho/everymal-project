@@ -57,7 +57,7 @@
 
         function next() {
           alert('회원가입완료.');
-          location.href = "${contextPath}/index.jsp";
+          location.href = "${contextPath}/main.do";
         }
 
         function reset() {
@@ -272,10 +272,13 @@
                   <c:when test="${!empty isLogon}">
                     <c:choose>
                       <c:when test="${isHos}">
-                        <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
+                        <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                      </c:when>
+                      <c:when test="${log_id eq 'admin'}">
+                      	<a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/userMypage">회원마이페이지</a>
+                        <a href="${contextPath}/user_Page/myInfo.do">회원마이페이지</a>
                       </c:otherwise>
                     </c:choose>
                   </c:when>
@@ -322,7 +325,7 @@
                   <label for="user_tel1">연락처<strong class="require">필수</strong></label>
                   <select name="user_tel1" id="user_tel1" required>
                     <option value="" selected="selected">선택</option>
-                    <option value="010">010</option>
+                    <option value="010" checked>010</option>
                     <option value="011">011</option>
                     <option value="016">016</option>
                     <option value="017">017</option>

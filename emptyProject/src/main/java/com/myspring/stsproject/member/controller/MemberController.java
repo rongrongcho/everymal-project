@@ -13,7 +13,9 @@ import com.myspring.stsproject.member.vo.MemberVO;
 public interface MemberController {
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView addMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public void addMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public void addHospital(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	

@@ -45,6 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="himg2" column="himg2"/>
 		<result property="himg3" column="himg3"/>
 		<result property="hos_pro" column="hos_pro"/>
+		<result property="rm_say" column="rm_say"/>
+		<result property="rm_status" column="rm_status"/>
 	</resultMap>
 	
 	<!--비밀번호 확인 -->
@@ -136,7 +138,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    ]]>
 	</select>
 	
-	
+	<!--썸네일 등록 이유 보여주기   -->
+	<select id="rmSay" resultType="hosMypageInfoVO" parameterType="String">
+		<![CDATA[
+	    select rm_say from hosrmtbl where hos_code=#{hos_code} and rm_status='거절'
+	    ]]>
+	</select>
+	<!--썸네일 등록 여부 보여주기   -->
+	<select id="rmStatus" resultType="hosMypageInfoVO" parameterType="String">
+		<![CDATA[
+	    select rm_status from hosrmtbl where hos_code=#{hos_code}
+	    ]]>
+	</select>
 	
 	<!-- ============================================== -->
 	<!-- 병원 프로필 이미지 찾기  -->
