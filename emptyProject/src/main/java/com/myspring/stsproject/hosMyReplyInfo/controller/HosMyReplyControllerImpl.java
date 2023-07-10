@@ -57,13 +57,10 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 	    HttpSession session=request.getSession();
 	    String hos_id=(String)session.getAttribute("log_id");
 		String hos_code=(String)session.getAttribute("hos_code");
-		hos_code="hos0001";
+		
 		model.addAttribute("hos_code",hos_code);
-		//이미지
-		hosImgVO=hosImgDAO.getHosPro(hos_code);
-		//hos_pro 담아옴
-		//
-		hos_id="kkm1234";
+		
+		
 		System.out.println("hos아이디 불러왔나?>>>>"+ hos_id);
 		hosMypageInfoVO =hosmypageinfoService.selecthosInfo(hos_id);
 		String _section=request.getParameter("section");

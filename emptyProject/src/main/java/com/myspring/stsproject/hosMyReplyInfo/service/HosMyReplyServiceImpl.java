@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.myspring.stsproject.board.vo.ArticleVO;
 import com.myspring.stsproject.hosMyReplyInfo.dao.HosMyReplyDAO;
 import com.myspring.stsproject.hosMyReplyInfo.vo.ReplyVO;
 import com.myspring.stsproject.hosReviewInfo.dao.HosReviewDAO;
+import com.myspring.stsproject.qna_Board.vo.ArticleVO;
 
 @Service("hosMyReplyService")
 public class HosMyReplyServiceImpl implements HosMyReplyService {
