@@ -10,5 +10,5 @@ import com.myspring.stsproject.hosList.vo.hospitalVO;
 
 public interface hospitalController {
 //	public void Hospital_detail (@ModelAttribute("hospitalVO") hospitalVO hospitalVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView Hospital_detail (@ModelAttribute("hospitalVO") hospitalVO hospitalVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView Hospital_detail (@ModelAttribute("hospitalVO") hospitalVO hospitalVO, String hos_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

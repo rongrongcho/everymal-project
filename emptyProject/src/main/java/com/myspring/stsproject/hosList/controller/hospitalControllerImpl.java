@@ -50,14 +50,14 @@ public class hospitalControllerImpl extends MultiActionController implements hos
 
 	@Override
 	@RequestMapping(value = "/hos_List/Hospital_detail.do", method = RequestMethod.GET)
-	public ModelAndView Hospital_detail(@ModelAttribute("hospitalVO") hospitalVO hospitalVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView Hospital_detail(@ModelAttribute("hospitalVO") hospitalVO hospitalVO, String hos_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String) request.getAttribute("viewName");
 		request.setCharacterEncoding("utf-8");
 	    HttpSession session=request.getSession();
 	    response.setContentType("text/html;charset=utf-8");
 	    PrintWriter out = response.getWriter();
-	    String hos_code=request.getParameter("hos_code");
-	    hos_code="hos0001";
+	    hos_code=request.getParameter("hos_code");
+	    // hos_code="hos0001";
 	    //hospitalVO result = hospitalDAO.selectHos(hos_code);
 	    List<ReviewVO> hosReviewList=new ArrayList();
 	    int review_count=hosReviewDAO.reviewcount(hos_code);// (hosReview��Ű�� �̿�)
