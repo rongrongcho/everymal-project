@@ -98,8 +98,8 @@ public class UserHistoryControllerImpl implements UserHistoryController {
 	    HttpSession session=request.getSession();
 		String viewName=(String) request.getAttribute("viewName");
         String log_id=(String)session.getAttribute("log_id");
-		//String user_code=(String)session.getAttribute("user_code");
-		String user_code="use0001";
+		String user_code=(String)session.getAttribute("user_code");
+
         System.out.println("UserHistorycontroller 로그인 아이디 : " + log_id+" user_code : "+ user_code);
 		userVO=userService.calluserInfo(log_id); //회원 정보 불러옴
 		userHistoryVO.setUser_id(log_id);

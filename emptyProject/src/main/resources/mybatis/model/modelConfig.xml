@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO" alias="hosMypageInfoVO"/>
 		<typeAlias type="com.myspring.stsproject.admin.vo.AdminVO" alias="adminVO"/>
 	    <typeAlias type="com.myspring.stsproject.userMypage.vo.UserVO" alias="userVO"/>
+
 	    <typeAlias type="com.myspring.stsproject.withdrawal.vo.WithdrawalVO" alias="withdrawalVO"/>
 	    <typeAlias type="com.myspring.stsproject.hosReservation.vo.ReservationVO" alias="reservationVO"/>
 	    <typeAlias type="com.myspring.stsproject.hosMyReplyInfo.vo.ReplyVO" alias="replyVO"/>
@@ -25,5 +26,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	    <typeAlias type="com.myspring.stsproject.forImg.vo.HosImgVO" alias="hosImgVO"/>
 	    <typeAlias type="com.myspring.stsproject.hos_List.vo.FilterVO" alias="filterVO"/>
 	    
+
 	</typeAliases>
 </configuration>
