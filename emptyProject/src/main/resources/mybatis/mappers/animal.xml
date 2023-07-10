@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.animal">
+	<!-- 회원가입 쿼리문 -->
+	<insert id="addAnimal" parameterType="animalVO">
+		insert into petinfotbl (pet_code, user_code, pet_name, pet_age, pet_sex, pet_types, pet_number, b_type, pet_weight, pet_etc) values(#{pet_code},#{user_code},#{pet_name},#{pet_age},#{pet_sex},#{pet_types},#{pet_number},#{b_type},#{pet_weight},#{pet_etc})
+	</insert>
+	<!-- pet_code 생성 쿼리문 -->
+	<select id="selectPetcode" resultType="String" parameterType="animalVO">
+		SELECT MAX(SUBSTR(pet_code, 4)) AS max_num FROM petinfotbl
+	</select>
+</mapper>

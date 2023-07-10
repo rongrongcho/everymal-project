@@ -7,18 +7,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.stsproject.admin.dao.AdminDAO;
 import com.myspring.stsproject.admin.service.AdminService;
@@ -102,61 +98,47 @@ public class AdminControllerImpl implements AdminController {
  		}
 	}
 	
-	//=======================업그레이드 
-	//일반 jsp보여주는 걸 mapping해야한다. 그래야 밑에 아작스 함수 jsp안에서 호출 가
-	@RequestMapping(value = "/administrator/hopitalRegi.do", method = RequestMethod.GET)
-	public ModelAndView valid(@ModelAttribute("administrator") AdminVO adminVO, @RequestParam(value = "action", required = false) String action, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName=(String) request.getAttribute("viewName");
-		HttpSession session=request.getSession();
-		session.setAttribute("action", action);
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
-	}
+	
 	
 	
 	
 	//병원 등록 신청 목록 조회 페이지 + 페이징 뷰 
 	
-	@RequestMapping(value="/administrator/hos_pitalRegi.do",produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public Map<String, Object> handleSelectedValue(HttpServletRequest request) throws Exception {
+	@RequestMapping(value="/administrator/hopitalRegi.do")
+	public ModelAndView hosRMList(HttpServletRequest request, Model model) throws Exception {
 
 		String viewName=(String) request.getAttribute("viewName");
 		String orderBy = request.getParameter("orderby");
 		System.out.println("안녕"+orderBy);
-	    String _section = request.getParameter("section");
-	    String _pageNum = request.getParameter("pageNum");
-        int section;
-        if (_section == null || _section.isEmpty()) {
-	        section = 1; // 기본값 설정
-	    } else {
-	        try {
-	            section = Integer.parseInt(_section);
-	        } catch (NumberFormatException e) {
-	            section = 1; // 기본값으로 설정하거나 적절한 오류 처리를 수행하세요.
-	        }
-	    }
-
+	    String _section=request.getParameter("section");
+        String _pageNum=request.getParameter("pageNum");
+        int section=Integer.parseInt((_section==null)?"1":_section); 
         int pageNum=Integer.parseInt((_pageNum==null)?"1":_pageNum);
         Map<String, Object> pagingMap = new HashMap<String, Object>(); // 섹션,pageNum,orderBy 만 삽입되어 있음. 
-	    pagingMap.put("section", section);
-	    pagingMap.put("pageNum", pageNum);
+        pagingMap.put("section", section);
+        pagingMap.put("pageNum", pageNum);
 	    pagingMap.put("orderby", orderBy);
 	    Map<String, Object> rmResult=adminService.listApps(pagingMap);
+	    List rmList=(List)rmResult.get("rmList");
+	    int totalApps = (int) rmResult.get("totalApps");
 	    
-		List rmList=(List)rmResult.get("rmList");
-		int totalList = ((Integer) rmResult.get("totalApps")).intValue();
-	    int totalPages = (int) Math.ceil((double) totalList / 6); //6개씩 보여줄거니
-	    
-	    Map<String, Object> response = new HashMap<String, Object>();
-	    response.put("userList", rmList);
-	    response.put("totalList", totalList);
-	    response.put("currentPage", pageNum);
-	    response.put("totalPages", totalPages);
+	    model.addAttribute("rmList",rmList);
+	    model.addAttribute("totalApps", totalApps);
+//        Map adminMap=adminService.listApps(pagingMap);
+//        adminMap.put("section", section);
+//        adminMap.put("pageNum", pageNum);
         
+//	    Map<String, Object> result = adminService.memberList(pagingMap); //
+//	    List userList = (List) result.get("userList");
+//	    int totalList = (int) result.get("totalList");
+//        int app_count=adminService.appCount();
+//        model.addAttribute("userList", userList); //${ds}
 
+	    
+		ModelAndView mav = new ModelAndView(viewName);
+	    mav.addObject("rmList", rmList);
 
-	    return response;
+        return mav;
 	}
 
 	@Override
@@ -206,8 +188,7 @@ public class AdminControllerImpl implements AdminController {
 
 	    Map<String, Object> result = adminService.memberList(pagingMap); //
 	    List userList = (List) result.get("userList");
-	    int totalList = Integer.parseInt(result.get("totalList").toString());
-
+	    int totalList = (int) result.get("totalList");
 	    //System.out.println(result.values());
 	    System.out.println(totalList);
 
@@ -227,10 +208,9 @@ public class AdminControllerImpl implements AdminController {
 		//관리자의 병원등록 신청 개별 상세 보기
 		String viewName=(String) request.getAttribute("viewName");
 		String hos_code=request.getParameter("hos_code");
-		String rm_code=request.getParameter("rm_code");
 		adminDAO.checkHos(hos_code);
-		
-		adminVO=adminService.viewApplication(hos_code,rm_code);
+		adminVO=adminService.viewApplication(hos_code);
+		System.out.println(adminVO.getHos_status());
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("appVO", adminVO); 
 		return mav;

@@ -45,7 +45,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="himg2" column="himg2"/>
 		<result property="himg3" column="himg3"/>
 		<result property="hos_pro" column="hos_pro"/>
-		<result property="rm_say" column="rm_say"/>
 	</resultMap>
 	
 	<!--비밀번호 확인 -->
@@ -74,12 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from hosjointbl j, hosfiltertbl f where j.hos_code=f.hos_code and j.hos_id=#{hos_id}
 		]]>
 	</select>
-	<select id="findRm_Say" resultType="String" parameterType="String">
-		<![CDATA[
-			SELECT rm.rm_say FROM hosrmtbl rm JOIN hosjointbl h ON h.hos_id = rm.hos_id WHERE h.hos_status = '거절' AND rm.hos_id = #{hos_id} AND rm.rm_date = (SELECT MAX(rm_date) FROM hosrmtbl WHERE hos_id = #{hos_id}
-)
-		]]>
-	</select>	
+	
 	<!--병원정보 수정하기(1)  -->
 	<update id="modhosInfo" parameterType="hosMypageInfoVO">
 		<![CDATA[
@@ -129,11 +123,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateStatus" parameterType="hosMypageInfoVO">
 		<![CDATA[
 	    update hosjointbl set hos_status='검토중' where hos_code=#{hos_code}
-	    ]]>
-	</update>
-	<update id="hosCancel" parameterType="hosMypageInfoVO">
-		<![CDATA[
-	    update hosjointbl set hos_status='미승인' where hos_code=#{hos_code}
 	    ]]>
 	</update>
 	<insert id="insertRMtbl" parameterType="hosMypageInfoVO">

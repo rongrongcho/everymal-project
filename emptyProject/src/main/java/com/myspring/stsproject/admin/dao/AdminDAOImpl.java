@@ -21,9 +21,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List selectRMList_tot(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> rmList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int)pagingMap.get("section");
+	    int pageNum = (int)pagingMap.get("pageNum");
 	    Map pagingM = new HashMap();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -34,9 +33,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List selectRMList_unchecked(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> rmList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int)pagingMap.get("section");
+	    int pageNum = (int)pagingMap.get("pageNum");
 	    Map pagingM = new HashMap();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -47,9 +45,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List selectRMList_checked(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> rmList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int)pagingMap.get("section");
+	    int pageNum = (int)pagingMap.get("pageNum");
 	    Map pagingM = new HashMap();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -60,9 +57,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List selectRMList_confirmed(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> rmList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int)pagingMap.get("section");
+	    int pageNum = (int)pagingMap.get("pageNum");
 	    Map pagingM = new HashMap();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -119,9 +115,8 @@ public class AdminDAOImpl implements AdminDAO {
 	// map에서 object로 설정시 integer와 string 타입을 변환 캐스팅만 하면 둘다 사용가능 , orderby가 string이기 때문에 object로 설정해줘야 한다. 중요! 
 	public List<AdminVO> memberList(Map<String, Object> pagingMap) throws DataAccessException {
 	    List<AdminVO> memberList = new ArrayList<AdminVO>();
-	    int section = Integer.parseInt(pagingMap.get("section").toString());
-	    int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int) pagingMap.get("section");
+	    int pageNum = (int) pagingMap.get("pageNum");
 	    Map<String, Object> pagingM = new HashMap<String, Object>();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -132,9 +127,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<AdminVO> enabledMemberList(Map<String, Object> pagingMap) throws DataAccessException {
 	    List<AdminVO> memberList = new ArrayList<AdminVO>();
-	    int section = Integer.parseInt(pagingMap.get("section").toString());
-	    int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int) pagingMap.get("section");
+	    int pageNum = (int) pagingMap.get("pageNum");
 	    Map<String, Object> pagingM = new HashMap<String, Object>();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -145,9 +139,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<AdminVO> abledMemberList(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> memberList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int) pagingMap.get("section");
+	    int pageNum = (int) pagingMap.get("pageNum");
 	    Map<String, Object> pagingM = new HashMap<String, Object>();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -157,9 +150,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<AdminVO> userMemberList(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> memberList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int) pagingMap.get("section");
+	    int pageNum = (int) pagingMap.get("pageNum");
 	    Map<String, Object> pagingM = new HashMap<String, Object>();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -170,9 +162,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<AdminVO> hosMemberList(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AdminVO> memberList = new ArrayList<AdminVO>();
-		int section = Integer.parseInt(pagingMap.get("section").toString());
-		int pageNum = Integer.parseInt(pagingMap.get("pageNum").toString());
-
+	    int section = (int) pagingMap.get("section");
+	    int pageNum = (int) pagingMap.get("pageNum");
 	    Map<String, Object> pagingM = new HashMap<String, Object>();
 	    pagingM.put("section", section);
 	    pagingM.put("pageNum", pageNum);
@@ -213,13 +204,10 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public AdminVO viewAppAdmin(String hos_code,String rm_code) throws Exception {
-		Map<String, Object> param = new HashMap<String, Object>();
-	    param.put("hos_code", hos_code);
-	    param.put("rm_code", rm_code);
-		return sqlSession.selectOne("mapper.admin.viewApplication", param);
+	public AdminVO viewAppAdmin(String hos_code) throws Exception {
+		
+		return sqlSession.selectOne("mapper.admin.viewApplication",hos_code);
 	}
-
 
 	@Override
 	public void approvalRM(String hos_code) throws Exception {

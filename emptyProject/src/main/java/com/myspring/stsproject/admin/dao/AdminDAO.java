@@ -33,7 +33,7 @@ public interface AdminDAO {
 	public int gmember() throws DataAccessException;
 	public int hosmember() throws DataAccessException;
 	
-	public AdminVO viewAppAdmin(String hos_code,String rm_code)  throws Exception;
+	public AdminVO viewAppAdmin(String hos_code)  throws Exception;
 	public void checkHos(String hos_code) throws Exception;
 	public void approvalRM(String hos_code) throws Exception;
 	public void rjRM(Map<String, String> rjMap) throws Exception;

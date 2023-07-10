@@ -1,0 +1,13 @@
+package com.myspring.stsproject.forImg.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller("hosProController")
+public interface userProImgController {
+  public void proimgdown (@RequestParam String user_id, Model model,HttpServletRequest request, HttpServletResponse response) throws Exception;
+}
