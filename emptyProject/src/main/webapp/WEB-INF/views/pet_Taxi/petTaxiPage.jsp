@@ -44,24 +44,31 @@
             <header id="header">
               <nav>
                 <ul class="topNav">
-                  <li><a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a></li>
-                  <li><a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a></li>
-                  <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                  <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+                  <li>
+                    <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
+                  </li>
+                  <li>
+                    <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
+                  </li>
+                  <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+                  <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
                   <li>
                     <c:choose>
                       <c:when test="${!empty isLogon}">
                         <c:choose>
                           <c:when test="${isHos}">
-                            <a href="${contextPath}/hosMypageInfo">병원마이페이지</a>
+                            <a href="${contextPath}/hos_MypageInfo/hosMypage.do">병원마이페이지</a>
+                          </c:when>
+                          <c:when test="${log_id eq 'admin'}">
+                            <a href="${contextPath }/administrator/memberList.do">관리자마이페이지</a>
                           </c:when>
                           <c:otherwise>
-                            <a href="${contextPath}/userMypage">회원마이페이지</a>
+                            <a href="${contextPath}/user_Page/isValidPwd.do">회원마이페이지</a>
                           </c:otherwise>
                         </c:choose>
                       </c:when>
                       <c:otherwise>
-                        <a href="${contextPath}/login.jsp">로그인•회원가입</a>
+                        <a href="${contextPath}/member/loginForm.do">로그인•회원가입</a>
                       </c:otherwise>
                     </c:choose>
                   </li>
@@ -178,25 +185,25 @@
             <footer>
               <ul class="bottomNav">
                 <li>
-                  <a id="footerLogo" href="${contextPath}/index.jsp"><img
+                  <a id="footerLogo" href="${contextPath}/main.do"><img
                       src="${contextPath}/resources/img/EverymalLogo_w.svg" alt="로고"
                       style="width: 250px; height: auto" /></a>
                 </li>
                 <li>
-                  <a href="${contextPath}/board/listArticles.do">1:1온라인 상담</a>
+                  <a href="${contextPath}/qna_Board/qnaboardMain.do">1:1온라인 상담</a>
                 </li>
                 <li>
-                  <a href="${contextPath}/emr_Page/emergency.jsp">24시간 응급실</a>
+                  <a href="${contextPath}/emr_Page/emergency.do">24시간 응급실</a>
                 </li>
-                <li><a href="${contextPath}/petTaxiPage">펫택시</a></li>
-                <li><a href="${contextPath}/hosfilter">병원 찾기</a></li>
+                <li><a href="${contextPath}/pet_Taxi/petTaxiPage.do">펫택시</a></li>
+                <li><a href="${contextPath}/hos_List/hos_filter.do">병원 찾기</a></li>
                 <li>
                   <c:choose>
                     <c:when test="${!empty isLogon}">
-                      <a href="${contextPath}/logindb/logout">로그아웃</a>
+                      <a href="${contextPath}/member/logout.do">로그아웃</a>
                     </c:when>
                     <c:otherwise>
-                      <a href="${contextPath}/login.jsp">로그인</a>
+                      <a href="${contextPath}/member/loginForm.do">로그인</a>
                     </c:otherwise>
                   </c:choose>
                 </li>
