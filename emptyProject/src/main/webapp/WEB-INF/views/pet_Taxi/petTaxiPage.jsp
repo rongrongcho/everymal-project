@@ -12,10 +12,10 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title> 펫 택시 </title>
 
-          <link rel="stylesheet" href="${contextPath}/resources/css/reset.css" />
-          <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
-          <link rel="stylesheet" href="${contextPath}/resources/css/petTaxiPage.css" />
-          <link rel="stylesheet" href="${contextPath}/resources/css/datepicker.min.css">
+          <link rel="stylesheet" href="${contextPath }/resources/css/reset.css" />
+          <link rel="stylesheet" href="${contextPath }/resources/css/common.css" />
+          <link rel="stylesheet" href="${contextPath }/resources/css/petTaxiPage.css" />
+          <link rel="stylesheet" href="${contextPath }/resources/css/datepicker.min.css">
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
           <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
           <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -25,7 +25,7 @@
                 function openPopup() {
                   let imgVar = "";
                   const tx_local = $("select[name='tx_local']").val();
-                  const url = "${pageContext.request.contextPath}/petTaxiPage/pet_Taxi/taxiList.jsp?tx_local=" + encodeURIComponent(tx_local);
+                  const url = "${pageContext.request.contextPath}/pet_Taxi/taxiList.do?tx_local=" + encodeURIComponent(tx_local);
                   window.name = "taxiParentForm";
                   openWin = window.open(url, "childForm", "width=700, height=400, resizable=no");
 
@@ -84,32 +84,57 @@
 
 
             <section id="petTaxiArea">
-              <form action="${contextPath}/petTaxiPage/reservPetTaxi.do" method="post" id="taxiParentForm">
+              <form action="${contextPath}/pet_Taxi/reservPetTaxi.do" method="post" id="taxiParentForm">
+
                 <div class="insertArea">
                   <div class="userInsertBox">
+                    <!--  <h2> 입력폼</h2>-->
+                    <label class="dep-label" for="tx_dep">출발 지역</label>
+                    <select name="tx_local" class="tx_local w-btn w-btn-indigo">
+                      <option value="">출발지를 선택해주세요</option>
+                      <option value="경기도">경기도</option>
+                      <option value="서울특별시">서울 특별시</option>
+                      <option value="부산광역시">부산 광역시</option>
+                      <option value="광주광역시">광주 광역시</option>
+                      <option value="대전광역시">대전 광역시</option>
+                      <option value="인천광역시">인천 광역시</option>
+                      <option value="대구광역시">대구 광역시</option>
+                      <option value="대구광역시">울산 광역시</option>
+                    </select>
+                    <input type="button" class="w-btn2 w-btn-blue" id="callTaxiList" onclick="openPopup()"
+                      value="택시 조회 목록" />
                     <div class="taxiInfoBox">
-                      <img class="taxiDriverImg framed"
-                        src="${contextPath}/resources/imgRepo/taxiImg/${viewHis.tx_code}/${viewHis.tx_img}"
+
+                      <img class="taxiDriverImg framed" src="${contextPath}/resources/img/taxi_de.jpg"
                         alt="기사님 사진 들어갈 자리"><br>
                       <div class="form-group taxi_info">
                         <span>기사 이름</span>
-                        <input class="form-field" type="text" name="tx_name" value="${viewHis.tx_name}" readonly>
+                        <input class="form-field" type="text" name="tx_name" placeholder="출발지를 선택해주세요" readonly>
+                        <input type="hidden" name="tx_name" placeholder="택시를 선택해주세요" />
                       </div>
                       <div class="form-group taxi_info">
                         <span>택시 번호</span>
-                        <input class="form-field" type="text" name="tx_number" value="${viewHis.tx_number}" readonly>
+                        <input class="form-field" type="text" name="tx_number" readonly placeholder="택시를 선택해주세요">
+                        <input type="hidden" name="tx_number" />
                       </div>
                       <div class="form-group taxi_info">
                         <span>연락처</span>
-                        <input class="form-field" type="text" name="tx_tel" value="${viewHis.tx_tel}" readonly>
+                        <input class="form-field" type="text" name="tx_tel" placeholder="택시를 선택해주세요" readonly>
+
+
                       </div>
                       <div class="form-group tx_intro taxi_info">
                         <span>인삿말</span>
-                        <textarea class="form-field" name="tx_intro" id="tx_intro"
-                          readonly>${viewHis.tx_intro}</textarea>
+                        <!--   <input type="text" name="tx_intro" id="tx_intro" disabled /> -->
+                        <textarea class="form-field" name="tx_intro" id="tx_intro" readonly></textarea>
+                        <input type="hidden" name="tx_tel" />
+                        <input type="hidden" name="tx_code" />
+                        <input type="hidden" name="tx_img" />
                       </div>
 
+
                     </div>
+
                   </div>
                 </div>
                 <!-- ====================================================== -->
@@ -118,36 +143,40 @@
                     <div class="TaxiList activeList">
                       <div class="taxiResBox">
                         <h2> Reservation Form</h2>
+                        <input type="hidden" name="user_code" value="${user_code}">
                         <div class="form-group">
                           <span>예약자 성명</span>
-                          <input class="form-field" type="text" name="res_name" value="${viewHis.res_name}" readonly>
+                          <input class="form-field" type="text" name="res_name" placeholder="홍길동" required>
                         </div>
                         <div class="form-group">
                           <span>희망예약날짜</span>
-                          <input class="form-field" name="tx_reserv_day" type="date" value="${viewHis.tx_reserv_day}"
-                            readonly>
+                          <input class="form-field" name="tx_reserv_day" type="date" required>
                         </div>
                         <div class="form-group">
                           <span>희망 예약시간</span>
-                          <input class="form-field" name="tx_restime" type="time" value="${viewHis.tx_restime}"
-                            readonly>
+                          <input class="form-field" name="tx_restime" type="time" required>
                         </div>
                         <div class="form-group">
                           <span>출발지</span>
-                          <input class="form-field" name="tx_dep" type="text" value="${viewHis.tx_dep}" readonly>
+                          <input class="form-field" name="tx_dep" type="text" placeholder="강남구청" required>
                         </div>
                         <div class="form-group">
                           <span>도착지</span>
-                          <input class="form-field" name="tx_arr" type="text" value="${viewHis.tx_arr}" readonly>
+                          <input class="form-field" name="tx_arr" type="text" placeholder="신사역" required>
                         </div>
+
+
+
                       </div>
                     </div>
-                    <!-- <div class="form-group">
-                      <input type="submit" id="reservationBtn" value="예약하기">
-                    </div> -->
+                    <input type="submit" id="reservationBtn" value="예약하기">
+
                   </div>
                 </div>
+
+
               </form>
+
             </section>
 
 
