@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String, Object> listApps(Map<String, Object> pagingMap) throws DataAccessException {
-		Map<String,Object> rmMap=new HashMap<>();
+		Map<String,Object> rmMap=new HashMap<String, Object>();
 		List<AdminVO> rmList=null;
 	    String orderBy = String.valueOf(pagingMap.get("orderby"));
 	    int totalApps=0;
@@ -70,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public Map<String, Object> memberList(Map<String, Object> pagingMap) throws DataAccessException {
-	    Map<String, Object> resultMap = new HashMap<>();
+	    Map<String, Object> resultMap = new HashMap<String, Object>();
 	    List<AdminVO> userList = null;
 	    String orderBy = String.valueOf(pagingMap.get("orderby"));
 	    int totalList=0;
@@ -101,9 +101,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AdminVO viewApplication(String hos_code) throws Exception {
+	public AdminVO viewApplication(String hos_code,String rm_code) throws Exception {
 		
-		return adminDAO.viewAppAdmin(hos_code);
+		return adminDAO.viewAppAdmin(hos_code,rm_code);
 	}
 
 }

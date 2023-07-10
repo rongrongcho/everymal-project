@@ -12,5 +12,5 @@ public interface AdminService {
 	public int appCount() throws DataAccessException;
 	public void approvalHosM(String[] chk) throws DataAccessException;
 	public Map<String, Object> memberList(Map<String, Object> pagingMap) throws DataAccessException;
-	public AdminVO viewApplication(String hos_code)  throws Exception;
+	public AdminVO viewApplication(String hos_code,String rm_code)  throws Exception;
 }
