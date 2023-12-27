@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-//모든 매핑은 여기로 온다(전처리)
+//모든 매핑은 여기로(전처리)
 
 public class ViewNameInterceptor extends HandlerInterceptorAdapter{
 

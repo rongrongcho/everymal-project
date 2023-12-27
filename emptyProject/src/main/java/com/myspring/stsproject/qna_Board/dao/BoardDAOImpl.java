@@ -66,12 +66,7 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.delete("deleteReply", q_code);
 	}
 
-//	@Override
-//	public List<ArticleVO> selectAllArticles() throws DataAccessException {
-//		List<ArticleVO> articleList=sqlSession.selectList("mapper.board.selectAllArticles");
-//		return articleList;
-//	}
-	
+
 }
 
 

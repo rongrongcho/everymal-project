@@ -16,13 +16,7 @@ public interface HosMypageInfoService {
 	public HosMypageInfoVO selecthosInfo(String hos_id) throws DataAccessException;
 	public void modhosInfo(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
 	public void modmyHosInfo(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
-//	public String uploadimg(String hos_code) throws DataAccessException;
-//	public void modmyHosInfo2(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
 	public void uploadimg(String hos_code, HosMypageInfoVO hosmypageinfoVO) throws DataAccessException;
-	//public String searchProfil(String hos_id) throws DataAccessException;
-	//public String searchProfil(String hos_id, HttpServletRequest request) throws DataAccessException;
 	public String searchProfil(String hos_id, String hos_code) throws DataAccessException;
-	
 
-	//	public HosMypageInfoVO callhosInfo(String hos_id) throws DataAccessException;
 }

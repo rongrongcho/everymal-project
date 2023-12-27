@@ -64,14 +64,13 @@ public class ReservationControllerImpl extends MultiActionController implements 
 	@RequestMapping(value = "/hos_Reservation/reservation.do")
 	private ModelAndView reservation(@ModelAttribute("reservationVO") ReservationVO reservationVO, Model model, RedirectAttributes rAttr,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String viewName=(String)request.getAttribute("viewName");
-		response.setCharacterEncoding("UTF-8"); //alert한글 깨짐 현상 
-		response.setContentType("text/html; charset=UTF-8");//alert한글 깨짐 현상 
+		response.setCharacterEncoding("UTF-8"); 
+		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session=request.getSession();
 		PrintWriter out = response.getWriter();
 		String user_id=(String)session.getAttribute("log_id");
 		String user_code=(String)session.getAttribute("user_code");
-		//String hos_code=(String)session.getAttribute("hos_code");
-		//String hos_code="hos9999";
+
 		
 		if(user_code==null) {
 			out.println("<script>");
@@ -86,7 +85,6 @@ public class ReservationControllerImpl extends MultiActionController implements 
         String tel_end=request.getParameter("tel_end");
         String user_tel=tel_front+tel_end;
         String user_name=request.getParameter("user_name");
-		//String hos_name=request.getParameter("hos_name");
         String hos_name=request.getParameter("hos_name");
         String pet_name=request.getParameter("pet_name");
         String pet_code=request.getParameter("pet_code");
@@ -101,7 +99,7 @@ public class ReservationControllerImpl extends MultiActionController implements 
         float pet_weight=Float.parseFloat(request.getParameter("pet_weight"));
         String [] hosSub=request.getParameterValues("hos_sub");
         String hos_sub=String.join(",", hosSub);
-        //////
+        
         reservationVO.setUser_tel(user_tel);
         reservationVO.setUser_id(user_id);
         reservationVO.setHos_code(hos_code);

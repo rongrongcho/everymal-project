@@ -5,31 +5,24 @@ import org.springframework.stereotype.Component;
 @Component("petTaxiVO")
 
 public class PetTaxiVO {
-	//택시 정보 
-	
-	
-		private String tx_tel; // 예약 공동
-		private String tx_number; //예약 공동
-		private String tx_name; // 예약 공동
+		private String tx_tel; 
+		private String tx_number; 
+		private String tx_name; 
 		private String tx_local; 
-		private String tx_code; // 예약 공동
+		private String tx_code;
 		private String tx_intro; 
 		private String tx_img;
 		
-		
-		
-		
-		// 택시 예약 
-		private String tx_res_code; // 택시 예약 코드 
-		private String tx_reserv_day; //예약 날짜 
-		private String tx_dep; //  출발지 
-		private String tx_arr; // 목적지 
-		private String tx_restime; // 예약 시간
-		private String res_name; // 예약자 성명
-		private String user_code; // 회원 코드 
 
-		
-		//=============================
+		private String tx_res_code;
+		private String tx_reserv_day; 
+		private String tx_dep; 
+		private String tx_arr; 
+		private String tx_restime; 
+		private String res_name;
+		private String user_code; 
+
+
 
 		public PetTaxiVO() {
 			super();

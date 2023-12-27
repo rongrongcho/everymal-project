@@ -4,41 +4,27 @@ import org.springframework.stereotype.Component;
 
 @Component("replyVO")
 public class ReplyVO {
-	private int q_code;      //질문코드
-    private String q_date;     //질문 올린 날짜
-    private String user_id;  //질문자(user) 아이디
-    private String q_title;  //질문 제목
-    private String q_text;   //질문 내용
-    private int a_code;      //답변 코드
-    private String a_date;     //답변 날짜
-    private String a_title;  //답변 제목
-    private String a_text;   //답변 내용
-    private String user_code;//질문자(user) 코드
-    private String hos_name; //병원 이름
-    private String petrace;  //질문 동물종
-    private String hos_id;   //병원 아이디
+	private int q_code;      
+    private String q_date;    
+    private String user_id;  
+    private String q_title;  
+    private String q_text;   
+    private int a_code;      
+    private String a_date;     
+    private String a_title;  
+    private String a_text;   
+    private String user_code;
+    private String hos_name; 
+    private String petrace;  
+    private String hos_id;   
     
     
-  //빈 생성자
+
     public ReplyVO() {
 		
 	}
 
-    //jsp에 뿌려줄 정보만 담는 생성자 (나중에 만들기)   
-	/*public ReplyVO(int a_code, String a_title, String a_date) {
-		super();
-		this.a_code = a_code;
-		this.a_date = a_date;
-		this.a_title = a_title;
-	}
-
-    
-	public ReplyVO(int a_code, String a_title, String a_date, String q_code) {
-		super();
-		this.a_code = a_code;
-		this.a_date = a_date;
-		this.a_title = a_title;
-	}*/
+ 
 
     
     

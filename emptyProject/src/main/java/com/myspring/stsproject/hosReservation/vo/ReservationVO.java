@@ -30,60 +30,6 @@ public class ReservationVO {
 		
 	}
 	
-	
-
-
-	public ReservationVO(String res_code, String receipt_date, String user_name, String user_tel, String pet_name,
-			int pet_age, String pet_sex, String hos_name, String res_date, String res_time, String hos_sub,
-			String res_etc, String hos_code, String pet_code, String user_code, String pet_types, String pet_number,
-			String b_type, float pet_weight, String user_id) {
-		super();
-		this.res_code = res_code;
-		this.receipt_date = receipt_date;
-		this.user_name = user_name;
-		this.user_tel = user_tel;
-		this.pet_name = pet_name;
-		this.pet_age = pet_age;
-		this.pet_sex = pet_sex;
-		this.hos_name = hos_name;
-		this.res_date = res_date;
-		this.res_time = res_time;
-		this.hos_sub = hos_sub;
-		this.res_etc = res_etc;
-		this.hos_code = hos_code;
-		this.pet_code = pet_code;
-		this.user_code = user_code;
-		this.pet_types = pet_types;
-		this.pet_number = pet_number;
-		this.b_type = b_type;
-		this.pet_weight = pet_weight;
-		this.user_id = user_id;
-	}
-
-
-
-
-	public ReservationVO(String user_code, String user_name, String user_tel, String pet_name, String pet_code,
-			String pet_number, String pet_sex, String pet_types, int pet_age, String b_type, String res_date,
-			String res_time, String res_etc, float pet_weight, String hos_name, String hos_code, String hos_sub) {
-		this.user_name = user_name;
-		this.user_tel = user_tel;
-		this.pet_name = pet_name;
-		this.pet_age = pet_age;
-		this.pet_sex = pet_sex;
-		this.hos_name = hos_name;
-		this.res_date = res_date;
-		this.res_time = res_time;
-		this.hos_sub = hos_sub;
-		this.res_etc = res_etc;
-		this.hos_code = hos_code;
-		this.pet_code = pet_code;
-		this.user_code = user_code;
-		this.pet_types = pet_types;
-		this.pet_number = pet_number;
-		this.pet_weight = pet_weight;
-		this.b_type = b_type;
-	}
 
 
 	public String getRes_code() {
@@ -264,6 +210,58 @@ public class ReservationVO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	
+	public ReservationVO(String res_code, String receipt_date, String user_name, String user_tel, String pet_name,
+			int pet_age, String pet_sex, String hos_name, String res_date, String res_time, String hos_sub,
+			String res_etc, String hos_code, String pet_code, String user_code, String pet_types, String pet_number,
+			String b_type, float pet_weight, String user_id) {
+		super();
+		this.res_code = res_code;
+		this.receipt_date = receipt_date;
+		this.user_name = user_name;
+		this.user_tel = user_tel;
+		this.pet_name = pet_name;
+		this.pet_age = pet_age;
+		this.pet_sex = pet_sex;
+		this.hos_name = hos_name;
+		this.res_date = res_date;
+		this.res_time = res_time;
+		this.hos_sub = hos_sub;
+		this.res_etc = res_etc;
+		this.hos_code = hos_code;
+		this.pet_code = pet_code;
+		this.user_code = user_code;
+		this.pet_types = pet_types;
+		this.pet_number = pet_number;
+		this.b_type = b_type;
+		this.pet_weight = pet_weight;
+		this.user_id = user_id;
+	}
+
+
+
+
+	public ReservationVO(String user_code, String user_name, String user_tel, String pet_name, String pet_code,
+			String pet_number, String pet_sex, String pet_types, int pet_age, String b_type, String res_date,
+			String res_time, String res_etc, float pet_weight, String hos_name, String hos_code, String hos_sub) {
+		this.user_name = user_name;
+		this.user_tel = user_tel;
+		this.pet_name = pet_name;
+		this.pet_age = pet_age;
+		this.pet_sex = pet_sex;
+		this.hos_name = hos_name;
+		this.res_date = res_date;
+		this.res_time = res_time;
+		this.hos_sub = hos_sub;
+		this.res_etc = res_etc;
+		this.hos_code = hos_code;
+		this.pet_code = pet_code;
+		this.user_code = user_code;
+		this.pet_types = pet_types;
+		this.pet_number = pet_number;
+		this.pet_weight = pet_weight;
+		this.b_type = b_type;
 	}
 
 	

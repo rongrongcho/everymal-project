@@ -17,8 +17,7 @@ public class HosReviewDAOImpl implements HosReviewDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-    //¸®ºä ¸®½ºÆ® ¸Ş¼Òµå(ÆäÀÌÂ¡)
+
 	@Override
 	public List selectAllRev(Map<String, Integer> pagingMap, String hos_code) throws DataAccessException {
 		 List<ReviewVO> reviewList = new ArrayList<ReviewVO>();
@@ -29,14 +28,14 @@ public class HosReviewDAOImpl implements HosReviewDAO{
          map.put("section", section);
          map.put("pageNum", pageNum);
          map.put("hos_code", hos_code);
-         //
+         
 		 reviewList = sqlSession.selectList("mapper.hosReview.selectAllRevList", map);
 		 
 		return reviewList;
 	}
 
     
-	//¸®ºä °³¼ö ±¸ÇÏ±â ¸Ş¼Òµå
+
 	@Override
 	public int reviewcount(String hos_code) throws DataAccessException {
 		int reviewCount= sqlSession.selectOne("mapper.hosReview.reviewcount", hos_code);
@@ -44,7 +43,6 @@ public class HosReviewDAOImpl implements HosReviewDAO{
 	}
 
 
-	//¸®ºä »èÁ¦¿äÃ» ¹İ¿µÇÏ±â ¸Ş¼Òµå
 	@Override
 	public void requestDelRev(String[] items) throws DataAccessException {
 		 String[]rv_code=items;
@@ -55,7 +53,7 @@ public class HosReviewDAOImpl implements HosReviewDAO{
 	}
 
 
-	//¸®ºä »ó¼¼º¸±â ¸Ş¼Òµå
+
 	@Override
 	public ReviewVO selectReview(String rv_code) throws DataAccessException {
 		ReviewVO review=new ReviewVO();
@@ -64,15 +62,30 @@ public class HosReviewDAOImpl implements HosReviewDAO{
 	}
 
 
-	//¸®ºä ÆòÁ¡ ±¸ÇÏ±â ¸Ş¼Òµå
+
+//	@Override
+//	public float reviewAvg(String hos_code) throws DataAccessException {
+//		float review_avg=0;
+//		review_avg=sqlSession.selectOne("mapper.hosReview.reviewAvg",hos_code);
+//		return review_avg;
+//	}
+	
+	
 	@Override
 	public float reviewAvg(String hos_code) throws DataAccessException {
-		float review_avg=0;
-		review_avg=sqlSession.selectOne("mapper.hosReview.reviewAvg",hos_code);
-		return review_avg;
+	    // review_avg ë³€ìˆ˜ë¥¼ 0.0ìœ¼ë¡œ ì´ˆê¸°í™” (ê¸°ë³¸ê°’ ì„¤ì •)
+	    Float review_avg = 0.0f;
+	    review_avg = sqlSession.selectOne("mapper.hosReview.reviewAvg", hos_code);
+	    // floatValue()ë¥¼ í˜¸ì¶œí•˜ê¸° ì „ì— review_avgê°€ nullì¸ì§€ í™•ì¸ 
+	    if (review_avg != null) {
+	        return review_avg.floatValue();
+	    } else {
+	        return 0.0f; // null ê°’ì— ëŒ€í•œ ê¸°ë³¸ê°’ìœ¼ë¡œ 0.0fë¥¼ ë°˜í™˜
+	    }
 	}
 
-   //»èÁ¦¿äÃ»µÈ ¸®ºä ¸®½ºÆ® ¸Ş¼Òµå (°ü¸®ÀÚ ÆäÀÌÁö)
+	
+
 	@Override
 	public List selectAllReqDelReviews(Map<String, Integer> pagingMap, int rv_delreq) throws DataAccessException {
 		List<ReviewVO> relDelreviewList = new ArrayList<ReviewVO>();
@@ -82,19 +95,18 @@ public class HosReviewDAOImpl implements HosReviewDAO{
         map.put("section", section);
         map.put("pageNum", pageNum);
         map.put("rv_delreq", rv_delreq);
-        //
+        
         relDelreviewList = sqlSession.selectList("mapper.hosReview.relDelreviewList", map);
 		return relDelreviewList;
 	}
 
-    //»èÁ¦ ¿äÃ»µÈ ¸®ºä °³¼ö ±¸ÇÏ±â ¸Ş¼Òµå(°ü¸®ÀÚ ÆäÀÌÁö)
+  
 	@Override
 	public int delReqreviewcount(int rv_delreq) throws DataAccessException {
 		int reqDelreview_count=sqlSession.selectOne("mapper.hosReview.delReqreviewcount", rv_delreq);
 		return reqDelreview_count;
 	}
 
-    //°ü¸®ÀÚ°¡ ¸®ºä »èÁ¦ÇÏ±â ¸Ş¼Òµå
 	@Override
 	public void deleteAllReviews(String[] items) throws DataAccessException {
 		 String[]rv_code=items;

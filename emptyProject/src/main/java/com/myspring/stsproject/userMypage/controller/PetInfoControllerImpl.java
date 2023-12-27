@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.stsproject.animal.dao.AnimalDAO;
 import com.myspring.stsproject.animal.vo.AnimalVO;
-import com.myspring.stsproject.forImg.dao.HosImgDAO;
-import com.myspring.stsproject.forImg.vo.HosImgVO;
 import com.myspring.stsproject.userMypage.dao.PetInfoDAO;
 import com.myspring.stsproject.userMypage.dao.UserDAO;
 import com.myspring.stsproject.userMypage.service.UserService;

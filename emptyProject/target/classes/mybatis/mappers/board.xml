@@ -7,53 +7,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- typeAlias에서 생성된 빈의 이름과 동일해야 한다  -->
 	<resultMap type="articleVO" id="articleResult">
 		<!-- sql문의 수행결과로 받을 변수명과 컬러명  -->
-		<result property="level" column="level"/>
-		<result property="articleNo" column="articleNo"/>
-		<result property="parentNo" column="parentNo"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="imageFileName" column="imageFileName"/>
-		<result property="writeDate" column="writeDate"/>
-		<result property="id" column="id"/>
+		<result property="q_code" column="q_code"/>
+		<result property="a_code" column="a_code"/>
+		<result property="user_id" column="user_id"/>
+		<result property="q_title" column="q_title"/>
+		<result property="q_text" column="q_text"/>
+		<result property="hos_id" column="hos_id"/>
+		<result property="hos_name" column="hos_name"/>
+		<result property="a_title" column="a_title"/>
+		<result property="a_text" column="a_text"/>
+		<result property="user_code" column="user_code"/>
+		<result property="petrace" column="petrace"/>
+		<result property="q_date" column="q_date"/>
+		<result property="a_date" column="a_date"/>
+		<result property="pageNum" column="pageNum"/>
+		<result property="section" column="section"/>
+		<result property="hos_code" column="hos_code"/>
+		<result property="hos_pro" column="hos_pro"/>
+		<result property="user_imgName" column="user_imgName"/>
 	</resultMap>
 	
-	<select id="selectAllArticles" resultMap="articleResult">
+	<select id="selectAllArticles" resultMap="articleResult" parameterType="java.util.Map">
 		<![CDATA[
-			select LEVEL, articleNo, parentNo, title, content, writeDate, id from boardtbl START WITH parentNo=0 CONNECT BY PRIOR articleNo=parentNo ORDER SIBLINGS BY articleNo desc
+			SELECT * FROM (SELECT ROWNUM AS recNum, b.q_code, b.q_date, b.q_title, b.q_text, b.user_id, h.hos_name, b.a_title, b.a_text, b.a_date, b.petrace, h.hos_pro, h.hos_code, g.user_imgName, ROW_NUMBER() OVER (ORDER BY b.q_code DESC) AS row_num FROM boardtbl b left OUTER JOIN gmembertbl g ON b.user_id = g.user_id left OUTER JOIN hosjointbl h ON b.hos_id = h.hos_id) WHERE row_num BETWEEN (#{section}-1)*50+(#{pageNum}-1)*5+1 AND (#{section}-1)*50+#{pageNum}*5
 		]]>
 	</select>
 	
-	<select id="selectNewArticleNo" resultType="int">
+	
+	<select id="selectToArticles" resultType="Integer">
 		<![CDATA[
-			select NVL(max(articleNo),0)+1 from boardtbl
+			select count(q_code) from boardtbl
 		]]>
 	</select>
 	
-	<insert id="insertNewArticle" parameterType="java.util.Map">
+	<select id="selectNewArticleNo" resultType="Integer">
 		<![CDATA[
-			insert into boardtbl (articleNo, parentNo, id, title, content, imageFileName) values(#{articleNo}, #{parentNo}, #{id},#{title},#{content},#{imageFileName})
+			select NVL(max(q_code),0)+1 from boardtbl
+		]]>
+	</select>
+	
+	<insert id="insertNewArticle" parameterType="articleVO">
+		<![CDATA[
+			insert into boardtbl (q_code, user_id, user_code, q_title, q_text, petRace) values(#{q_code}, #{user_id}, #{user_code}, #{q_title}, #{q_text}, #{petRace})
 		]]>
 	</insert>
 	
 	<select id="selectArticle" resultType="articleVO" parameterType="int">
 		<![CDATA[
-			select articleNo, parentNo, title, content, NVL(imageFileName, 'null') as imageFileName, id, writeDate from boardtbl where articleNo=#{articleNo}
+			select * from boardtbl where q_code=#{q_code}
 		]]>
 	</select>
 	
-	<update id="updateArticle" parameterType="java.util.Map">
-		update boardtbl set title=#{title}, content=#{content}
-		<if test="imageFileName!=null and imageFileName.length()!=0" >
-			, imageFileName=#{imageFileName}
-		</if>
-		where articleNo=?
+	<update id="updateArticle" parameterType="articleVO">
+		update boardtbl set q_title=#{q_title}, q_text=#{q_text} where q_code=#{q_code}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="int">
 		<![CDATA[
-			delete from boardtbl where articleNo in (select articleNo from boardtbl START WITH articleNo=#{articleNo} CONNECT BY PRIOR articleNo=parentNo)
+			delete from boardtbl where q_code=#{q_code}
 		]]>
 	</delete>
 	
+	<update id="insertNewReply" parameterType="articleVO">
+		update boardtbl set a_code=#{a_code}, a_title=#{a_title}, a_text=#{a_text}, hos_name=#{hos_name}, a_date=sysdate, hos_id=#{hos_id} where q_code=#{q_code}
+	</update>
+	
+	<update id="deleteReply" parameterType="int">
+		<![CDATA[
+			update boardtbl set a_code=null, a_title=null, a_text=null, hos_name=null, a_date=null, hos_id=null where q_code=#{q_code}
+		]]>
+	</update>
 	
 </mapper>

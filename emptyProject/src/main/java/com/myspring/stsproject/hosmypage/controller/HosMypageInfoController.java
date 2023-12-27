@@ -13,8 +13,6 @@ import com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO;
 
 public interface HosMypageInfoController {
 	public ModelAndView isValid(@ModelAttribute("hosMypageInfoVO") HosMypageInfoVO hosmypageinfoVO, @RequestParam("hos_id") String hos_id, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
-//	public ModelAndView selecthosInfo(@RequestParam("hos_id") String hos_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
-//	public ModelAndView modhosInfo(@ModelAttribute("hosMypageInfoVO") HosMypageInfoVO hosmypageinfoVO,@RequestParam("usertel_front") String usertelFront,@RequestParam("usertel_end") String usertelEnd, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modmyHosInfo(@ModelAttribute("hosMypageInfoVO") HosMypageInfoVO hosmypageinfoVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modhosInfo(HosMypageInfoVO hosmypageinfoVO, String usertelFront, String usertelEnd, MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;

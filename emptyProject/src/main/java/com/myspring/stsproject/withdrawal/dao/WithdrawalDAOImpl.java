@@ -21,13 +21,6 @@ public class WithdrawalDAOImpl implements WithdrawalDAO {
 			 sqlSession.selectOne("mapper.withdrawal.selectHosmember", id);
 			 sqlSession.update("mapper.withdrawal.updateHosmember", id);
 		}
-//	    if (code != null && code.startsWith("use")) {
-//	        sqlSession.selectOne("mapper.withdrawal.selectGmember", id);
-//	        sqlSession.update("mapper.withdrawal.updateGmember", id);
-//	    } else {
-//	        sqlSession.selectOne("mapper.withdrawal.selectHosmember", id);
-//	        sqlSession.update("mapper.withdrawal.updateHosmember", id);
-//	    }
 	}
 
 	

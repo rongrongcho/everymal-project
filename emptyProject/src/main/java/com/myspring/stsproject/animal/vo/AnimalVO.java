@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component("animalVO")
 public class AnimalVO {
+
 	private String user_code;
 	private String pet_code;
 	private String pet_name;
@@ -14,7 +15,14 @@ public class AnimalVO {
 	private String b_type;
 	private float pet_weight;
 	private String pet_etc;
+	
 	public AnimalVO() {
+		super();
+	}
+	
+	
+	
+	public AnimalVO(String user_code2, String pet_name2, int pet_age2, String pet_sex2, String pet_types2, String pet_number2, String b_type2, float pet_weight2, String pet_etc2) {
 	}
 	public String getUser_code() {
 		return user_code;
@@ -74,6 +82,20 @@ public class AnimalVO {
 		return pet_etc;
 	}
 	public void setPet_etc(String pet_etc) {
+		this.pet_etc = pet_etc;
+	}
+	public AnimalVO(String user_code, String pet_code, String pet_name, int pet_age, String pet_sex, String pet_types,
+			String pet_number, String b_type, float pet_weight, String pet_etc) {
+		super();
+		this.user_code = user_code;
+		this.pet_code = pet_code;
+		this.pet_name = pet_name;
+		this.pet_age = pet_age;
+		this.pet_sex = pet_sex;
+		this.pet_types = pet_types;
+		this.pet_number = pet_number;
+		this.b_type = b_type;
+		this.pet_weight = pet_weight;
 		this.pet_etc = pet_etc;
 	}
 	

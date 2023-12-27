@@ -21,4 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	b_type=#{b_type}, pet_weight=#{pet_weight}, pet_etc=#{pet_etc} where pet_code=#{pet_code}
 		]]>
 </update>
+
+
+<!-- 펫 삭제 쿼리-->
+<delete id="removePetInfo" parameterType="String">
+<![CDATA[
+	delete from petinfotbl where pet_code=#{pet_code}
+		]]>
+</delete>
 </mapper>

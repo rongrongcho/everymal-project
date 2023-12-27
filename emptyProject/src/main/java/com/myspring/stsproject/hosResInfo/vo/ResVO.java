@@ -6,28 +6,28 @@ import org.springframework.stereotype.Component;
 
 @Component("resVO")
 public class ResVO {
-	 private String res_code; //예약코드
-     private String user_name; //일반회원 이름
-     private String user_tel; //사용자 전화번호
-     private String pet_name;//반려동물이름
-     private int pet_age;//반려동물나이
-     private String pet_sex;//반려동물 성별
-     private String hos_name;//병원이름
-     private Date res_date;//예약희망날짜
-     private String res_time;//희망예약시간
-     private String hos_sub;//진료과목
-     private String res_etc;//요구사항 및 특이사항
-     private String hos_code;//병원코드
-     private String pet_code;//반려동물코드
-     private String user_code;//일반회원코드
-     private Date receipt_date;//예약 신청 날짜
+	 private String res_code;
+     private String user_name; 
+     private String user_tel; 
+     private String pet_name;
+     private int pet_age;
+     private String pet_sex;
+     private String hos_name;
+     private Date res_date;
+     private String res_time;
+     private String hos_sub;
+     private String res_etc;
+     private String hos_code;
+     private String pet_code;
+     private String user_code;
+     private Date receipt_date;
      private String user_id;
      private String hos_img;
      private String b_type;
-     private String pet_types;//반려동물 종
+     private String pet_types;
      private float pet_weight;
-     private int res_count; //예약 개수
-     private String hos_id; //병원 id
+     private int res_count;
+     private String hos_id; 
      private String pet_number;
      
      
@@ -37,7 +37,7 @@ public class ResVO {
 	public void setHos_id(String hos_id) {
 		this.hos_id = hos_id;
 	}
-	//빈 생성자
+
      public ResVO() {
 		
 	}

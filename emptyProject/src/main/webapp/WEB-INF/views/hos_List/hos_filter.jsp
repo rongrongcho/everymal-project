@@ -245,8 +245,6 @@
                 </c:choose>
               </ul>
 
-
-
               <div id="paging" align="center">
                 <c:if test="${totalHos !=0}">
                   <c:choose>

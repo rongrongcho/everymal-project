@@ -337,7 +337,6 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session=request.getSession();
-//		session.removeAttribute("isLogOn");
 		session.invalidate();
 		ModelAndView mav= new ModelAndView();
 		rAttr.addAttribute("result", "logOut");

@@ -19,7 +19,6 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 
 
-
 	@Override
 	public Map<String, Object> listApps(Map<String, Object> pagingMap) throws DataAccessException {
 		Map<String,Object> rmMap=new HashMap<String, Object>();
@@ -43,11 +42,6 @@ public class AdminServiceImpl implements AdminService {
 	    	totalApps=adminDAO.allApps();
 	    }
 
-	    
-	    
-	    
-	    //adminDAO.selectRMList(pagingMap);
-		//int totalApps=adminDAO.appCount();
 		rmMap.put("rmList",rmList);
 		rmMap.put("totalApps", totalApps);
 		
@@ -64,7 +58,6 @@ public class AdminServiceImpl implements AdminService {
 	public void approvalHosM(String[] chk) throws DataAccessException {
 		  adminDAO.appManyHos_hostbl(chk);
 		  adminDAO.appManyHos_rmtbl(chk);
-		
 	}
 	
 	

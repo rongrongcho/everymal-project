@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface WithdrawalController {
 
-	
+	//회원탈퇴 
 	ModelAndView updateEnabled(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 

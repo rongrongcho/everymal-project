@@ -32,17 +32,12 @@ public class AdminControllerImpl implements AdminController {
 
 	@Autowired
 	private AdminVO adminVO;
-	
-	
 	@Autowired
 	private AdminDAO adminDAO;
-	
 	@Autowired
 	private AdminService adminService;
-	
 	@Autowired
 	private HosReviewService hosReviewService;
-
 	@Autowired
 	private ReviewVO reviewVO;
 
@@ -73,7 +68,7 @@ public class AdminControllerImpl implements AdminController {
 	@RequestMapping(value = "/administrator/reviewDelete.do", method = RequestMethod.POST)
 	public ModelAndView reviewDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String) request.getAttribute("viewName");		 
-		response.setCharacterEncoding("UTF-8"); //alert한글 깨짐 현상 
+		response.setCharacterEncoding("UTF-8"); 
 		PrintWriter out = response.getWriter();		  
 		response.setContentType("text/html;charset=UTF-8");
 			String[] items=null;
@@ -91,7 +86,7 @@ public class AdminControllerImpl implements AdminController {
  			for(int i=0; i<items.length; i++) {
      			System.out.println( "items : " + items[i]);
      		}
- 			hosReviewService.deleteReveiws(items); //여기 함
+ 			hosReviewService.deleteReveiws(items);
  			out.print("<script>");
  			out.print("alert('리뷰 영구 삭제 성공!');");
  			out.print("location.href='" +request.getContextPath() + "/administrator/reqDelReviewList.do" + "';");
@@ -102,8 +97,9 @@ public class AdminControllerImpl implements AdminController {
  		}
 	}
 	
-	//=======================업그레이드 
-	//일반 jsp보여주는 걸 mapping해야한다. 그래야 밑에 아작스 함수 jsp안에서 호출 가
+	//ajax 추가 및 변경 
+	//일반 jsp를 mappin
+	//밑에 아작스 함수 jsp안에서 호출 
 	@RequestMapping(value = "/administrator/hopitalRegi.do", method = RequestMethod.GET)
 	public ModelAndView valid(@ModelAttribute("administrator") AdminVO adminVO, @RequestParam(value = "action", required = false) String action, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String) request.getAttribute("viewName");
@@ -113,10 +109,7 @@ public class AdminControllerImpl implements AdminController {
 		return mav;
 	}
 	
-	
-	
-	//병원 등록 신청 목록 조회 페이지 + 페이징 뷰 
-	
+	// 병원 등록 신청 목록 조회 페이지 + 페이징 뷰 
 	@RequestMapping(value="/administrator/hos_pitalRegi.do",produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> handleSelectedValue(HttpServletRequest request) throws Exception {
@@ -133,7 +126,7 @@ public class AdminControllerImpl implements AdminController {
 	        try {
 	            section = Integer.parseInt(_section);
 	        } catch (NumberFormatException e) {
-	            section = 1; // 기본값으로 설정하거나 적절한 오류 처리를 수행하세요.
+	            section = 1; 
 	        }
 	    }
 
@@ -146,7 +139,7 @@ public class AdminControllerImpl implements AdminController {
 	    
 		List rmList=(List)rmResult.get("rmList");
 		int totalList = ((Integer) rmResult.get("totalApps")).intValue();
-	    int totalPages = (int) Math.ceil((double) totalList / 6); //6개씩 보여줄거니
+	    int totalPages = (int) Math.ceil((double) totalList / 6); //6개씩 보여
 	    
 	    Map<String, Object> response = new HashMap<String, Object>();
 	    response.put("userList", rmList);

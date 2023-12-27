@@ -96,13 +96,12 @@ public class UserDAOImpl implements UserDAO{
         map.put("section", section);
         map.put("pageNum", pageNum);
         map.put("user_code", user_code);
-        qList = sqlSession.selectList("mapper.userMypage.selectAllQ", map);
-        //qList는 여러 개의 userVO 객체를 포함하는 리스트이므로, 반복문을 사용하여 각 userVO의 값을 비교해야 함                 
+        qList = sqlSession.selectList("mapper.userMypage.selectAllQ", map);            
         for (UserVO userVO : qList) {       
         	  if (userVO.getA_code() == null) {       		  
-        	    userVO.setIsAnswer("미답변");        	    
+        	    userVO.setIsAnswer("占싱답변");        	    
         	  } else {
-        	    userVO.setIsAnswer("답변완료");        	    
+        	    userVO.setIsAnswer("占썰변占싹뤄옙");        	    
         	  }
         	}
 		 

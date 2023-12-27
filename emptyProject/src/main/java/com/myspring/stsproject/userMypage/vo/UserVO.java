@@ -6,22 +6,17 @@ import org.springframework.stereotype.Component;
 @Component("userVO")
 public class UserVO {
 	
-	//userMypage 변수 선언
 	private String user_code;
 	private String user_id; 
-	private String user_pwd; // user_
-	private String user_name; // user_name
-	private String user_zipcode; // 우편번호 
-	private String user_addr1; // user_addr // 도로명 주소 
-	private String user_addr2; // user_addr // 상세 주소2
-	private String user_imgName; // 테이블 user_Img
-	private String user_email; //user_email
-	private String user_tel; // user_tel
-	private Date j_date; // J_date;
-
-	
-	
-	//myPetInfo 변수 선언 
+	private String user_pwd; 
+	private String user_name; 
+	private String user_zipcode; 
+	private String user_addr1; 
+	private String user_addr2;
+	private String user_imgName; 
+	private String user_email; 
+	private String user_tel; 
+	private Date j_date; 
 	
 	private String pet_name;
 	private int pet_age;
@@ -33,59 +28,34 @@ public class UserVO {
 	private String pet_types;
 	
 	
-	//myReview 변수 선언 
 	
-	
-	private String rv_code; // 리뷰 코드 
-	private String rv_title; // 리뷰 제목
-	private String rv_text; // 리뷰 내용
-	private int rv_rate; // 리뷰 별점
-	private Date rv_date; // 리뷰 작성일
-	private String rv_imgname; // 리뷰 첨부파일
-	
-	
-	
-	//
+	private String rv_code;
+	private String rv_title; 
+	private String rv_text; 
+	private int rv_rate; 
+	private Date rv_date; 
+	private String rv_imgname; 
 	
 	private String res_code;
 	private String[] items;
 	
 	
-	
-
-	
-	//myQuestion변수 선언
-	
-	private String q_code; // 질문 게시글 코드
+	private String q_code; 
 	private Date q_date;
 	private String q_title;
 	private String q_text;
-	//=====
-	private String a_code; // 답변 코드 
+	
+	private String a_code; 
 	private Date a_date;
 	private String petrace;
 	private String a_title;
 	private String a_text;
 	
-	private String isAnswer; // 답변 등록 여부 
-
-
-
-		
-
-//=============================================================================
-	
-	
-	
-	
-
+	private String isAnswer; 
 
 	public UserVO() {
 		super();
 	}
-
-
-
 
 
 	public UserVO(String user_code, String user_id, String user_pwd, String user_name, String user_zipcode,

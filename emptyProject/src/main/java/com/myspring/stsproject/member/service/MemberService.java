@@ -19,7 +19,6 @@ public interface MemberService {
 	public String HosidChk(MemberVO memberVO) throws DataAccessException;
 	public void updateMember(MemberVO memVO) throws DataAccessException;
 	public void removeMember(String id) throws DataAccessException;
-	/* public MemberVO login(MemberVO memberVO) throws DataAccessException; */
 	public boolean login(MemberVO memberVO) throws DataAccessException;
 	public HashMap<String,Object> memberInfo(MemberVO memberVO) throws DataAccessException;
 }

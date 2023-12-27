@@ -26,8 +26,7 @@ public class ArticleVO {
 	private int pageNum;
 	private int section;
 	
-	
-	//이미지 ===============================
+
 	private String hos_code;
 	private String hos_pro;
 	private String user_imgName;
@@ -41,11 +40,6 @@ public class ArticleVO {
 		this.user_imgName = user_imgName;
 	}
 
-	
-	
-
-
-	//롱이가 추가함===========================
 	
 	public String getHos_pro() {
 		return hos_pro;

@@ -87,11 +87,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
-
-	/*
-	 * @Override public MemberVO login(MemberVO memberVO) throws DataAccessException
-	 * { return memberDAO.loginCheck(memberVO); }
-	 */
 	
 	@Override
 	public boolean login(MemberVO memberVO) throws DataAccessException {

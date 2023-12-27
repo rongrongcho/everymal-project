@@ -66,8 +66,8 @@ public class UserHistoryControllerImpl implements UserHistoryController {
         List<UserHistoryVO> recentReserv=new ArrayList<UserHistoryVO>();
 
 
-        historyList=userHistoryService.listHReserv(userHistoryVO); // 지난 이용 내역 데이터 
-        recentReserv=userHistoryService.listHRecent(userHistoryVO);//가장 최근 예약 데이터 
+        historyList=userHistoryService.listHReserv(userHistoryVO); 
+        recentReserv=userHistoryService.listHRecent(userHistoryVO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("historyList", historyList);
 		mav.addObject("recentList", recentReserv); 
@@ -100,14 +100,14 @@ public class UserHistoryControllerImpl implements UserHistoryController {
         String log_id=(String)session.getAttribute("log_id");
 		String user_code=(String)session.getAttribute("user_code");
 
-        System.out.println("UserHistorycontroller 로그인 아이디 : " + log_id+" user_code : "+ user_code);
-		userVO=userService.calluserInfo(log_id); //회원 정보 불러옴
+        System.out.println("UserHistorycontroller  : " + log_id+" user_code : "+ user_code);
+		userVO=userService.calluserInfo(log_id); 
 		userHistoryVO.setUser_id(log_id);
 		userHistoryVO.setUser_code(user_code);
 	    List<UserHistoryVO> historyList=new ArrayList<UserHistoryVO>(); 
         List<UserHistoryVO> recentReserv=new ArrayList<UserHistoryVO>();
-        historyList=userHistoryService.listTxReserv(userHistoryVO); // 지난 이용 내역 데이터 
-        recentReserv=userHistoryService.listTxRecent(userHistoryVO);//가장 최근 예약 데이터 
+        historyList=userHistoryService.listTxReserv(userHistoryVO); 
+        recentReserv=userHistoryService.listTxRecent(userHistoryVO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("taxiHistory", historyList);
 		mav.addObject("taxiRecent", recentReserv);

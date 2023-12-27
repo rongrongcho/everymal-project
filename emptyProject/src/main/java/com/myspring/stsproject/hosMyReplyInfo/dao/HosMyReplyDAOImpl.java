@@ -26,7 +26,6 @@ public class HosMyReplyDAOImpl implements HosMyReplyDAO{
          int section = pagingMap.get("section");
          int pageNum = pagingMap.get("pageNum");
          Map map = new HashMap();
-         //¿ø·¡ ¿©±â ¾ø´ø ºÎºĞÀÎµ¥ mappers¿¡¼­ Äõ¸®¹®¿¡ º¯¼ö 2°³ ÀÌ»ó Àü´ŞÇÏ±â À§ÇØ¼­ HashMap map ¸¸µé¾î¼­ °Å±â¿¡ ´Ù ³Ö¾îÁÜ. ±×·¡¼­ º¯¼ö 3°³ º¸³¿
          map.put("section", section);
          map.put("pageNum", pageNum);
          map.put("hos_id", hos_id);
@@ -47,7 +46,7 @@ public class HosMyReplyDAOImpl implements HosMyReplyDAO{
 	public void deleteReply(String[] items) throws DataAccessException {
 		String[]a_code=items;
 		if(a_code==null || a_code.length==0) {
-			 System.out.println("»èÁ¦ ¿äÃ»ÇÒ ¸®ºä¸¦ ¼±ÅÃ ¾È ÇÔ");
+			 System.out.println("ì˜¤ë¥˜,ì„ íƒëœ ê²Œì‹œê¸€ì˜ ì½”ë“œê°€ ì¡´ì¬í•˜ì§€ì•ŠìŠµë‹ˆë‹¤.");
 		 }else {			 		 		 			
 			 Map map=new HashMap();
 			 map.put("array", a_code);

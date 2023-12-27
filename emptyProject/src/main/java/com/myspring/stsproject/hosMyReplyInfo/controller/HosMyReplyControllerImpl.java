@@ -56,12 +56,9 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 	    response.setContentType("text/html;charset=utf-8");
 	    HttpSession session=request.getSession();
 	    String hos_id=(String)session.getAttribute("log_id");
-		String hos_code=(String)session.getAttribute("hos_code");
-		
+		String hos_code=(String)session.getAttribute("hos_code");	
 		model.addAttribute("hos_code",hos_code);
-		
-		
-		System.out.println("hosæ∆¿Ãµ ∫“∑Øø‘≥™?>>>>"+ hos_id);
+
 		hosMypageInfoVO =hosmypageinfoService.selecthosInfo(hos_id);
 		String _section=request.getParameter("section");
 		String _pageNum=request.getParameter("pageNum");
@@ -74,7 +71,6 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 		hosReplyMap.put("section", section);
 		hosReplyMap.put("pageNum", pageNum);
 		int reply_count=hosMyReplyService.replyCount(hos_id);
-		System.out.println(hos_id + " ∞° ¿€º∫«— "+reply_count +"∞≥¿« ¥‰∫Ø¿Ã ¡∂»∏µ !!!");
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("hosReplyMap", hosReplyMap); 
@@ -90,7 +86,6 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	HttpSession session=request.getSession();
-	   // session = request.getSession();
 		String hos_id=(String)session.getAttribute("log_id");
 		String[] items=null;
         items=request.getParameterValues("del_chk");
@@ -98,7 +93,6 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 		
 		if(items==null){
 			out.print("<script>");
-			out.print("alert('ªË¡¶«“ ¥‰∫Ø¿ª º±≈√«ÿ¡÷ººø‰!');");
 			out.print("location.href='" +request.getContextPath()+ "/hos_MyReplyInfo/listMyReply.do" + "';");
 			out.print("</script>");
 			out.flush();	
@@ -106,11 +100,11 @@ public class HosMyReplyControllerImpl implements HosMyReplyController {
 		}else {
 			
 			for(int i=0; i<items.length; i++) {
-    			System.out.println( "items(¥‰∫ØµÓ∑œπ¯»£) : " + items[i]);
+    			System.out.println( "items) : " + items[i]);
     		}
 			hosMyReplyService.delReply(items);
 			out.print("<script>");
-			out.print("alert('¥‰∫Ø¿Ã ªË¡¶µ«æ˙Ω¿¥œ¥Ÿ.');");
+			out.print("alert('ÏÑ±Í≥µÏ†ÅÏúºÎ°ú ÏÇ≠Ï†úÎêòÏóàÏäµÎãàÎã§!');");
 			out.print("location.href='" +request.getContextPath() + "/hos_MyReplyInfo/listMyReply.do" + "';");
 			ModelAndView redirectMav = new ModelAndView("redirect:/hos_MyReplyInfo/listMyReply.do");
 			return redirectMav;

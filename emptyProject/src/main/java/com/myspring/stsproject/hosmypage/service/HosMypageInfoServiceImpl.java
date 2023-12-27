@@ -42,7 +42,7 @@ import com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO;
 		@Override
 		public void modmyHosInfo(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException{
 			hosmypageinfoDAO.modmyHosInfo(hosmypageinfoVO);
-			//hosmypageinfoDAO.modmyHosInfo2(hosmypageinfoVO);
+		
 		}
 
 		@Override
@@ -67,11 +67,6 @@ import com.myspring.stsproject.hosmypage.vo.HosMypageInfoVO;
 		    }
 		}
 
-
-//		@Override
-//		public void modmyHosInfo2(HosMypageInfoVO hosmypageinfoVO) throws DataAccessException{
-//			hosmypageinfoDAO.modmyHosInfo2(hosmypageinfoVO);
-//		}
 	}
 
 

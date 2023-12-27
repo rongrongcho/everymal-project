@@ -116,7 +116,6 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	
 	@Override
-	// map에서 object로 설정시 integer와 string 타입을 변환 캐스팅만 하면 둘다 사용가능 , orderby가 string이기 때문에 object로 설정해줘야 한다. 중요! 
 	public List<AdminVO> memberList(Map<String, Object> pagingMap) throws DataAccessException {
 	    List<AdminVO> memberList = new ArrayList<AdminVO>();
 	    int section = Integer.parseInt(pagingMap.get("section").toString());
@@ -202,10 +201,6 @@ public class AdminDAOImpl implements AdminDAO {
 		return count;
 	}
 
-
-
-
-//=====================================================================
 	public void checkHos(String hos_code) throws Exception {
 		sqlSession.update("mapper.admin.checkHos_h", hos_code);
 		sqlSession.update("mapper.admin.checkHos_a", hos_code);

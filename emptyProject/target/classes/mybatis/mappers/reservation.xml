@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.reservation">
+
+  <!-- adminVO -->
+  <resultMap type="reservationVO" id="reservationResult">
+  	<result property="res_code" column="res_code"/>
+  	<result property="receipt_date" column="receipt_date"/>
+  	<result property="user_name" column="user_name"/>
+  	<result property="user_tel" column="user_tel"/>
+  	<result property="pet_name" column="pet_name"/>
+  	<result property="pet_age" column="pet_age"/>
+  	<result property="pet_sex" column="pet_sex"/>
+  	<result property="hos_name" column="hos_name"/>
+  	<result property="res_date" column="res_date"/>
+  	<result property="res_time" column="res_time"/>
+  	<result property="hos_sub" column="hos_sub"/>
+  	<result property="res_etc" column="res_etc"/>
+  	<result property="hos_code" column="hos_code"/>
+  	<result property="pet_code" column="pet_code"/>
+  	<result property="user_code" column="user_code"/>
+  	<result property="pet_types" column="pet_types"/>
+  	<result property="pet_number" column="pet_number"/>
+  	<result property="b_type" column="b_type"/>
+  	<result property="pet_weight" column="pet_weight"/>
+  	<result property="pet_etc" column="pet_etc"/>
+  	<result property="user_id" column="user_id"/>
+  </resultMap>
+  
+  <!-- 펫 정보 있는지 여부 찾 -->
+    <select id="selectPetinfo" resultType="reservationVO" parameterType="reservationVO">
+	    <![CDATA[
+			SELECT * FROM petinfotbl WHERE user_code=#{user_code}
+	    ]]>
+	</select>
+  <!-- 예약하기 -->
+	<insert id="insertReservation" parameterType="reservationVO">
+	    <![CDATA[
+			insert into hosrestbl(res_code,user_name, user_tel, pet_name, pet_age, pet_sex, hos_name, res_date, res_time, hos_sub, res_etc, hos_code, user_code, pet_types, pet_number, b_type, pet_weight, pet_code, user_id) values(#{res_code},#{user_name},#{user_tel},#{pet_name},#{pet_age},#{pet_sex},#{hos_name},#{res_date},#{res_time},#{hos_sub},#{res_etc},#{hos_code},#{user_code},#{pet_types},#{pet_number},#{b_type},#{pet_weight},#{pet_code},#{user_id})
+	    ]]>
+	</insert>
+	<!-- 번호 생 -->
+	<select id="resNumber" resultType="int">
+		<![CDATA[
+			SELECT MAX(SUBSTR(res_code, 4)) AS max_num FROM hosrestbl
+	    ]]>
+	</select>
+	
+</mapper>

@@ -42,7 +42,6 @@ public class BoardControllerImpl implements BoardController{
 		Map articleMap=boardService.listArticles(pagingMap);
 		articleMap.put("section", section);
 		articleMap.put("pageNum", pageNum);
-//		request.setAttribute("articleMap", articleMap);
 		
 		ModelAndView mav=new ModelAndView(viewName);
 		mav.addObject("articleMap", articleMap);

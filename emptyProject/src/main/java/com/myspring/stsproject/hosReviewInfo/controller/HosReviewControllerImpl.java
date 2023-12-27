@@ -56,8 +56,6 @@ public class HosReviewControllerImpl implements HosReviewController {
 		String hos_id=(String)session.getAttribute("log_id");
 		String hos_code=(String)session.getAttribute("hos_code");		
 		model.addAttribute("hos_code",hos_code);		
-		System.out.println("º´¿øÄÚµå ºÒ·¯¿Ô³ª?>>>>"+ hos_code);
-		System.out.println("º´¿ø¾ÆÀÌµğ ºÒ·¯¿Ô³ª?>>>>"+ hos_id);
 		hosMypageInfoVO =hosmypageinfoService.selecthosInfo(hos_id);
         
 		float review_avg_result=hosReviewService.reviewAvg(hos_code);
@@ -86,8 +84,8 @@ public class HosReviewControllerImpl implements HosReviewController {
 	public ModelAndView hosRevDel(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String) request.getAttribute("viewName");
 		 
-		response.setCharacterEncoding("UTF-8"); //alertÇÑ±Û ±úÁü Çö»ó 
-		response.setContentType("text/html; charset=UTF-8");//alertÇÑ±Û ±úÁü Çö»ó 
+		response.setCharacterEncoding("UTF-8"); 
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
 		String hos_id=(String)session.getAttribute("log_id");
@@ -98,7 +96,7 @@ public class HosReviewControllerImpl implements HosReviewController {
 		
 		if(items==null){
 			out.print("<script>");
-			out.print("alert('»èÁ¦¿äÃ» ÇÒ ¸®ºä¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä!');");
+			out.print("alert('ì‚­ì œí•  ê²Œì‹œê¸€ì„ ì„ íƒí•´ì£¼ì„¸ìš”!');");
 			out.print("location.href='" +request.getContextPath()+ "/hos_ReviewInfo/hosReviewList.do" + "';");			
 			out.print("</script>");			
 			out.flush();	
@@ -110,19 +108,15 @@ public class HosReviewControllerImpl implements HosReviewController {
     		}
 			hosReviewService.reqDelReview(items);
 			out.print("<script>");
-			out.print("alert('»èÁ¦¿äÃ» ¼º°ø!');");
+			out.print("alert('ì„ íƒí•˜ì‹  ê²Œì‹œê¸€ì´ ì„±ê³µì ìœ¼ë¡œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤!');");
 			out.print("location.href='" +request.getContextPath() + "/hos_ReviewInfo/hosReviewList.do" + "';");
 			out.print("</script>");
 			out.flush();
 			ModelAndView redirectMav = new ModelAndView("redirect:/hos_ReviewInfo/hosReviewList.do");
 			return redirectMav;
-		}
-		 
-		 
+		}	 
 		
 	}
-
-	
 	
 	@Override
 	@RequestMapping(value = "/hos_ReviewInfo/hosviewReview.do", method = RequestMethod.GET)

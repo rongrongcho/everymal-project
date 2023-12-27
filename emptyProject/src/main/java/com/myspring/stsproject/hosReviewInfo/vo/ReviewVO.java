@@ -5,23 +5,18 @@ import org.springframework.stereotype.Component;
 @Component("reviewVO")
 public class ReviewVO {
 	
-	       private String rv_code; //¸®ºäÄÚµå
-	       private String rv_title; //¸®ºä Á¦¸ñ
-	       private String rv_text;; //¸®ºä ³»¿ë
-	       private int rv_rate;//¸®ºä º°Á¡
-	       private String hos_name;//º´¿øÀÌ¸§
-	       private String hos_code;//º´¿øÄÚµå
-	       private String res_code; //¿¹¾à ÄÚµå
+	       private String rv_code; 
+	       private String rv_title; 
+	       private String rv_text;; 
+	       private int rv_rate;
+	       private String hos_name;
+	       private String hos_code;
+	       private String res_code; 
 	       private Date rv_date;
 	       private String [] items;
-	       private String rv_imgName;//Ã·ºÎÀÌ¹ÌÁö ÀÌ¸§
+	       private String rv_imgName;
 	       
-	      /* public String getHos_id() {
-			return hos_id;
-		}
-		public void setHos_id(String hos_id) {
-			this.hos_id = hos_id;
-		}*/
+
 	       
 
 
@@ -48,13 +43,13 @@ public class ReviewVO {
 		}
 
 
-		//ºó »ý¼ºÀÚ
+		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	       public ReviewVO() {
 			
 		}
 	       
 	       
-	       //jsp¿¡ »Ñ·ÁÁÙ Á¤º¸¸¸ ´ã´Â »ý¼ºÀÚ (³ªÁß¿¡ ¸¸µé±â)   
+	       //jspï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)   
 
 
 

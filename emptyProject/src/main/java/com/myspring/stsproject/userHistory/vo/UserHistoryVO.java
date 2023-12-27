@@ -11,23 +11,19 @@ import java.sql.Date;
 
 @Component("userHistoryVO")
 public class UserHistoryVO {
-	
-	 //============================= 병원 예약 
 
-	   //private String hos_pro;
-	   //============================
 	   private String user_id;
-	   private String res_code; //  예약코드 
-	   private String user_code; // 회원 코드 
-	   private String hos_code; // 병원 코드 
-	   private String pet_code; // 동물 코드 
+	   private String res_code;
+	   private String user_code; 
+	   private String hos_code; 
+	   private String pet_code; 
 	   
-	   private String user_name; // 예약자 성명
-	   private String user_tel; // 예약자 연락처 
-	   private String useR_id; // 회원 아이디 
+	   private String user_name; 
+	   private String user_tel; 
+	   private String useR_id; 
 	      
-	   private String hos_name; //병원 이름
-	   private String hos_sub; //진료 과목 
+	   private String hos_name; 
+	   private String hos_sub; 
 	   
 	   
 	   
@@ -39,17 +35,17 @@ public class UserHistoryVO {
 
 	   
 	   
-	   private Date receipt_date; // 예약 접수일
-	   private Date res_date; // 예약 날짜 
-	   private String res_time; // 예약 시간
+	   private Date receipt_date; 
+	   private Date res_date; 
+	   private String res_time; 
 	   
-	   private String pet_name; // 동물 이름
-	   private String pet_sex; //동물 성별
-	   private int pet_age; // 동물 나이 
-	   private String b_type; // 동물 혈액형 
-	   private float pet_weight; // 동물 몸무게 
-	   private String pet_types; //동물 종류 
-	   private String pet_number;// 동물 등록번호 
+	   private String pet_name; 
+	   private String pet_sex; 
+	   private int pet_age; 
+	   private String b_type; 
+	   private float pet_weight; 
+	   private String pet_types; 
+	   private String pet_number;
 	   
 	   
 	   
@@ -69,10 +65,9 @@ public class UserHistoryVO {
 
 
 
-	   private String res_etc; // 기타 사항
+	   private String res_etc; 
 	   
-	   
-	   //---------가장 최근 예약(병원) 
+
 	   private Date r_res_date;
 	   private Date r_receipt_date;
 	   private String r_hos_name;
@@ -80,51 +75,38 @@ public class UserHistoryVO {
 	   private String r_hos_code;
 	   
 
+	   private String tx_code; 
+	   private String tx_res_code; 
+	   private Date tx_reserv_day; 
+	   private String tx_dep; 
+	   private String tx_arr; 
 	   
-	   //================================= 펫 택시 예약 정보  
-	   private String tx_code; // 택시 코드 
-	   private String tx_res_code; // 택시 예약 코드 
-	   private Date tx_reserv_day; //예약 날짜 
-	   private String tx_dep; //  출발지 
-	   private String tx_arr; // 목적지 
-	   
-	   //====================================택시 정보 테이블 
-	   private String tx_number; // 택시 번호 
-	   private String tx_name; // 택시 기사 이름 
-	   private String tx_local; // 택시 지역 
-	   private String tx_tel; // 택시 전화번호 
+	   private String tx_number; 
+	   private String tx_name; 
+	   private String tx_local;
+	   private String tx_tel; 
 
-	   //============================택시 최근 예약
 	   
-	   private String ttx_code; // 택시 코드 
-	   private String ttx_res_code; // 택시 예약 코드 
-	   private Date ttx_reserv_day; //예약 날짜 
-	   private String ttx_dep; //  출발지 
-	   private String ttx_arr; // 목적지 
+	   private String ttx_code; 
+	   private String ttx_res_code; 
+	   private Date ttx_reserv_day; 
+	   private String ttx_dep; 
+	   private String ttx_arr;
 	   
 	   
-	   private String ttx_number; // 택시 번호 
-	   private String ttx_name; // 택시 기사 이름 
-	   private String ttx_tel; // 택시 전화번호 
-	   private String tx_img; //택시 드라이버 이미지 
+	   private String ttx_number; 
+	   private String ttx_name; 
+	   private String ttx_tel; 
+	   private String tx_img; 
 	   private String tx_restime;
 	   private String tx_intro; 
+	   	   
 	   
-	   
-	   
-	   //
-	   
-	   
-	   private String res_name; // 예약자 성명
-	   
-	   //hosjointbl에서 가져온 것
-	   
-	   private String hos_thum; // 병원 썸네일 
+	   private String res_name; 
+	   	   
+	   private String hos_thum; 
 
-	   
-	   
-	   //===========생성자
-	   
+	  
 
 	   
 	   public UserHistoryVO() {
@@ -133,64 +115,7 @@ public class UserHistoryVO {
 
 
 
-	public UserHistoryVO(String user_id, String res_code, String user_code, String hos_code, String pet_code, String user_name,
-			String user_tel, String useR_id2, String hos_name, String hos_sub, Date receipt_date, Date res_date,
-			String res_time, String pet_name, String pet_sex, int pet_age, String b_type, float pet_weight,
-			String pet_types, String pet_number, String res_etc, Date r_res_date, Date r_receipt_date, String r_hos_name,
-			String r_res_code, String r_hos_code, String tx_code, String tx_res_code, Date tx_reserv_day, String tx_dep,
-			String tx_arr, String tx_number, String tx_name, String tx_local, String tx_tel, String ttx_code,
-			String ttx_res_code, Date ttx_reserv_day, String ttx_dep, String ttx_arr, String ttx_number, String ttx_name,
-			String ttx_tel, String tx_img, String tx_restime, String tx_intro, String res_name, String hos_thum) {
-		super();
-		this.user_id = user_id;
-		this.res_code = res_code;
-		this.user_code = user_code;
-		this.hos_code = hos_code;
-		this.pet_code = pet_code;
-		this.user_name = user_name;
-		this.user_tel = user_tel;
-		useR_id = useR_id2;
-		this.hos_name = hos_name;
-		this.hos_sub = hos_sub;
-		this.receipt_date = receipt_date;
-		this.res_date = res_date;
-		this.res_time = res_time;
-		this.pet_name = pet_name;
-		this.pet_sex = pet_sex;
-		this.pet_age = pet_age;
-		this.b_type = b_type;
-		this.pet_weight = pet_weight;
-		this.pet_types = pet_types;
-		this.pet_number = pet_number;
-		this.res_etc = res_etc;
-		this.r_res_date = r_res_date;
-		this.r_receipt_date = r_receipt_date;
-		this.r_hos_name = r_hos_name;
-		this.r_res_code = r_res_code;
-		this.r_hos_code = r_hos_code;
-		this.tx_code = tx_code;
-		this.tx_res_code = tx_res_code;
-		this.tx_reserv_day = tx_reserv_day;
-		this.tx_dep = tx_dep;
-		this.tx_arr = tx_arr;
-		this.tx_number = tx_number;
-		this.tx_name = tx_name;
-		this.tx_local = tx_local;
-		this.tx_tel = tx_tel;
-		this.ttx_code = ttx_code;
-		this.ttx_res_code = ttx_res_code;
-		this.ttx_reserv_day = ttx_reserv_day;
-		this.ttx_dep = ttx_dep;
-		this.ttx_arr = ttx_arr;
-		this.ttx_number = ttx_number;
-		this.ttx_name = ttx_name;
-		this.ttx_tel = ttx_tel;
-		this.tx_img = tx_img;
-		this.tx_restime = tx_restime;
-		this.tx_intro = tx_intro;
-		this.res_name = res_name;
-		this.hos_thum = hos_thum;
-	}
+
 
 
 
@@ -753,6 +678,65 @@ public class UserHistoryVO {
 
 
 	public void setHos_thum(String hos_thum) {
+		this.hos_thum = hos_thum;
+	}
+	
+	public UserHistoryVO(String user_id, String res_code, String user_code, String hos_code, String pet_code, String user_name,
+			String user_tel, String useR_id2, String hos_name, String hos_sub, Date receipt_date, Date res_date,
+			String res_time, String pet_name, String pet_sex, int pet_age, String b_type, float pet_weight,
+			String pet_types, String pet_number, String res_etc, Date r_res_date, Date r_receipt_date, String r_hos_name,
+			String r_res_code, String r_hos_code, String tx_code, String tx_res_code, Date tx_reserv_day, String tx_dep,
+			String tx_arr, String tx_number, String tx_name, String tx_local, String tx_tel, String ttx_code,
+			String ttx_res_code, Date ttx_reserv_day, String ttx_dep, String ttx_arr, String ttx_number, String ttx_name,
+			String ttx_tel, String tx_img, String tx_restime, String tx_intro, String res_name, String hos_thum) {
+		super();
+		this.user_id = user_id;
+		this.res_code = res_code;
+		this.user_code = user_code;
+		this.hos_code = hos_code;
+		this.pet_code = pet_code;
+		this.user_name = user_name;
+		this.user_tel = user_tel;
+		useR_id = useR_id2;
+		this.hos_name = hos_name;
+		this.hos_sub = hos_sub;
+		this.receipt_date = receipt_date;
+		this.res_date = res_date;
+		this.res_time = res_time;
+		this.pet_name = pet_name;
+		this.pet_sex = pet_sex;
+		this.pet_age = pet_age;
+		this.b_type = b_type;
+		this.pet_weight = pet_weight;
+		this.pet_types = pet_types;
+		this.pet_number = pet_number;
+		this.res_etc = res_etc;
+		this.r_res_date = r_res_date;
+		this.r_receipt_date = r_receipt_date;
+		this.r_hos_name = r_hos_name;
+		this.r_res_code = r_res_code;
+		this.r_hos_code = r_hos_code;
+		this.tx_code = tx_code;
+		this.tx_res_code = tx_res_code;
+		this.tx_reserv_day = tx_reserv_day;
+		this.tx_dep = tx_dep;
+		this.tx_arr = tx_arr;
+		this.tx_number = tx_number;
+		this.tx_name = tx_name;
+		this.tx_local = tx_local;
+		this.tx_tel = tx_tel;
+		this.ttx_code = ttx_code;
+		this.ttx_res_code = ttx_res_code;
+		this.ttx_reserv_day = ttx_reserv_day;
+		this.ttx_dep = ttx_dep;
+		this.ttx_arr = ttx_arr;
+		this.ttx_number = ttx_number;
+		this.ttx_name = ttx_name;
+		this.ttx_tel = ttx_tel;
+		this.tx_img = tx_img;
+		this.tx_restime = tx_restime;
+		this.tx_intro = tx_intro;
+		this.res_name = res_name;
 		this.hos_thum = hos_thum;
 	}
 

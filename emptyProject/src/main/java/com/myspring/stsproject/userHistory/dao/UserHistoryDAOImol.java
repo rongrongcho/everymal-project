@@ -35,7 +35,6 @@ public class UserHistoryDAOImol implements UserHistoryDAO {
 	@Override
 	public List<UserHistoryVO> hosRecent(UserHistoryVO userHistoryVO) throws DataAccessException {
 		List<UserHistoryVO> hrList=new ArrayList<UserHistoryVO>();
-		//String user_id=userHistoryVO.getUser_id();
 		String user_id=userHistoryVO.getUser_id();
 		hrList=sqlSession.selectList("mapper.history.userHosRecentList",user_id);
 		return hrList;		

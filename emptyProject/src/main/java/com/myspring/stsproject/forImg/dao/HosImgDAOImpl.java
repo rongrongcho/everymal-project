@@ -16,12 +16,6 @@ public class HosImgDAOImpl implements HosImgDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//���� Ȩ ���� �ҷ�����
-	/*@Override
-	public HosImgVO getHosImg(String hos_code) throws DataAccessException {
-		hosImgVO =sqlSession.selectOne("mapper.forImg.getHosImg", hos_code);
-		return hosImgVO;
-	}*/
 
 	@Override
 	public HosImgVO getHosPro(String hos_code) throws DataAccessException {

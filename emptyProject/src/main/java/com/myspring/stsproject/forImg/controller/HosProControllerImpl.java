@@ -28,24 +28,19 @@ public class HosProControllerImpl implements HosProController {
 	public void hosProImgDown(@RequestParam String hos_pro, @RequestParam String hos_code, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		model.addAttribute("hos_pro",hos_pro);		//URL�� �ִ� hos_pro�� ��
+		model.addAttribute("hos_pro",hos_pro);		
 		model.addAttribute("hos_code",hos_code);
-		//String hos_code=request.getParameter("hos_code");
-		System.out.println("�߹��� ġ�Ϳ� �̹��� �ҷ����� ���� ȣ���ڵ�:" + hos_code);
-		//String hos_pro=request.getParameter("hos_pro");
-		System.out.println("�߹��� ġ�Ϳ� �̹��� �ҷ����� ���� ���ϸ�:" + hos_pro);
 		OutputStream outs=response.getOutputStream();
 		String path=IMG_REPO+profilefolder+"\\"+hos_code+"\\"+hos_pro;
 		File imageFile=new File(path);
-		//�̹��� ���� �ٿ�ε�� �ʿ��� response ��� ������ ���� 
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-diposition", hos_pro);
 		FileInputStream fis=new FileInputStream(imageFile);
-		byte[] buffer = new byte[1024*8]; //���۸� �̿��� �ѹ��� 8K �� ����
+		byte[] buffer = new byte[1024*8]; 
 		while(true) {
 			int count=fis.read(buffer);
 			if(count == -1) break;
-			outs.write(buffer,0,count); // buffer�� �ִ°� 0���� count ��ŭ
+			outs.write(buffer,0,count); 
 		}
 		fis.close();
 		outs.close();

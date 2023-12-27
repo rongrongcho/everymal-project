@@ -29,7 +29,7 @@ public class HosResDAOImpl implements HosResDAO{
         map.put("section", section);
         map.put("pageNum", pageNum);
         map.put("hos_code",hos_code);
-        //
+        
         resList = sqlSession.selectList("mapper.hosResInfo.selectAllReservation", map);
 		 
 		return resList;

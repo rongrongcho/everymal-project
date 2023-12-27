@@ -32,7 +32,7 @@ public class PetTaxiControllerImpl implements PetTaxiController {
 	@RequestMapping(value = "/pet_Taxi/petTaxiPage.do")
 	public ModelAndView openPetTaxiPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    response.setContentType("text/html; charset=UTF-8");
-	    response.setCharacterEncoding("UTF-8"); // alertÇÑ±Û ±úÁü Çö»ó
+	    response.setCharacterEncoding("UTF-8"); 
 		String viewName=(String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
@@ -42,7 +42,7 @@ public class PetTaxiControllerImpl implements PetTaxiController {
 	@RequestMapping(value = "/pet_Taxi/taxiList.do")
 	public ModelAndView goToTaxiSelect(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    response.setContentType("text/html; charset=UTF-8");
-	    response.setCharacterEncoding("UTF-8"); // alertÇÑ±Û ±úÁü Çö»ó
+	    response.setCharacterEncoding("UTF-8"); 
 		String viewName=(String) request.getAttribute("viewName");
 		String tx_local = request.getParameter("tx_local");
         List<PetTaxiVO> taxiList = new ArrayList<PetTaxiVO>();
@@ -50,7 +50,6 @@ public class PetTaxiControllerImpl implements PetTaxiController {
         paramMap.put("petTaxiVO", petTaxiVO);
         paramMap.put("tx_local", tx_local);
         taxiList = petTaxiService.listTaxi(paramMap);
-        System.out.println("taxiList¿Ö ´ëÃ¼ ¹¹°¡ ¹®Á¦¾ß" + taxiList.get(0));
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("taxiList",taxiList);
 		return mav;
@@ -61,7 +60,7 @@ public class PetTaxiControllerImpl implements PetTaxiController {
 
 	public ModelAndView ReservPetTaxi(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    response.setContentType("text/html; charset=UTF-8");
-	    response.setCharacterEncoding("UTF-8"); // alertÇÑ±Û ±úÁü Çö»ó
+	    response.setCharacterEncoding("UTF-8"); 
 		String viewName=(String)request.getAttribute("viewName");
 		HttpSession session = request.getSession();
 		String user_id=(String)session.getAttribute("log_id");
@@ -71,7 +70,7 @@ public class PetTaxiControllerImpl implements PetTaxiController {
  
     	    out=response.getWriter();
 		    out.print("<script>");
-			out.print("alert('·Î±×ÀÎµÇ¾îÀÖÁö¾Ê½À´Ï´Ù.'); ");
+			out.print("alert('ë¡œê·¸ì¸í›„ ì´ìš©í•´ì£¼ì„¸ìš”!'); ");
 			out.print("location.href='" +request.getContextPath() + "/pet_Taxi/petTaxiPage.do';");
 		    out.print("</script>");
 		    out.flush();
@@ -100,7 +99,7 @@ public class PetTaxiControllerImpl implements PetTaxiController {
     	    petTaxiService.taxiReserv(petTaxiVO);
     	    out=response.getWriter();
 		    out.print("<script>");
-			out.print("alert('Æê ÅÃ½Ã ¿¹¾àÀ» ¿Ï·áÇß½À´Ï´Ù.¸¶ÀÌÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.'); ");
+			out.print("alert('ì„±ê³µì ìœ¼ë¡œ í« íƒì‹œ ì˜ˆì•½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤. '); ");
 			out.print("location.href='" +request.getContextPath() + "/pet_Taxi/petTaxiPage.do';");
 		    out.print("</script>");
 		    out.flush();	

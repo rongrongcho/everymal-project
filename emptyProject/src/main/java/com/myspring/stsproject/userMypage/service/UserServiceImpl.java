@@ -29,11 +29,11 @@ public class UserServiceImpl implements UserService{
 	public String searchProfil(String user_id) throws DataAccessException {
 		String user_imgName = userDAO.searchProfil(user_id);
 	    if (user_imgName == null || user_imgName.isEmpty()) {
-	       return "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\img\\blankProfil.png";
+	       return "/Users/imnotalong/projctLCR/everymal/src/main/webapp/resources/img/blankProfil.png";
 	    	
 	    } else {
 	        
-	        return "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\user_profil\\" + user_id+"\\"+user_imgName;
+	        return "/Users/imnotalong/projctLCR/everymal/src/main/webapp/resources/imgRepo/user_profil/" + user_id+"/"+user_imgName;
 	      
 	    }
 	}

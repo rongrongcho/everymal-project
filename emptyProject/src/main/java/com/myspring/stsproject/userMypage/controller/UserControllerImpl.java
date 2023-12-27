@@ -89,7 +89,6 @@ public class UserControllerImpl implements UserController{
 	        String _user_id= (String)session.getAttribute("log_id");
 	        userVO=userService.calluserInfo(_user_id); 
 	        request.setAttribute("userVO", userVO);
-	        //model.addAttribute("hos_code",hos_code);
 	        mav.setViewName("redirect:/user_Page/myInfo.do?user_id=" + user_id);
 
 		}else {
@@ -131,7 +130,7 @@ public class UserControllerImpl implements UserController{
 		System.out.println(userVO.getUser_tel());
 		
 		// 경로
-		  String savePath = "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\imgRepo\\user_profil\\" + user_id;
+		  String savePath = "/Users/imnotalong/projctLCR/everymal/src/main/webapp/resources/imgRepo/user_profil/" + user_id;
 	    
 				
        
@@ -197,7 +196,7 @@ public class UserControllerImpl implements UserController{
 	            
 	            // 예외 발생 시 빈 프로필 사진 디폴트로 띄워줌 
 	            //경로
-	            String blankImagePath = "C:\\choronglee\\stsProject\\emptyProject\\src\\main\\webapp\\resources\\img\\blankProfil.png";
+	            String blankImagePath = "/Users/imnotalong/projctLCR/everymal/src/main/webapp/resources/imgblankProfil.png";
 	           
 	     
 	            try {
@@ -213,7 +212,6 @@ public class UserControllerImpl implements UserController{
 	                return new ResponseEntity<>(blankImageBytes, headers, HttpStatus.OK);
 	            } catch (Exception ex) {
 	                ex.printStackTrace();
-	                
 	                // Try 구문 마저 생성하지 못하면 500 error 반환 
 	                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	            }
@@ -279,8 +277,7 @@ public class UserControllerImpl implements UserController{
 			String rv_title=request.getParameter("rv_title");				
 			String rv_text=request.getParameter("rv_text");
 			String rv_rate=request.getParameter("rv_rate");
-			
-			//================================================
+		
 			userVO.setUser_id(user_id);
 			userVO.setRv_code(rv_code);
 			userVO.setRv_title(rv_title);

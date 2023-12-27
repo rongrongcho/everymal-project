@@ -12,14 +12,9 @@ public class HosImgVO {
 	private String himg2;
 	private String himg3;
 	
-	
-	//======================
-	
 	private String hos_pro;
 	private String hos_thum; 
-	
-	//=========================
-	
+
 	
 	public HosImgVO() {
 		super();

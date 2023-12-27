@@ -7,19 +7,14 @@ import org.springframework.stereotype.Component;
 
 public class AdminVO {
 
-	//병원등록관리 페이지를 위한 변수 선언
-	
-	
-
-	private String hos_name; //신청 병원이름
-	private String hos_id; //신청 병원 아이디 
-	private String rm_code; // 신청 코드
-	private String rm_chk; // 선택 여부 
-	private String rm_status; // 진행 상황 
+	private String hos_name; 
+	private String hos_id; 
+	private String rm_code; 
+	private String rm_chk;  
+	private String rm_status;
 	private Date rm_date;
 	private String hos_code; 
 	private String rm_say;
-	//=============================================
 	
 	private String user_id;
 	private Date j_date;
@@ -27,8 +22,6 @@ public class AdminVO {
     private String user_enabled;
     private String user_code;
     
-    
-
 	private String hos_status;
 	private String hos_Thum;
 	private String himg1;

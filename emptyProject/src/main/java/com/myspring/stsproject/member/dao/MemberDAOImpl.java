@@ -86,12 +86,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
-	/*
-	 * @Override public MemberVO loginCheck(MemberVO memberVO) throws
-	 * DataAccessException { MemberVO
-	 * member=sqlSession.selectOne("mapper.member.loginById", memberVO); return
-	 * member; }
-	 */
 	
 	@Override
 	public boolean loginCheck(MemberVO memberVO) throws DataAccessException {
