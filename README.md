@@ -2,6 +2,9 @@
 
 반려 가구수 증가 추세에 비해서 반려동물 건강관리 사이트가 부재함을 인식하고 <br>
 이에 따라 다양한 반려동물을 키우는 반려인들과 동물병원의 편의를 증진시키는 종합 플랫폼 사이트 제작 프로젝트
+<br>
+In recognition of the lack of pet health management sites compared to the increasing trend of pet ownership, <br>
+a comprehensive platform site project is underway to enhance the convenience of pet owners raising various pets and veterinary clinics.
 
 ### 주요 기능 Main Features 
 
