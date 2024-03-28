@@ -1,3 +1,6 @@
+<img src="https://github.com/rongrongcho/everymal/assets/119823081/45545133-f6d6-4b24-9dce-18429eb40b67"/>
+
+
 ## Everymal
 
 반려 가구수 증가 추세에 비해서 반려동물 건강관리 사이트가 부재함을 인식하고 <br>
