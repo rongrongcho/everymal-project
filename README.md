@@ -25,7 +25,7 @@ a comprehensive platform site project is underway to enhance the convenience of 
 - 이초롱 Lee Chorong
 - 황치현 Hwang Chihyun
 
-### Development Tools 개발도구 
+### 개발도구 Development Tools 
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white)](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white)
 [![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white)](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white)](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white)
